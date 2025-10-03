@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Table Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #1e293b;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .toggle-container {
+            display: flex;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .toggle-button {
+            padding: 8px 20px;
+            border: none;
+            background: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toggle-button.active {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            color: #3b82f6;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #059669;
+        }
+
+        .table-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #f8fafc;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0;
+            border-bottom: 1px solid #e2e8f0;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .thumbnail {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+            margin: 1px;
+        }
+
+        .thumbnail-cell {
+            width: 35px;
+            padding: 1px 4px !important;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            height: 20px;
+            border: none;
+            padding: 2px 6px;
+            font-size: 12px;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: 2px solid #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .add-column-section {
+            padding: 15px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .add-column-section input {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .ad-name-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 2px 8px !important;
+            font-size: 11px;
+        }
+
+        .static-cell {
+            padding: 2px 8px !important;
+            font-size: 11px;
+        }
+
+        .col-header-actions {
+            display: inline-flex;
+            gap: 5px;
+            margin-left: 8px;
+        }
+
+        .btn-remove-col {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            padding: 0;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .btn-remove-col:hover {
+            color: #dc2626;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .image-modal-close:hover {
+            color: #bbb;
+        }
+
+        .thumbnail {
+            cursor: pointer;
+        }
+
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Ad Table Editor</h1>
+        <div class="header-controls">
+            <button class="btn btn-secondary" onclick="addNewColumn()">+ Add Column</button>
+            <button class="btn btn-primary" onclick="downloadCSV()">Download CSV</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="adsTable">
+            <thead id="tableHeader">
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+
+        <div class="add-column-section">
+            <input type="text" id="newColumnName" placeholder="Enter new column name...">
+            <button class="btn btn-secondary" onclick="addColumnFromInput()">Add Column</button>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" class="image-modal-content">
+    </div>
+
+    <script>
+        let adsData = [];
+        let customColumns = {};
+
+        // Base columns
+        const baseColumns = [
+            { key: 'thumbnail', label: 'Image', editable: false, type: 'image' },
+            { key: 'category', label: 'Category', editable: false, type: 'text' },
+            { key: 'adName', label: 'Ad Name', editable: false, type: 'text' },
+            { key: 'concept', label: 'Concept', editable: false, type: 'text' }
+        ];
+
+        // Load data
+        async function loadData() {
+            try {
+                // Load both Windows and Bath data
+                const windowsResponse = await fetch('ads-data.json');
+                const windowsAds = await windowsResponse.json();
+
+                const bathResponse = await fetch('bath-ads-data.json');
+                const bathAds = await bathResponse.json();
+
+                // Add category to each ad and filter out videos
+                windowsAds.forEach(ad => ad.category = 'Windows');
+                bathAds.forEach(ad => ad.category = 'Bath');
+
+                // Combine and filter out videos (only keep images)
+                const allAds = [...windowsAds, ...bathAds];
+                adsData = allAds.filter(ad => {
+                    const isVideo = ad.adName && (
+                        ad.adName.toLowerCase().includes('_vid_') ||
+                        ad.adName.toLowerCase().includes('video') ||
+                        (ad.url && ad.url.includes('.mp4'))
+                    );
+                    return !isVideo;
+                });
+
+                renderTable();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                alert('Error loading data. Make sure the JSON files are available.');
+            }
+        }
+
+        // Initialize custom columns for each ad
+        function initializeCustomColumns() {
+            adsData.forEach((ad, index) => {
+                if (!customColumns[ad.adName]) {
+                    customColumns[ad.adName] = {};
+                }
+            });
+        }
+
+        // Render table
+        function renderTable() {
+            initializeCustomColumns();
+
+            const tableHeader = document.getElementById('tableHeader');
+            const tableBody = document.getElementById('tableBody');
+
+            // Get all custom column names
+            const customColumnNames = new Set();
+            Object.values(customColumns).forEach(cols => {
+                Object.keys(cols).forEach(name => customColumnNames.add(name));
+            });
+
+            // Build header
+            let headerHTML = '<tr>';
+            baseColumns.forEach(col => {
+                headerHTML += `<th>${col.label}</th>`;
+            });
+            customColumnNames.forEach(colName => {
+                headerHTML += `<th>${colName}<span class="col-header-actions"><button class="btn-remove-col" onclick="removeColumn('${colName}')" title="Remove column">×</button></span></th>`;
+            });
+            headerHTML += '</tr>';
+            tableHeader.innerHTML = headerHTML;
+
+            // Build body
+            let bodyHTML = '';
+            adsData.forEach((ad, index) => {
+                bodyHTML += '<tr>';
+
+                baseColumns.forEach(col => {
+                    if (col.type === 'image') {
+                        const imgSrc = ad.localImage || ad.url || ad.originalUrl || '';
+                        if (imgSrc) {
+                            bodyHTML += `<td class="thumbnail-cell"><img src="${imgSrc}" class="thumbnail" onclick="event.stopPropagation(); showImageModal('${imgSrc}')" onerror="this.style.display='none'"></td>`;
+                        } else {
+                            bodyHTML += `<td class="thumbnail-cell"></td>`;
+                        }
+                    } else if (col.editable) {
+                        bodyHTML += `<td><input type="${col.type}" value="${ad[col.key] || ''}" onchange="updateValue(${index}, '${col.key}', this.value)"></td>`;
+                    } else {
+                        const cellClass = col.key === 'adName' ? 'ad-name-cell' : 'static-cell';
+                        bodyHTML += `<td class="${cellClass}">${ad[col.key] || ''}</td>`;
+                    }
+                });
+
+                // Add custom columns
+                customColumnNames.forEach(colName => {
+                    const value = customColumns[ad.adName]?.[colName] || '';
+                    bodyHTML += `<td><input type="text" value="${value}" onchange="updateCustomValue('${ad.adName}', '${colName}', this.value)"></td>`;
+                });
+
+                bodyHTML += '</tr>';
+            });
+            tableBody.innerHTML = bodyHTML;
+        }
+
+        // Update value
+        function updateValue(index, key, value) {
+            adsData[index][key] = value;
+        }
+
+        // Update custom column value
+        function updateCustomValue(adName, colName, value) {
+            if (!customColumns[adName]) {
+                customColumns[adName] = {};
+            }
+            customColumns[adName][colName] = value;
+        }
+
+        // Add new column
+        function addNewColumn() {
+            const colName = prompt('Enter column name:');
+            if (colName && colName.trim()) {
+                renderTable();
+            }
+        }
+
+        function addColumnFromInput() {
+            const input = document.getElementById('newColumnName');
+            const colName = input.value.trim();
+            if (colName) {
+                // Initialize column for all ads
+                adsData.forEach(ad => {
+                    if (!customColumns[ad.adName]) {
+                        customColumns[ad.adName] = {};
+                    }
+                    if (!customColumns[ad.adName][colName]) {
+                        customColumns[ad.adName][colName] = '';
+                    }
+                });
+                input.value = '';
+                renderTable();
+            }
+        }
+
+        // Remove column
+        function removeColumn(colName) {
+            if (confirm(`Remove column "${colName}"?`)) {
+                Object.keys(customColumns).forEach(adName => {
+                    delete customColumns[adName][colName];
+                });
+                renderTable();
+            }
+        }
+
+        // Download CSV
+        function downloadCSV() {
+            // Get all custom column names
+            const customColumnNames = new Set();
+            Object.values(customColumns).forEach(cols => {
+                Object.keys(cols).forEach(name => customColumnNames.add(name));
+            });
+
+            // Build CSV header
+            let csv = baseColumns.filter(col => col.type !== 'image').map(col => col.label).join(',');
+            if (customColumnNames.size > 0) {
+                csv += ',' + Array.from(customColumnNames).join(',');
+            }
+            csv += '\n';
+
+            // Build CSV rows
+            adsData.forEach(ad => {
+                const row = [];
+                baseColumns.forEach(col => {
+                    if (col.type !== 'image') {
+                        let value = ad[col.key] || '';
+                        // Escape quotes and wrap in quotes if contains comma
+                        if (typeof value === 'string' && (value.includes(',') || value.includes('"') || value.includes('\n'))) {
+                            value = '"' + value.replace(/"/g, '""') + '"';
+                        }
+                        row.push(value);
+                    }
+                });
+
+                customColumnNames.forEach(colName => {
+                    let value = customColumns[ad.adName]?.[colName] || '';
+                    if (typeof value === 'string' && (value.includes(',') || value.includes('"') || value.includes('\n'))) {
+                        value = '"' + value.replace(/"/g, '""') + '"';
+                    }
+                    row.push(value);
+                });
+
+                csv += row.join(',') + '\n';
+            });
+
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `all_ads_table_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Image modal functions
+        function showImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // Load initial data
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1787 @@
+{
+  "Clicky_V1_Cost_HowMuchshouldXActuallyCostin2025_IMG_Square_": [
+    {
+      "targeting": "Appts",
+      "spend": 16276.54,
+      "bar": "17%",
+      "roas": 1,
+      "ctr": "0.83%",
+      "cvr": "1.79%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 15265.74,
+      "bar": "12%",
+      "roas": 1.27,
+      "ctr": "0.73%",
+      "cvr": "1.98%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 1511.55,
+      "bar": "6%",
+      "roas": 1.69,
+      "ctr": "0.84%",
+      "cvr": "2.36%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 34524.06,
+      "bar": "12%",
+      "roas": 1.27,
+      "ctr": "0.82%",
+      "cvr": "1.91%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 48979.95,
+      "bar": "12%",
+      "roas": 1.31,
+      "ctr": "0.76%",
+      "cvr": "2.16%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 51801.83,
+      "bar": "7%",
+      "roas": 2.18,
+      "ctr": "0.93%",
+      "cvr": "3.40%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 168359.67,
+      "bar": "10%",
+      "roas": 1.54,
+      "ctr": "0.82%",
+      "cvr": "2.45%",
+      "isTotal": true
+    }
+  ],
+  "V5_BOGO+BNPL_EvergreenOffer__IMG_LearnMore_lead": [
+    {
+      "targeting": "Appts",
+      "spend": 896.2,
+      "bar": "29%",
+      "roas": 1.17,
+      "ctr": "0.65%",
+      "cvr": "3.83%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 645.95,
+      "bar": "33%",
+      "roas": 0.7,
+      "ctr": "0.38%",
+      "cvr": "3.30%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 82283.04,
+      "bar": "31%",
+      "roas": 0.88,
+      "ctr": "0.45%",
+      "cvr": "4.10%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 83825.19,
+      "bar": "31%",
+      "roas": 0.88,
+      "ctr": "0.45%",
+      "cvr": "4.09%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyStateBrand_Cost_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 70230.59,
+      "bar": "16%",
+      "roas": 1.07,
+      "ctr": "0.93%",
+      "cvr": "2.65%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 70230.59,
+      "bar": "16%",
+      "roas": 1.07,
+      "ctr": "0.93%",
+      "cvr": "2.65%",
+      "isTotal": true
+    }
+  ],
+  "Clickylavin_v3_Cost_hereswhatXshouldactuallycostyou_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 11149.51,
+      "bar": "13%",
+      "roas": 0.96,
+      "ctr": "1.98%",
+      "cvr": "0.95%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 29816.03,
+      "bar": "10%",
+      "roas": 1.21,
+      "ctr": "2.32%",
+      "cvr": "0.73%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 3959.04,
+      "bar": "15%",
+      "roas": 1.25,
+      "ctr": "2.21%",
+      "cvr": "0.62%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 7488.65,
+      "bar": "10%",
+      "roas": 1.4,
+      "ctr": "2.84%",
+      "cvr": "1.14%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 5625.14,
+      "bar": "5%",
+      "roas": 1.95,
+      "ctr": "3.69%",
+      "cvr": "2.70%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 58038.37,
+      "bar": "10%",
+      "roas": 1.26,
+      "ctr": "2.34%",
+      "cvr": "0.90%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyNumberWindowsBrand_V3_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 55691.32,
+      "bar": "19%",
+      "roas": 1,
+      "ctr": "0.31%",
+      "cvr": "4.23%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 55691.32,
+      "bar": "19%",
+      "roas": 1,
+      "ctr": "0.31%",
+      "cvr": "4.23%",
+      "isTotal": true
+    }
+  ],
+  "BeautyShot_V2_BNPLEvergreenOffer__IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 312.8,
+      "bar": "100%",
+      "roas": 0.48,
+      "ctr": "0.57%",
+      "cvr": "1.54%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 51324.9,
+      "bar": "18%",
+      "roas": 1,
+      "ctr": "0.37%",
+      "cvr": "5.04%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 51637.7,
+      "bar": "18%",
+      "roas": 1,
+      "ctr": "0.37%",
+      "cvr": "5.01%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyStateBrand_Offers_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 27743.4,
+      "bar": "18%",
+      "roas": 1.21,
+      "ctr": "0.86%",
+      "cvr": "3.06%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 27743.4,
+      "bar": "18%",
+      "roas": 1.21,
+      "ctr": "0.86%",
+      "cvr": "3.06%",
+      "isTotal": true
+    }
+  ],
+  "Clickylavin_v2_Cost_hereswhatXshouldactuallycostyou_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 6159.31,
+      "bar": "21%",
+      "roas": 0.71,
+      "ctr": "1.29%",
+      "cvr": "0.65%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 4086.73,
+      "bar": "6%",
+      "roas": 1.25,
+      "ctr": "1.67%",
+      "cvr": "0.94%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 4429.24,
+      "bar": "7%",
+      "roas": 0.95,
+      "ctr": "1.69%",
+      "cvr": "0.43%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 2798.32,
+      "bar": "11%",
+      "roas": 0.96,
+      "ctr": "2.34%",
+      "cvr": "0.89%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 6881.17,
+      "bar": "11%",
+      "roas": 1.98,
+      "ctr": "2.14%",
+      "cvr": "2.41%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 901.99,
+      "bar": "0%",
+      "roas": 2.66,
+      "ctr": "2.99%",
+      "cvr": "3.96%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 25256.76,
+      "bar": "10%",
+      "roas": 1.28,
+      "ctr": "1.70%",
+      "cvr": "1.04%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyNumberWindowsBrand_V2_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 22433.48,
+      "bar": "11%",
+      "roas": 1.16,
+      "ctr": "0.53%",
+      "cvr": "4.91%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 22433.48,
+      "bar": "11%",
+      "roas": 1.16,
+      "ctr": "0.53%",
+      "cvr": "4.91%",
+      "isTotal": true
+    }
+  ],
+  "BeforeAfter_ClickyNumberWindowsBrand_V3_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 18706.53,
+      "bar": "15%",
+      "roas": 1.44,
+      "ctr": "0.44%",
+      "cvr": "3.48%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 18706.53,
+      "bar": "15%",
+      "roas": 1.44,
+      "ctr": "0.44%",
+      "cvr": "3.48%",
+      "isTotal": true
+    }
+  ],
+  "BeautyShot_V3_BNPLEvergreenOffer__IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 200.25,
+      "bar": "50%",
+      "roas": 1.5,
+      "ctr": "1.14%",
+      "cvr": "2.06%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 15962.4,
+      "bar": "23%",
+      "roas": 0.86,
+      "ctr": "0.39%",
+      "cvr": "4.10%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 16162.65,
+      "bar": "23%",
+      "roas": 0.87,
+      "ctr": "0.40%",
+      "cvr": "4.01%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_V2_HeresHowMuchYouShouldPay__VID_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 166.49,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.47%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 6577.73,
+      "bar": "10%",
+      "roas": 0.89,
+      "ctr": "0.69%",
+      "cvr": "2.03%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 21.32,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.28%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 1772.27,
+      "bar": "18%",
+      "roas": 0.93,
+      "ctr": "1.55%",
+      "cvr": "1.67%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 4666.71,
+      "bar": "16%",
+      "roas": 1.22,
+      "ctr": "1.46%",
+      "cvr": "2.31%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 1724.75,
+      "bar": "4%",
+      "roas": 2.26,
+      "ctr": "1.94%",
+      "cvr": "3.93%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 14929.27,
+      "bar": "11%",
+      "roas": 1.15,
+      "ctr": "1.05%",
+      "cvr": "2.30%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_justgarry_Cost_HereswhatXshouldcostyouin2025_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 3535.95,
+      "bar": "33%",
+      "roas": 0.64,
+      "ctr": "1.05%",
+      "cvr": "1.28%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 1773.01,
+      "bar": "17%",
+      "roas": 1.02,
+      "ctr": "0.63%",
+      "cvr": "2.04%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 188.03,
+      "bar": "0%",
+      "roas": 0.8,
+      "ctr": "0.74%",
+      "cvr": "1.47%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 3051.22,
+      "bar": "6%",
+      "roas": 1.77,
+      "ctr": "1.48%",
+      "cvr": "2.94%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 5722.28,
+      "bar": "9%",
+      "roas": 1.23,
+      "ctr": "1.49%",
+      "cvr": "2.38%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 96.55,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.07%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 14367.04,
+      "bar": "12%",
+      "roas": 1.16,
+      "ctr": "1.17%",
+      "cvr": "2.18%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Image|st:Clicky|f:CostV1": [
+    {
+      "targeting": "Leads",
+      "spend": 13073.63,
+      "bar": "25%",
+      "roas": 1.11,
+      "ctr": "0.93%",
+      "cvr": "1.90%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 13073.63,
+      "bar": "25%",
+      "roas": 1.11,
+      "ctr": "0.93%",
+      "cvr": "1.90%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_StateBrand_Cost_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 4946.29,
+      "bar": "28%",
+      "roas": 0.97,
+      "ctr": "0.76%",
+      "cvr": "1.95%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 524.04,
+      "bar": "0%",
+      "roas": 1.14,
+      "ctr": "0.83%",
+      "cvr": "1.30%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 70.47,
+      "bar": "0%",
+      "roas": 2.13,
+      "ctr": "0.96%",
+      "cvr": "1.82%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 2014.34,
+      "bar": "29%",
+      "roas": 1.27,
+      "ctr": "0.95%",
+      "cvr": "2.15%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 4516.15,
+      "bar": "8%",
+      "roas": 1.76,
+      "ctr": "0.91%",
+      "cvr": "4.03%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 728.63,
+      "bar": "31%",
+      "roas": 2.68,
+      "ctr": "1.57%",
+      "cvr": "5.08%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 12799.92,
+      "bar": "18%",
+      "roas": 1.41,
+      "ctr": "0.87%",
+      "cvr": "2.75%",
+      "isTotal": true
+    }
+  ],
+  "BeautyShot_V5_BNPLEvergreenOffer__IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 237.18,
+      "bar": "0%",
+      "roas": 1.26,
+      "ctr": "0.68%",
+      "cvr": "2.25%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 11245.72,
+      "bar": "18%",
+      "roas": 1.07,
+      "ctr": "0.45%",
+      "cvr": "5.17%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 11482.9,
+      "bar": "17%",
+      "roas": 1.07,
+      "ctr": "0.46%",
+      "cvr": "5.02%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_NumberWindowsBrand_V2_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 2729.64,
+      "bar": "38%",
+      "roas": 0.44,
+      "ctr": "0.71%",
+      "cvr": "0.64%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 281.23,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.41%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 6595.37,
+      "bar": "13%",
+      "roas": 0.89,
+      "ctr": "0.37%",
+      "cvr": "2.35%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 141.07,
+      "bar": "100%",
+      "roas": 1.06,
+      "ctr": "0.67%",
+      "cvr": "2.56%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 360.58,
+      "bar": "0%",
+      "roas": 1.66,
+      "ctr": "0.47%",
+      "cvr": "7.41%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 525.99,
+      "bar": "20%",
+      "roas": 2.85,
+      "ctr": "1.06%",
+      "cvr": "6.76%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 10633.88,
+      "bar": "18%",
+      "roas": 0.87,
+      "ctr": "0.48%",
+      "cvr": "1.93%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_deviousdan_Cost_HereswhatXshouldcostyouin2025_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 2090.3,
+      "bar": "0%",
+      "roas": 0.22,
+      "ctr": "0.75%",
+      "cvr": "0.30%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 1893.31,
+      "bar": "6%",
+      "roas": 1.27,
+      "ctr": "0.68%",
+      "cvr": "1.71%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 22.08,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.87%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 1674.81,
+      "bar": "14%",
+      "roas": 1.25,
+      "ctr": "1.22%",
+      "cvr": "1.60%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 4584.69,
+      "bar": "19%",
+      "roas": 1.54,
+      "ctr": "0.88%",
+      "cvr": "2.35%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 230.47,
+      "bar": "0%",
+      "roas": 1.95,
+      "ctr": "1.24%",
+      "cvr": "3.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 10495.66,
+      "bar": "14%",
+      "roas": 1.19,
+      "ctr": "0.85%",
+      "cvr": "1.69%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Solution|f:CaulkingVideos": [
+    {
+      "targeting": "Leads",
+      "spend": 9494.65,
+      "bar": "12%",
+      "roas": 1.09,
+      "ctr": "0.62%",
+      "cvr": "2.17%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 9494.65,
+      "bar": "12%",
+      "roas": 1.09,
+      "ctr": "0.62%",
+      "cvr": "2.17%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:VSLQueen|ty:Video|st:Offer|f:KendallReEdit": [
+    {
+      "targeting": "Leads",
+      "spend": 6640.75,
+      "bar": "17%",
+      "roas": 0.66,
+      "ctr": "0.55%",
+      "cvr": "2.14%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 6640.75,
+      "bar": "17%",
+      "roas": 0.66,
+      "ctr": "0.55%",
+      "cvr": "2.14%",
+      "isTotal": true
+    }
+  ],
+  "BeforeAfter_ClickyNumberWindowsBrand_V4_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 5793.13,
+      "bar": "10%",
+      "roas": 0.78,
+      "ctr": "0.32%",
+      "cvr": "3.70%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 5793.13,
+      "bar": "10%",
+      "roas": 0.78,
+      "ctr": "0.32%",
+      "cvr": "3.70%",
+      "isTotal": true
+    }
+  ],
+  "Install_V3_RbABrand__VID_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 4693.84,
+      "bar": "36%",
+      "roas": 0.35,
+      "ctr": "0.85%",
+      "cvr": "0.79%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 61.65,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "3.26%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 0.45,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "#DIV/0!"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 43.11,
+      "bar": "50%",
+      "roas": 6.96,
+      "ctr": "1.16%",
+      "cvr": "15.38%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 109.5,
+      "bar": "0%",
+      "roas": 1.37,
+      "ctr": "0.98%",
+      "cvr": "4.17%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 878.14,
+      "bar": "21%",
+      "roas": 2.39,
+      "ctr": "0.83%",
+      "cvr": "7.73%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 5786.69,
+      "bar": "29%",
+      "roas": 0.73,
+      "ctr": "0.87%",
+      "cvr": "1.69%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_StateBrand_Offers_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 1944.53,
+      "bar": "0%",
+      "roas": 0.39,
+      "ctr": "0.90%",
+      "cvr": "0.80%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 288.1,
+      "bar": "0%",
+      "roas": 0.52,
+      "ctr": "0.65%",
+      "cvr": "0.76%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 15.35,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.19%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 205.97,
+      "bar": "0%",
+      "roas": 0.73,
+      "ctr": "1.55%",
+      "cvr": "0.91%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 548.07,
+      "bar": "100%",
+      "roas": 0.55,
+      "ctr": "0.97%",
+      "cvr": "1.08%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 2408.5,
+      "bar": "13%",
+      "roas": 2.37,
+      "ctr": "1.62%",
+      "cvr": "4.52%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 5410.52,
+      "bar": "15%",
+      "roas": 1.3,
+      "ctr": "1.13%",
+      "cvr": "2.46%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Cousin|ty:Video|st:UGC|f:WillHook4": [
+    {
+      "targeting": "Leads",
+      "spend": 4326.2,
+      "bar": "42%",
+      "roas": 0.42,
+      "ctr": "0.78%",
+      "cvr": "1.37%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 4326.2,
+      "bar": "42%",
+      "roas": 0.42,
+      "ctr": "0.78%",
+      "cvr": "1.37%",
+      "isTotal": true
+    }
+  ],
+  "AD2_Rachel_SocialProof_WindowsBrand_VID_LearnMore_": [
+    {
+      "targeting": "Leads",
+      "spend": 4112.44,
+      "bar": "37%",
+      "roas": 0.69,
+      "ctr": "0.82%",
+      "cvr": "1.82%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 4112.44,
+      "bar": "37%",
+      "roas": 0.69,
+      "ctr": "0.82%",
+      "cvr": "1.82%",
+      "isTotal": true
+    }
+  ],
+  "AD13_Danielle_SocialProof_WindowsBrand_VID_LearnMore_": [
+    {
+      "targeting": "Leads",
+      "spend": 3906.62,
+      "bar": "50%",
+      "roas": 0.38,
+      "ctr": "0.59%",
+      "cvr": "1.21%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3906.62,
+      "bar": "50%",
+      "roas": 0.38,
+      "ctr": "0.59%",
+      "cvr": "1.21%",
+      "isTotal": true
+    }
+  ],
+  "BeforeAfter_ClickyNumberWindowsBrand_V2_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 3541.24,
+      "bar": "9%",
+      "roas": 1.48,
+      "ctr": "0.46%",
+      "cvr": "7.61%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3541.24,
+      "bar": "9%",
+      "roas": 1.48,
+      "ctr": "0.46%",
+      "cvr": "7.61%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_V3_Cost_HowMuchDoesXActuallyCost_IMG_Square_": [
+    {
+      "targeting": "Purchase Value",
+      "spend": 3431.55,
+      "bar": "14%",
+      "roas": 0.92,
+      "ctr": "0.89%",
+      "cvr": "2.22%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3431.55,
+      "bar": "14%",
+      "roas": 0.92,
+      "ctr": "0.89%",
+      "cvr": "2.22%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Offer|f:BNPLBOGOLongForm": [
+    {
+      "targeting": "Leads",
+      "spend": 3348.38,
+      "bar": "15%",
+      "roas": 0.58,
+      "ctr": "0.43%",
+      "cvr": "3.23%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3348.38,
+      "bar": "15%",
+      "roas": 0.58,
+      "ctr": "0.43%",
+      "cvr": "3.23%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Image|st:Clicky|f:CostV2": [
+    {
+      "targeting": "Leads",
+      "spend": 3181.96,
+      "bar": "24%",
+      "roas": 0.99,
+      "ctr": "1.73%",
+      "cvr": "1.71%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3181.96,
+      "bar": "24%",
+      "roas": 0.99,
+      "ctr": "1.73%",
+      "cvr": "1.71%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Offer|f:ClickyStateV1": [
+    {
+      "targeting": "Leads",
+      "spend": 3109.73,
+      "bar": "17%",
+      "roas": 0.58,
+      "ctr": "1.08%",
+      "cvr": "1.56%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3109.73,
+      "bar": "17%",
+      "roas": 0.58,
+      "ctr": "1.08%",
+      "cvr": "1.56%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Issue|f:RideAlong0902WoodRot": [
+    {
+      "targeting": "Leads",
+      "spend": 3020.13,
+      "bar": "25%",
+      "roas": 0.6,
+      "ctr": "1.11%",
+      "cvr": "0.97%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3020.13,
+      "bar": "25%",
+      "roas": 0.6,
+      "ctr": "1.11%",
+      "cvr": "0.97%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyStateBrand_EnergyBills_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 2888.96,
+      "bar": "0%",
+      "roas": 1.56,
+      "ctr": "1.19%",
+      "cvr": "6.10%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2888.96,
+      "bar": "0%",
+      "roas": 1.56,
+      "ctr": "1.19%",
+      "cvr": "6.10%",
+      "isTotal": true
+    }
+  ],
+  "AD6_Kendall_Quality_WindowsBrand_VID_LearnMore_": [
+    {
+      "targeting": "Leads",
+      "spend": 2736.66,
+      "bar": "33%",
+      "roas": 0.49,
+      "ctr": "0.72%",
+      "cvr": "1.66%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2736.66,
+      "bar": "33%",
+      "roas": 0.49,
+      "ctr": "0.72%",
+      "cvr": "1.66%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Offer|f:BEAFClickyBNPLBOGO": [
+    {
+      "targeting": "Leads",
+      "spend": 2455,
+      "bar": "10%",
+      "roas": 0.61,
+      "ctr": "0.39%",
+      "cvr": "2.91%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2455,
+      "bar": "10%",
+      "roas": 0.61,
+      "ctr": "0.39%",
+      "cvr": "2.91%",
+      "isTotal": true
+    }
+  ],
+  "AD18_Georgette_Problems_WindowsBrand_VID_LearnMore_": [
+    {
+      "targeting": "Leads",
+      "spend": 2269.82,
+      "bar": "0%",
+      "roas": 0.46,
+      "ctr": "1.02%",
+      "cvr": "0.97%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2269.82,
+      "bar": "0%",
+      "roas": 0.46,
+      "ctr": "1.02%",
+      "cvr": "0.97%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Image|st:B&A|f:BOGOBNPLV1": [
+    {
+      "targeting": "Leads",
+      "spend": 2173.03,
+      "bar": "20%",
+      "roas": 0.35,
+      "ctr": "0.46%",
+      "cvr": "1.26%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2173.03,
+      "bar": "20%",
+      "roas": 0.35,
+      "ctr": "0.46%",
+      "cvr": "1.26%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:NonBranded|s:Internal|ty:Image|st:Clicky|f:LuxWindowsMountains": [
+    {
+      "targeting": "Leads",
+      "spend": 2069.08,
+      "bar": "40%",
+      "roas": 0.36,
+      "ctr": "0.61%",
+      "cvr": "1.21%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2069.08,
+      "bar": "40%",
+      "roas": 0.36,
+      "ctr": "0.61%",
+      "cvr": "1.21%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyNumberWindowsBrand_V1_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 2044.56,
+      "bar": "0%",
+      "roas": 1.25,
+      "ctr": "1.00%",
+      "cvr": "7.62%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2044.56,
+      "bar": "0%",
+      "roas": 1.25,
+      "ctr": "1.00%",
+      "cvr": "7.62%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_StateBrand_EnergyBills_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 1346.8,
+      "bar": "0%",
+      "roas": 0.22,
+      "ctr": "0.81%",
+      "cvr": "0.16%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 193.74,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.55%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 125.42,
+      "bar": "0%",
+      "roas": 1.2,
+      "ctr": "1.21%",
+      "cvr": "0.74%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 27.61,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.57%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 246.93,
+      "bar": "0%",
+      "roas": 1.21,
+      "ctr": "1.05%",
+      "cvr": "3.28%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 41.65,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.11%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1982.15,
+      "bar": "0%",
+      "roas": 0.38,
+      "ctr": "0.83%",
+      "cvr": "0.31%",
+      "isTotal": true
+    }
+  ],
+  "BeautyShot_V1_BNPLEvergreenOffer__IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 511.77,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.71%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 1440.45,
+      "bar": "10%",
+      "roas": 1.04,
+      "ctr": "0.47%",
+      "cvr": "4.61%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1952.22,
+      "bar": "10%",
+      "roas": 0.77,
+      "ctr": "0.55%",
+      "cvr": "2.71%",
+      "isTotal": true
+    }
+  ],
+  "Greenbar_V1_BNPLEvergreenOffer__IMG_LearnMore_lead": [
+    {
+      "targeting": "Leads",
+      "spend": 1915.81,
+      "bar": "8%",
+      "roas": 1.02,
+      "ctr": "0.72%",
+      "cvr": "5.37%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1915.81,
+      "bar": "8%",
+      "roas": 1.02,
+      "ctr": "0.72%",
+      "cvr": "5.37%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_V2_Cost_HowMuchDoesXActuallyCost_IMG_Square_": [
+    {
+      "targeting": "Appts",
+      "spend": 694.57,
+      "bar": "0%",
+      "roas": 0.65,
+      "ctr": "0.80%",
+      "cvr": "0.80%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 283.02,
+      "bar": "0%",
+      "roas": 0.53,
+      "ctr": "0.50%",
+      "cvr": "1.35%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 15.04,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.25%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 175.12,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.99%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 684.49,
+      "bar": "0%",
+      "roas": 0.88,
+      "ctr": "0.82%",
+      "cvr": "1.83%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 25.7,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.98%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1877.94,
+      "bar": "0%",
+      "roas": 0.64,
+      "ctr": "0.78%",
+      "cvr": "1.08%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:NonBranded|s:Internal|ty:Video|st:Clicky|f:B&AWindowMusic": [
+    {
+      "targeting": "Purchases",
+      "spend": 1814.61,
+      "bar": "14%",
+      "roas": 0.58,
+      "ctr": "0.72%",
+      "cvr": "1.35%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1814.61,
+      "bar": "14%",
+      "roas": 0.58,
+      "ctr": "0.72%",
+      "cvr": "1.35%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Cousin|ty:Video|st:UGC|f:WillHook5": [
+    {
+      "targeting": "Leads",
+      "spend": 1725.88,
+      "bar": "25%",
+      "roas": 0.35,
+      "ctr": "1.49%",
+      "cvr": "0.61%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1725.88,
+      "bar": "25%",
+      "roas": 0.35,
+      "ctr": "1.49%",
+      "cvr": "0.61%",
+      "isTotal": true
+    }
+  ],
+  "BeautyShot_V4_BNPLEvergreenOffer__IMG_LearnMore_lead": [
+    {
+      "targeting": "Leads",
+      "spend": 1703.9,
+      "bar": "0%",
+      "roas": 0.26,
+      "ctr": "0.35%",
+      "cvr": "3.13%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1703.9,
+      "bar": "0%",
+      "roas": 0.26,
+      "ctr": "0.35%",
+      "cvr": "3.13%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Offer|f:BNPLBOGOpromo": [
+    {
+      "targeting": "Leads",
+      "spend": 1702.53,
+      "bar": "22%",
+      "roas": 0.79,
+      "ctr": "0.74%",
+      "cvr": "3.54%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1702.53,
+      "bar": "22%",
+      "roas": 0.79,
+      "ctr": "0.74%",
+      "cvr": "3.54%",
+      "isTotal": true
+    }
+  ],
+  "Whiteboard_ClickyStateBrand_Upgrade_IMG_LearnMore_": [
+    {
+      "targeting": "Purchases",
+      "spend": 1554.6,
+      "bar": "11%",
+      "roas": 0.87,
+      "ctr": "0.86%",
+      "cvr": "2.59%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1554.6,
+      "bar": "11%",
+      "roas": 0.87,
+      "ctr": "0.86%",
+      "cvr": "2.59%",
+      "isTotal": true
+    }
+  ],
+  "Clicky_NumberWindowsBrand_V3_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 1010.5,
+      "bar": "33%",
+      "roas": 0.45,
+      "ctr": "0.61%",
+      "cvr": "0.48%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 44.96,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.37%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 1.04,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "#DIV/0!"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 9.76,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.46%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 393.64,
+      "bar": "0%",
+      "roas": 3.81,
+      "ctr": "1.60%",
+      "cvr": "14.08%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 40.57,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.03%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1500.47,
+      "bar": "8%",
+      "roas": 1.3,
+      "ctr": "0.65%",
+      "cvr": "1.81%",
+      "isTotal": true
+    }
+  ],
+  "BeautyShot_V2_BNPLEvergreenOffer__IMG_LearnMore_lead": [
+    {
+      "targeting": "Leads",
+      "spend": 1474.91,
+      "bar": "0%",
+      "roas": 0.81,
+      "ctr": "0.47%",
+      "cvr": "4.12%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1474.91,
+      "bar": "0%",
+      "roas": 0.81,
+      "ctr": "0.47%",
+      "cvr": "4.12%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Internal|ty:Video|st:Offer|f:ClickyWindowV2": [
+    {
+      "targeting": "Leads",
+      "spend": 1432.21,
+      "bar": "40%",
+      "roas": 0.52,
+      "ctr": "0.67%",
+      "cvr": "2.15%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1432.21,
+      "bar": "40%",
+      "roas": 0.52,
+      "ctr": "0.67%",
+      "cvr": "2.15%",
+      "isTotal": true
+    }
+  ],
+  "AD15_Danielle_Quality_WindowsBrand_VID_LearnMore_": [
+    {
+      "targeting": "Leads",
+      "spend": 1416.18,
+      "bar": "0%",
+      "roas": 0.53,
+      "ctr": "0.67%",
+      "cvr": "1.78%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1416.18,
+      "bar": "0%",
+      "roas": 0.53,
+      "ctr": "0.67%",
+      "cvr": "1.78%",
+      "isTotal": true
+    }
+  ],
+  "AD12_Danielle_EnergyBill_Pain_WindowsBrand_VID_LearnMore_": [
+    {
+      "targeting": "Leads",
+      "spend": 1371.81,
+      "bar": "25%",
+      "roas": 0.44,
+      "ctr": "1.15%",
+      "cvr": "1.21%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1371.81,
+      "bar": "25%",
+      "roas": 0.44,
+      "ctr": "1.15%",
+      "cvr": "1.21%",
+      "isTotal": true
+    }
+  ],
+  "V2_BOGOEvergreenOffer__IMG_LearnMore_lead": [
+    {
+      "targeting": "Appts",
+      "spend": 60.73,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.80%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 13.85,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.86%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 11.06,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "#DIV/0!"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 1281.14,
+      "bar": "0%",
+      "roas": 0.7,
+      "ctr": "0.53%",
+      "cvr": "2.48%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 3.57,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "#DIV/0!"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1370.35,
+      "bar": "0%",
+      "roas": 0.66,
+      "ctr": "0.56%",
+      "cvr": "2.05%",
+      "isTotal": true
+    }
+  ],
+  "BeforeAfter_Cost_V1_IMG_LearnMore_": [
+    {
+      "targeting": "Appts",
+      "spend": 1016.73,
+      "bar": "0%",
+      "roas": 0.3,
+      "ctr": "0.63%",
+      "cvr": "0.36%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 39.89,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.34%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 1.03,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "#DIV/0!"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 19.87,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.80%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Purchase Value",
+      "spend": 148.75,
+      "bar": "0%",
+      "roas": 1.01,
+      "ctr": "0.67%",
+      "cvr": "4.17%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 66.69,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.77%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1292.96,
+      "bar": "0%",
+      "roas": 0.35,
+      "ctr": "0.63%",
+      "cvr": "0.49%",
+      "isTotal": true
+    }
+  ],
+  "V4_BOGOEvergreenOffer__IMG_LearnMore_lead": [
+    {
+      "targeting": "Appts",
+      "spend": 35.89,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.04%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 7.59,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.80%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Iss.Appt",
+      "spend": 27.16,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.56%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Leads",
+      "spend": 1061.73,
+      "bar": "50%",
+      "roas": 1.13,
+      "ctr": "0.57%",
+      "cvr": "3.43%"
+    },
+    {
+      "targeting": "Purchases",
+      "spend": 12.46,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "4.76%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1144.83,
+      "bar": "50%",
+      "roas": 1.05,
+      "ctr": "0.61%",
+      "cvr": "2.90%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Cousin|ty:Video|st:UGC|f:BeccaHook2Body2": [
+    {
+      "targeting": "Leads",
+      "spend": 1112.45,
+      "bar": "0%",
+      "roas": 0.27,
+      "ctr": "0.74%",
+      "cvr": "0.85%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1112.45,
+      "bar": "0%",
+      "roas": 0.27,
+      "ctr": "0.74%",
+      "cvr": "0.85%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:NonBranded|s:Internal|ty:Video|st:Issue|f:WoodRot": [
+    {
+      "targeting": "Unknown",
+      "spend": 1079.5,
+      "bar": "0%",
+      "roas": 0.42,
+      "ctr": "1.13%",
+      "cvr": "0.64%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1079.5,
+      "bar": "0%",
+      "roas": 0.42,
+      "ctr": "1.13%",
+      "cvr": "0.64%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Windows|b:RBA|s:Cousin|ty:Video|st:UGC|f:BeccaHook2Body1": [
+    {
+      "targeting": "Leads",
+      "spend": 1014.23,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.32%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1014.23,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.32%",
+      "cvr": "0.00%",
+      "isTotal": true
+    }
+  ]
+}

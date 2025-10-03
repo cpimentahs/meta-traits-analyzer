@@ -1,0 +1,95 @@
+ad_name,Targeting,Spend,BAR,ROAS,CTR,CVR
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:ShowerCost,Book Appt,"4,041.10",2%,0.94,3.63%,2.90%
+,Lead,"38,694.07",9%,1.52,3.07%,4.59%
+,Lead+Book Appt,"23,623.60",16%,1.42,2.71%,4.62%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:ShowerCost Total,,"66,358.77",11%,1.45,2.97%,4.49%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:ShowerCost,Book Appt,"8,591.97",21%,0.93,2.69%,3.21%
+,Lead,"23,401.29",14%,1.28,2.89%,5.68%
+,Lead+Book Appt,"10,293.75",22%,1.18,2.68%,5.65%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:ShowerCost Total,,"42,287.01",17%,1.18,2.79%,5.09%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:RemodelCostV2,Book Appt,"1,010.28",33%,0.48,3.25%,1.73%
+,Lead,"7,319.63",13%,1.18,2.22%,3.67%
+,Lead+Book Appt,"7,264.58",16%,0.98,2.11%,2.56%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:RemodelCostV2 Total,,"15,594.49",15%,1.04,2.22%,2.97%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:BathCost,Book Appt,"1,501.86",33%,0.73,2.47%,3.33%
+,Lead,"7,205.55",13%,0.94,2.91%,6.88%
+,Lead+Book Appt,"1,330.49",30%,0.85,2.01%,6.29%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:BathCost Total,,"10,037.90",18%,0.90,2.67%,6.07%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:BathroomV1,Book Appt,13.98,0%,0.00,1.06%,0.00%
+,Lead,"3,935.31",4%,0.79,2.81%,10.80%
+,Lead+Book Appt,11.10,0%,0.00,2.17%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:BathroomV1 Total,,"3,960.39",4%,0.79,2.78%,10.72%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Affordability,Book Appt,68.72,0%,0.00,0.93%,0.00%
+,Lead,"3,043.63",50%,0.29,2.23%,5.07%
+,Lead+Book Appt,32.87,100%,3.92,2.83%,28.57%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Affordability Total,,"3,145.22",56%,0.32,2.10%,5.15%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerLargeV2,Book Appt,77.29,0%,1.06,2.60%,4.17%
+,Lead,"2,990.26",0%,0.72,3.44%,7.28%
+,Lead+Book Appt,10.92,0%,0.00,1.61%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerLargeV2 Total,,"3,078.47",0%,0.72,3.36%,7.06%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:Affordability,Book Appt,152.59,100%,0.50,1.21%,2.27%
+,Lead,"2,288.76",31%,0.61,1.59%,7.97%
+,Lead+Book Appt,59.33,0%,0.00,0.97%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:Affordability Total,,"2,500.68",35%,0.59,1.52%,7.19%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Upgrade,Book Appt,139.90,0%,1.75,3.54%,4.00%
+,Lead,"1,871.53",20%,0.42,2.90%,5.81%
+,Lead+Book Appt,11.84,0%,0.00,2.78%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Upgrade Total,,"2,023.27",13%,0.51,2.99%,5.46%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:PersonShower,Book Appt,106.10,0%,1.31,0.88%,11.76%
+,Lead,"1,709.09",10%,0.61,2.92%,7.19%
+,Lead+Book Appt,84.10,0%,0.00,4.52%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:PersonShower Total,,"1,899.29",8%,0.62,2.67%,7.10%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:Cleobathra,Book Appt,"1,499.24",40%,0.42,1.90%,1.78%
+,Lead,96.40,0%,0.00,1.86%,0.00%
+,Lead+Book Appt,45.93,0%,0.00,2.41%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:Cleobathra Total,,"1,641.57",40%,0.38,1.90%,1.74%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V2,Lead,"1,481.34",0%,0.37,1.72%,5.97%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V2 Total,,"1,481.34",0%,0.37,1.72%,5.97%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Vanity1,Lead,"1,402.56",0%,0.48,2.29%,4.29%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Vanity1 Total,,"1,402.56",0%,0.48,2.29%,4.29%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:OneDay,Book Appt,148.08,0%,0.64,1.84%,3.39%
+,Lead,"1,121.61",25%,0.42,2.73%,4.10%
+,Lead+Book Appt,35.66,0%,0.00,1.50%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:OneDay Total,,"1,305.35",20%,0.43,2.43%,3.88%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V3,Lead,"1,275.51",0%,0.55,2.80%,8.56%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V3 Total,,"1,275.51",0%,0.55,2.80%,8.56%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:NetworxLux|f:Journey7,Lead,"1,180.10",33%,0.69,1.57%,7.25%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:NetworxLux|f:Journey7 Total,,"1,180.10",33%,0.69,1.57%,7.25%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:90s - Copy,Lead,"1,084.32",25%,0.44,2.81%,5.81%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:90s - Copy Total,,"1,084.32",25%,0.44,2.81%,5.81%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Shower1,Lead,"1,008.34",0%,0.35,3.30%,1.74%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Shower1 Total,,"1,008.34",0%,0.35,3.30%,1.74%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:TextImage|f:Testimonial2,Lead,990.49,0%,0.34,5.02%,4.26%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:TextImage|f:Testimonial2 Total,,990.49,0%,0.34,5.02%,4.26%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Upgrade,Book Appt,242.00,0%,0.51,2.51%,2.80%
+,Lead,734.75,100%,0.33,2.86%,5.26%
+,Lead+Book Appt,12.26,0%,0.00,0.00%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Upgrade Total,,989.01,33%,0.37,2.61%,3.96%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Shower,Book Appt,169.87,0%,0.00,2.16%,0.00%
+,Lead,635.17,0%,0.78,3.14%,13.04%
+,Lead+Book Appt,137.57,0%,0.00,1.78%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Shower Total,,942.61,0%,0.52,2.55%,7.58%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:#Showers,Book Appt,201.94,0%,1.32,1.75%,8.33%
+,Lead,716.62,0%,0.31,2.47%,8.74%
+,Lead+Book Appt,2.92,0%,0.00,5.56%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:#Showers Total,,921.48,0%,0.53,2.16%,8.48%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:FloorplanShowerLargeV2,Book Appt,116.72,0%,0.55,2.54%,2.56%
+,Lead,667.08,17%,0.97,1.98%,14.29%
+,Lead+Book Appt,30.61,0%,3.19,2.46%,16.67%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:FloorplanShowerLargeV2 Total,,814.41,14%,0.99,2.09%,11.80%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V1,Lead,782.43,0%,0.16,1.89%,8.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V1 Total,,782.43,0%,0.16,1.89%,8.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerSmallV2,Book Appt,123.75,0%,0.00,3.21%,0.00%
+,Lead,512.99,0%,0.17,1.50%,3.37%
+,Lead+Book Appt,67.17,0%,0.80,1.53%,11.11%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerSmallV2 Total,,703.91,0%,0.20,1.76%,2.94%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:OneDay,Book Appt,122.32,0%,2.09,1.93%,14.81%
+,Lead,570.08,0%,0.12,1.66%,8.96%
+,Lead+Book Appt,10.73,0%,0.00,1.27%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:OneDay Total,,703.13,0%,0.46,1.72%,10.42%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:OneDay,Book Appt,59.23,0%,0.00,1.83%,0.00%
+,Lead,620.85,67%,0.57,1.74%,10.31%
+,Lead+Book Appt,0.95,0%,0.00,0.00%,0.00%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:OneDay Total,,681.03,67%,0.52,1.76%,7.75%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Bathroom1,Lead,586.64,0%,0.01,4.14%,0.32%
+d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Bathroom1 Total,,586.64,0%,0.01,4.14%,0.32%

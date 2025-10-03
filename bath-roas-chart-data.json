@@ -1,0 +1,560 @@
+{
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:TextOver|f:VanitySimple": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.58,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:Affordability": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      1.48,
+      0,
+      0.67,
+      0.52,
+      0.63,
+      0.26
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:PersonShower": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      2.86,
+      0,
+      0.63,
+      0.5,
+      0,
+      0.27
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Upgrade": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.11,
+      0,
+      1.5,
+      0.22,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Affordability": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.49,
+      0.24,
+      0.32,
+      0.69,
+      2.68,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:ShowerCost": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      1.52,
+      1.37,
+      1.31,
+      1.22,
+      1.44,
+      1.4
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:ShowerCost": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      1.41,
+      1.24,
+      0.92,
+      0.84,
+      1.32,
+      1.01
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:RemodelCostV2": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.81,
+      0.55,
+      0.89,
+      1.11,
+      1.48,
+      0.98
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:BathCost": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.64,
+      0.66,
+      1.07,
+      0.77,
+      1.04,
+      1.58
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Shower": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.61,
+      1.19,
+      0.47
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:OneDay": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.05,
+      0,
+      0.55,
+      0.45,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerLargeV2": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.62,
+      3.14,
+      0,
+      2.06,
+      0,
+      0.82
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:OneDay": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.81,
+      0.45,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:OneDay": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      2.51,
+      1.77,
+      0,
+      0.13,
+      0.18,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Bathroom1": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.01
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Shower1": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.35
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:Cleobathra": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.95,
+      0.51,
+      0.27,
+      0.36,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Upgrade": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.97,
+      0.22,
+      0,
+      0.56,
+      7.93,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerSmallV2": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:FloorplanShowerLargeV2": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      1.37,
+      0,
+      0,
+      0,
+      8.17,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V1": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0.15,
+      0.27
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:NetworxLux|f:Journey7": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.69
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:#Showers": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      4.26,
+      1.33,
+      0.22,
+      0.47,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:BathroomV1": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.81,
+      0,
+      0.33,
+      0,
+      0,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V2": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0.34,
+      1
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:TextImage|f:Testimonial2": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.34
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Vanity1": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.48
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Video|st:BathPicker|f:V3": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0.58,
+      0.29
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Video|st:BathPicker|f:V4": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0.51,
+      0
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V3": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0.56,
+      0.45
+    ]
+  },
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:90s - Copy": {
+    "weeks": [
+      "8/18",
+      "8/25",
+      "9/1",
+      "9/8",
+      "9/15",
+      "9/22"
+    ],
+    "values": [
+      0.44,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
