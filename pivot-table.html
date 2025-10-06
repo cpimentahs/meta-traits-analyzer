@@ -454,8 +454,8 @@
         async function loadData() {
             try {
                 const [windowsRes, bathRes] = await Promise.all([
-                    fetch('Traits Ad Analysis - Data _ windows ads + traits (1).csv'),
-                    fetch('Traits Ad Analysis - Data _ bath ads + traits.csv')
+                    fetch('traits-windows-ads.csv'),
+                    fetch('traits-bath-ads.csv')
                 ]);
 
                 const [windowsText, bathText] = await Promise.all([
