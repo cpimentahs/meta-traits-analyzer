@@ -299,6 +299,82 @@
             text-overflow: ellipsis;
         }
 
+        /* Multi-select filter styles */
+        .filter-dropdown {
+            position: relative;
+            min-width: 300px;
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 6px 10px;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .filter-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-options.active {
+            display: block;
+        }
+
+        .filter-option {
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-option:hover {
+            background: #f5f5f5;
+        }
+
+        .filter-option input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .selected-count {
+            font-size: 11px;
+            color: #666;
+            padding: 4px 0;
+            font-weight: 500;
+        }
+
+        .clear-filter {
+            font-size: 11px;
+            color: #0066cc;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .clear-filter:hover {
+            color: #0052a3;
+        }
+
         /* Modal styles */
         .modal {
             display: none;
@@ -400,6 +476,13 @@
                     <option value="Quality Ads Only">Quality Ads Only</option>
                     <option value="Loser Ads">Loser Ads</option>
                 </select>
+                <label>Filter Ads:</label>
+                <div class="filter-dropdown">
+                    <input type="text" id="adFilterSearch" class="filter-input" placeholder="Search and select ads...">
+                    <div id="adFilterOptions" class="filter-options"></div>
+                </div>
+                <span class="selected-count" id="selectedAdCount"></span>
+                <span class="clear-filter" id="clearAdFilter" style="display: none;">Clear</span>
             </div>
             <div class="control-row">
                 <button id="generateBtn">Generate</button>
@@ -454,6 +537,8 @@
         let currentAdIndex = 0;
         let currentGalleryAds = [];
         let selectedRows = new Set(); // Track selected rows for comparison
+        let selectedAdNames = new Set(); // Track selected ad names for filtering
+        let allAdNames = []; // Store all unique ad names
 
         // Load and parse CSV files
         async function loadData() {
@@ -474,6 +559,11 @@
                 ];
 
                 filteredData = allData;
+
+                // Extract unique ad names
+                allAdNames = [...new Set(allData.map(ad => ad['Ad Name']))].sort();
+                populateAdFilter();
+
                 console.log(`✅ Loaded ${allData.length} ads`);
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -481,21 +571,126 @@
             }
         }
 
+        // Populate ad filter dropdown
+        function populateAdFilter() {
+            const filterOptions = document.getElementById('adFilterOptions');
+            filterOptions.innerHTML = allAdNames.map(adName => `
+                <label class="filter-option">
+                    <input type="checkbox" value="${adName}" onchange="toggleAdFilter('${adName.replace(/'/g, "\\'")}', this.checked)">
+                    <span>${adName}</span>
+                </label>
+            `).join('');
+        }
+
+        // Toggle ad filter dropdown
+        document.addEventListener('click', (e) => {
+            const filterSearch = document.getElementById('adFilterSearch');
+            const filterOptions = document.getElementById('adFilterOptions');
+            const filterDropdown = document.querySelector('.filter-dropdown');
+
+            if (filterDropdown && filterDropdown.contains(e.target)) {
+                filterOptions.classList.add('active');
+            } else {
+                filterOptions.classList.remove('active');
+            }
+        });
+
+        // Search functionality for ad filter
+        document.getElementById('adFilterSearch').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const options = document.querySelectorAll('.filter-option');
+
+            options.forEach(option => {
+                const adName = option.querySelector('span').textContent.toLowerCase();
+                if (adName.includes(searchTerm)) {
+                    option.style.display = 'flex';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
+
+        // Toggle individual ad selection
+        function toggleAdFilter(adName, checked) {
+            if (checked) {
+                selectedAdNames.add(adName);
+            } else {
+                selectedAdNames.delete(adName);
+            }
+            updateAdFilterDisplay();
+            applyAdFilter();
+        }
+
+        // Update filter display
+        function updateAdFilterDisplay() {
+            const count = selectedAdNames.size;
+            const countDisplay = document.getElementById('selectedAdCount');
+            const clearBtn = document.getElementById('clearAdFilter');
+
+            if (count > 0) {
+                countDisplay.textContent = `${count} ad${count > 1 ? 's' : ''} selected`;
+                clearBtn.style.display = 'inline';
+            } else {
+                countDisplay.textContent = '';
+                clearBtn.style.display = 'none';
+            }
+        }
+
+        // Apply ad filter
+        function applyAdFilter() {
+            if (selectedAdNames.size === 0) {
+                // No filter, show all data
+                filterData(currentFilter);
+            } else {
+                // Filter by selected ad names
+                filteredData = allData.filter(ad => {
+                    const matchesCategory = currentFilter === 'both' || ad.Category === (currentFilter === 'windows' ? 'Windows' : 'Bath');
+                    const matchesAdName = selectedAdNames.has(ad['Ad Name']);
+                    return matchesCategory && matchesAdName;
+                });
+
+                console.log(`Filtered to ${filteredData.length} ads by selection`);
+
+                // Auto-regenerate if a pivot table was already created
+                if (pivotData.length > 0) {
+                    generatePivot();
+                }
+            }
+        }
+
+        // Clear ad filter
+        document.getElementById('clearAdFilter').addEventListener('click', () => {
+            selectedAdNames.clear();
+            document.querySelectorAll('#adFilterOptions input[type="checkbox"]').forEach(cb => cb.checked = false);
+            updateAdFilterDisplay();
+            applyAdFilter();
+        });
+
         // Filter data by category
         function filterData(filter) {
             currentFilter = filter;
 
             // Update button states
             document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Apply category filter first
+            let categoryFiltered;
             if (filter === 'both') {
                 document.getElementById('bothBtn').classList.add('active');
-                filteredData = allData;
+                categoryFiltered = allData;
             } else if (filter === 'windows') {
                 document.getElementById('windowsBtn').classList.add('active');
-                filteredData = allData.filter(ad => ad.Category === 'Windows');
+                categoryFiltered = allData.filter(ad => ad.Category === 'Windows');
             } else if (filter === 'bath') {
                 document.getElementById('bathBtn').classList.add('active');
-                filteredData = allData.filter(ad => ad.Category === 'Bath');
+                categoryFiltered = allData.filter(ad => ad.Category === 'Bath');
+            }
+
+            // Apply ad name filter if any are selected
+            if (selectedAdNames.size > 0) {
+                filteredData = categoryFiltered.filter(ad => selectedAdNames.has(ad['Ad Name']));
+            } else {
+                filteredData = categoryFiltered;
             }
 
             console.log(`Filtered to ${filteredData.length} ${filter} ads`);
