@@ -466,6 +466,7 @@
                     <option value="Concepts+Headline+CTAText">Concepts+Headline+CTAText</option>
                     <option value="Concepts+Headline">Concepts+Headline</option>
                     <option value="Problem+Headline+CTA">Problem+Headline+CTA</option>
+                    <option value="Concepts+Brand">Concepts+Brand</option>
                     <option value="Quadrants">Quadrants</option>
                     <option value="High ROAS & High BAR">High ROAS & High BAR</option>
                     <option value="High ROAS & Low BAR">High ROAS & Low BAR</option>
@@ -802,6 +803,8 @@
                 selectedFields = ['Concept', 'Headline'];
             } else if (selectedValue === 'Problem+Headline+CTA') {
                 selectedFields = ['Problem', 'Headline', 'CTA Text'];
+            } else if (selectedValue === 'Concepts+Brand') {
+                selectedFields = ['Concept', 'Brand'];
             } else {
                 // Single field (including Quadrants, Champion Ads, etc.)
                 selectedFields = [selectedValue];
@@ -1373,6 +1376,8 @@
                 selectedFields = ['Concept', 'Headline'];
             } else if (selectedValue === 'Problem+Headline+CTA') {
                 selectedFields = ['Problem', 'Headline', 'CTA Text'];
+            } else if (selectedValue === 'Concepts+Brand') {
+                selectedFields = ['Concept', 'Brand'];
             } else {
                 selectedFields = [selectedValue];
             }
