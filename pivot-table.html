@@ -508,11 +508,21 @@
 
         // Parse CSV with proper handling of quoted values
         function parseCSV(text) {
-            const lines = text.trim().split('\n');
-            const headers = parseCSVLine(lines[1]); // Row 2 has headers
+            const lines = text.trim().split('\n').filter(line => line.trim()); // Remove empty lines
+
+            // Find the header row (first row with "Category" column)
+            let headerIndex = 0;
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].includes('Category')) {
+                    headerIndex = i;
+                    break;
+                }
+            }
+
+            const headers = parseCSVLine(lines[headerIndex]);
             const data = [];
 
-            for (let i = 2; i < lines.length; i++) {
+            for (let i = headerIndex + 1; i < lines.length; i++) {
                 const values = parseCSVLine(lines[i]);
                 if (values.length === headers.length) {
                     const row = {};
