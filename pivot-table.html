@@ -389,7 +389,12 @@
                     <option value="Concepts+Problem+Color">Concepts+Problem+Color</option>
                     <option value="Concepts+Headline+CTAText">Concepts+Headline+CTAText</option>
                     <option value="Concepts+Headline">Concepts+Headline</option>
+                    <option value="Problem+Headline+CTA">Problem+Headline+CTA</option>
                     <option value="Quadrants">Quadrants</option>
+                    <option value="High ROAS & High BAR">High ROAS & High BAR</option>
+                    <option value="High ROAS & Low BAR">High ROAS & Low BAR</option>
+                    <option value="Low ROAS & High BAR">Low ROAS & High BAR</option>
+                    <option value="Low ROAS & Low BAR">Low ROAS & Low BAR</option>
                     <option value="Champion Ads">Champion Ads</option>
                     <option value="CM Only Ads">CM Only Ads</option>
                     <option value="Quality Ads Only">Quality Ads Only</option>
@@ -590,13 +595,10 @@
                 selectedFields = ['Concept', 'Headline', 'CTA Text'];
             } else if (selectedValue === 'Concepts+Headline') {
                 selectedFields = ['Concept', 'Headline'];
-            } else if (selectedValue === 'Quadrants' || selectedValue === 'Champion Ads' ||
-                       selectedValue === 'CM Only Ads' || selectedValue === 'Quality Ads Only' ||
-                       selectedValue === 'Loser Ads') {
-                // These are single grouping fields from the data
-                selectedFields = [selectedValue];
+            } else if (selectedValue === 'Problem+Headline+CTA') {
+                selectedFields = ['Problem', 'Headline', 'CTA Text'];
             } else {
-                // Single field
+                // Single field (including Quadrants, Champion Ads, etc.)
                 selectedFields = [selectedValue];
             }
 
@@ -1164,6 +1166,8 @@
                 selectedFields = ['Concept', 'Headline', 'CTA Text'];
             } else if (selectedValue === 'Concepts+Headline') {
                 selectedFields = ['Concept', 'Headline'];
+            } else if (selectedValue === 'Problem+Headline+CTA') {
+                selectedFields = ['Problem', 'Headline', 'CTA Text'];
             } else {
                 selectedFields = [selectedValue];
             }
