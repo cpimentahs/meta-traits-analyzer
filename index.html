@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Ads Performance Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Ad Performance Pivot Table</title>
     <style>
         * {
             margin: 0;
@@ -13,325 +12,370 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffff;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 10px;
         }
 
-        .header-container {
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .toggle-container {
             display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 25px;
+            gap: 10px;
+            background: #f5f5f5;
             padding: 4px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e1e8ed;
+            border-radius: 8px;
         }
 
         .toggle-btn {
-            padding: 8px 20px;
-            border: none;
+            padding: 6px 16px;
             background: transparent;
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 600;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
-            border-radius: 20px;
-            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 13px;
+            color: #666;
+            transition: all 0.2s;
         }
 
         .toggle-btn.active {
-            background: #4285f4;
+            background: #0066cc;
             color: white;
         }
 
         .toggle-btn:hover:not(.active) {
-            background: #f0f2f5;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 32px;
-            font-weight: 600;
+            background: #e5e5e5;
         }
 
         .controls {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            border: 1px solid #e1e8ed;
+            background: #f9f9f9;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
         }
 
-        .search-bar {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: 2px solid #dae1e7;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            transition: border-color 0.3s;
-        }
-
-        .search-bar:focus {
-            outline: none;
-            border-color: #4285f4;
-        }
-
-        .sort-buttons {
+        .control-row {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 8px;
+            align-items: center;
         }
 
-        .concept-dropdown {
-            padding: 10px 15px;
-            font-size: 15px;
-            border: 2px solid #dae1e7;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            min-width: 180px;
-            transition: border-color 0.3s;
+        .control-row:last-child {
+            margin-bottom: 0;
         }
 
-        .concept-dropdown:hover {
-            border-color: #4285f4;
-        }
-
-        .concept-dropdown:focus {
-            outline: none;
-            border-color: #4285f4;
-        }
-
-        .sort-btn {
-            padding: 10px 20px;
-            font-size: 15px;
+        label {
             font-weight: 500;
-            border: 2px solid #dae1e7;
-            background: white;
-            border-radius: 8px;
+            color: #666;
+            font-size: 12px;
+            min-width: 80px;
+        }
+
+        select, button {
+            padding: 6px 10px;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            color: #1a1a1a;
+            border-radius: 4px;
+            font-size: 12px;
             cursor: pointer;
+        }
+
+        select {
+            min-width: 180px;
+        }
+
+        button {
+            background: #0066cc;
+            border-color: #0066cc;
+            color: #fff;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0052a3;
+        }
+
+        .table-container {
+            background: #fff;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 85vh;
+            border: 1px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            color: #1a1a1a;
+        }
+
+        td {
+            color: #1a1a1a;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .number {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric-positive {
+            color: #4ade80;
+        }
+
+        .metric-negative {
+            color: #f87171;
+        }
+
+        #downloadBtn {
+            background: #059669;
+            border-color: #059669;
+        }
+
+        #downloadBtn:hover {
+            background: #047857;
+        }
+
+        .expand-btn {
+            cursor: pointer;
+            color: #0066cc;
+            font-weight: bold;
+            user-select: none;
+            padding-right: 5px;
+        }
+
+        .expand-btn:hover {
+            color: #0052a3;
+        }
+
+        .expanded-row {
+            background: #fafafa !important;
+        }
+
+        .ad-gallery {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
             transition: all 0.3s;
         }
 
-        .sort-btn:hover {
-            background-color: #f8f9fa;
-            border-color: #4285f4;
-        }
-
-        .sort-btn.active {
-            background-color: #4285f4;
-            color: white;
-            border-color: #4285f4;
-        }
-
-        .ads-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .ad-gallery.compact {
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
         }
 
         .ad-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e1e8ed;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
-            flex-direction: row;
-            height: 205px;
+            gap: 15px;
+            background: #fafafa;
+            padding: 10px;
+            padding-right: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .ad-gallery.compact .ad-card {
+            padding: 0;
+            padding-right: 10px;
+            background: transparent;
+            border: none;
+        }
+
+        .ad-thumbnail {
+            position: relative;
             cursor: pointer;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
         }
 
-        .ad-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .ad-thumbnail:hover {
+            border-color: #0066cc;
+            transform: scale(1.05);
         }
 
-        .ad-image-container {
-            width: 40%;
-            min-width: 200px;
+        .ad-thumbnail img {
+            width: 100%;
             height: 100%;
-            background-color: #ffffff;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ad-mini-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 11px;
+            flex: 1;
+        }
+
+        .ad-mini-stats.hidden {
+            display: none;
+        }
+
+        .ad-mini-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        .ad-mini-stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .ad-mini-stat-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .ad-thumbnail img.error {
+            display: none;
+        }
+
+        .ad-thumbnail.has-error {
+            background: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-right: 2px solid #e1e8ed;
-            overflow: hidden;
+            min-height: 120px;
         }
 
-        .ad-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background-color: #fff;
+        .ad-thumbnail.has-error::before {
+            content: '🖼️';
+            font-size: 40px;
+            opacity: 0.3;
         }
 
-        .ad-content {
-            padding: 15px 15px 18px 15px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-width: 0;
-        }
-
-        .ad-name {
+        .ad-name-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
             font-size: 10px;
-            font-weight: 500;
-            color: #2c3e50;
-            margin-top: 3px;
-            line-height: 1.15;
-            word-break: break-all;
+            padding: 4px;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
         }
 
-        .ad-header {
-            margin-bottom: 8px;
-            min-width: 0;
+        /* Multi-select filter styles */
+        .filter-dropdown {
+            position: relative;
+            min-width: 300px;
         }
 
-        .concept-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            background-color: #e3f2fd;
-            color: #1976d2;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .metrics {
-            display: grid;
-            gap: 3.2px;
-        }
-
-        .metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 3.2px 0;
-            border-bottom: 1px solid #f0f2f5;
-        }
-
-        .metric:last-child {
-            border-bottom: none;
-        }
-
-        .metric-label {
+        .filter-input {
+            width: 100%;
+            padding: 6px 10px;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
             font-size: 12px;
-            color: #64748b;
+            cursor: pointer;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .filter-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-options.active {
+            display: block;
+        }
+
+        .filter-option {
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-option:hover {
+            background: #f5f5f5;
+        }
+
+        .filter-option input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .selected-count {
+            font-size: 11px;
+            color: #666;
+            padding: 4px 0;
             font-weight: 500;
         }
 
-        .metric-value {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1e293b;
+        .clear-filter {
+            font-size: 11px;
+            color: #0066cc;
+            cursor: pointer;
+            text-decoration: underline;
         }
 
-        .roas-value {
-            padding: 4px 8px;
-            border-radius: 6px;
+        .clear-filter:hover {
+            color: #0052a3;
         }
 
-        .roas-high {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .roas-medium {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-
-        .roas-low {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        .stats-summary {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border: 1px solid #e1e8ed;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 5px;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        @media (max-width: 768px) {
-            .ads-grid {
-                grid-template-columns: 1fr;
-            }
-            .ad-card {
-                flex-direction: column;
-                height: auto;
-            }
-            .ad-image-container {
-                width: 100%;
-                height: 150px;
-                border-right: none;
-                border-bottom: 2px solid #e1e8ed;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1200px) {
-            .ads-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (min-width: 1201px) {
-            .ads-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        /* Modal Styles */
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -340,635 +384,1148 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
         }
 
-        .modal-content {
-            background-color: white;
-            margin: 40px auto;
-            padding: 0;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 1200px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        .modal.active {
             display: flex;
-            max-height: 80vh;
-            overflow: hidden;
         }
 
-        .modal-left {
-            width: 50%;
-            background: #f8f9fa;
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a1a;
+            border: none;
+            font-size: 40px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            border-right: 2px solid #e1e8ed;
+            transition: background 0.2s;
         }
 
-        .modal-right {
-            width: 50%;
-            padding: 20px;
-            overflow-y: auto;
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 1);
         }
 
-        .modal-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        .modal-nav.prev {
+            left: 20px;
+        }
+
+        .modal-nav.next {
+            right: 20px;
         }
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 28px;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
             font-weight: bold;
-            color: #666;
             cursor: pointer;
-            z-index: 1001;
-            background: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .modal-close:hover {
-            color: #000;
-            transform: rotate(90deg);
-            transition: transform 0.3s;
-        }
-
-        .modal-title {
-            font-size: 12.6px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e1e8ed;
-        }
-
-        .targeting-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        .targeting-table th {
-            background-color: #f8f9fa;
-            padding: 12px;
-            text-align: left;
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
-            border-bottom: 2px solid #e1e8ed;
-        }
-
-        .targeting-table td {
-            padding: 12px;
-            border-bottom: 1px solid #f0f2f5;
-            font-size: 10.5px;
-        }
-
-        .targeting-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .targeting-table .roas-cell {
-            font-weight: 600;
-        }
-
-        .no-targeting-data {
-            padding: 40px;
-            text-align: center;
-            color: #999;
-            font-size: 14px;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 250px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .chart-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
-            margin-bottom: 10px;
+            color: #ccc;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header-container">
-            <h1>Ads Performance Dashboard</h1>
-            <div class="toggle-container">
-                <button class="toggle-btn active" data-category="windows" onclick="switchCategory('windows')">Windows</button>
-                <button class="toggle-btn" data-category="bath" onclick="switchCategory('bath')">Bath</button>
-            </div>
-        </div>
-
         <div class="controls">
-            <input type="text" class="search-bar" id="searchBar" placeholder="Search by ad name or concept...">
-            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-                <select id="conceptFilter" class="concept-dropdown">
-                    <option value="">All Concepts</option>
+            <div class="control-row">
+                <label>Group By:</label>
+                <select id="groupBySelect">
+                    <option value="">Select grouping...</option>
+                    <option value="Ad Name">Ad Name</option>
+                    <option value="Category">Category</option>
+                    <option value="Concept">Concept</option>
+                    <option value="Headline">Headline</option>
+                    <option value="Problem">Problem</option>
+                    <option value="Solution">Solution</option>
+                    <option value="Offer Style">Offer Style</option>
+                    <option value="CTA Text">CTA Text</option>
+                    <option value="CTA Position">CTA Position</option>
+                    <option value="Social Proof">Social Proof</option>
+                    <option value="Emotion">Emotion</option>
+                    <option value="Brand">Brand</option>
+                    <option value="Urgency">Urgency</option>
+                    <option value="Contrast">Contrast</option>
+                    <option value="Color">Color</option>
+                    <option disabled>--- Pre-built Groupings ---</option>
+                    <option value="Concepts+Problem+Color">Concepts+Problem+Color</option>
+                    <option value="Concepts+Headline+CTAText">Concepts+Headline+CTAText</option>
+                    <option value="Concepts+Headline">Concepts+Headline</option>
+                    <option value="Problem+Headline+CTA">Problem+Headline+CTA</option>
+                    <option value="Concepts+Brand">Concepts+Brand</option>
+                    <option value="Quadrants">Quadrants</option>
+                    <option value="High ROAS & High BAR">High ROAS & High BAR</option>
+                    <option value="High ROAS & Low BAR">High ROAS & Low BAR</option>
+                    <option value="Low ROAS & High BAR">Low ROAS & High BAR</option>
+                    <option value="Low ROAS & Low BAR">Low ROAS & Low BAR</option>
+                    <option value="Champion Ads">Champion Ads</option>
+                    <option value="CM Only Ads">CM Only Ads</option>
+                    <option value="Quality Ads Only">Quality Ads Only</option>
+                    <option value="Loser Ads">Loser Ads</option>
                 </select>
-                <div class="sort-buttons">
-                    <button class="sort-btn" onclick="sortData('default')">Default Order</button>
-                    <button class="sort-btn" onclick="sortData('roas')">Sort by ROAS ↓</button>
-                    <button class="sort-btn" onclick="sortData('bar')">Sort by BAR ↓</button>
-                    <button class="sort-btn" onclick="sortData('adsets')">Sort by Adsets ↓</button>
-                    <button class="sort-btn" onclick="sortData('spend')">Sort by Spend ↓</button>
+                <label>Filter Ads:</label>
+                <div class="filter-dropdown">
+                    <input type="text" id="adFilterSearch" class="filter-input" placeholder="Search and select ads...">
+                    <div id="adFilterOptions" class="filter-options"></div>
                 </div>
+                <span class="selected-count" id="selectedAdCount"></span>
+                <span class="clear-filter" id="clearAdFilter" style="display: none;">Clear</span>
+            </div>
+            <div class="control-row">
+                <button id="generateBtn">Generate</button>
+                <button id="downloadBtn">Download CSV</button>
+                <button id="compareBtn" style="background: #8b5cf6; border-color: #8b5cf6; display: none;">Compare (<span id="compareCount">0</span>)</button>
+                <div class="toggle-container" style="margin-left: auto;">
+                    <button class="toggle-btn active" id="bothBtn">Both</button>
+                    <button class="toggle-btn" id="windowsBtn">Windows</button>
+                    <button class="toggle-btn" id="bathBtn">Bath</button>
+                </div>
+                <label style="min-width: auto; margin: 0; display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                    <input type="checkbox" id="showKpisToggle" checked style="cursor: pointer;">
+                    <span>Show KPIs</span>
+                </label>
             </div>
         </div>
 
-        <div class="ads-grid" id="adsGrid">
-            <!-- Ad cards will be inserted here -->
+        <div class="table-container">
+            <table id="pivotTable">
+                <thead id="tableHead"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="adModal" class="modal">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            <div class="modal-left" id="modalMedia">
-                <!-- Image or video will be inserted here -->
-            </div>
-            <div class="modal-right">
-                <h2 class="modal-title" id="modalTitle">Ad Details</h2>
-                <div id="modalChartContainer" class="chart-container" style="display:none;">
-                    <div class="chart-title">Weekly ROAS Performance</div>
-                    <canvas id="roasChart"></canvas>
-                </div>
-                <div id="modalTableContent">
-                    <!-- Table will be inserted here -->
-                </div>
+    <!-- Modal for full-size image -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <button class="modal-nav prev" onclick="navigateAd(-1)">‹</button>
+        <button class="modal-nav next" onclick="navigateAd(1)">›</button>
+        <div style="background: white; border-radius: 12px; max-width: 1200px; max-height: 90vh; overflow: auto; padding: 30px; display: flex; gap: 30px;">
+            <img class="modal-content" id="modalImage" style="width: 50%; height: auto; border-radius: 8px; object-fit: contain;">
+            <div id="modalStats" style="flex: 1;">
+                <h3 id="modalAdName" style="margin: 0 0 15px 0; color: #1a1a1a; font-size: 13px;">Ad Performance</h3>
+                <div id="modalStatsBody" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;"></div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal for comparison -->
+    <div id="compareModal" class="modal">
+        <span class="modal-close" onclick="closeComparisonModal()">&times;</span>
+        <div id="compareContent"></div>
     </div>
 
     <script>
-        let adsData = [];
+        let allData = [];
         let filteredData = [];
-        let currentSort = 'default';
-        let targetingData = {};
-        let roasChartData = {};
-        let currentChart = null;
-        let currentCategory = 'windows';
+        let pivotData = [];
+        let pivotGroups = {}; // Store original ad rows for each group
+        let currentFilter = 'both'; // 'both', 'windows', 'bath'
+        let currentAdIndex = 0;
+        let currentGalleryAds = [];
+        let selectedRows = new Set(); // Track selected rows for comparison
+        let selectedAdNames = new Set(); // Track selected ad names for filtering
+        let allAdNames = []; // Store all unique ad names
 
-        // Function to load data based on category
-        function loadCategoryData(category) {
-            const prefix = category === 'windows' ? '' : 'bath-';
+        // Load and parse CSV files
+        async function loadData() {
+            try {
+                const [windowsRes, bathRes] = await Promise.all([
+                    fetch('traits-windows-ads.csv'),
+                    fetch('traits-bath-ads.csv')
+                ]);
 
-            Promise.all([
-                fetch(`${prefix}targeting-data.json`).then(r => r.json()).catch(() => ({})),
-                fetch(`${prefix}roas-chart-data.json`).then(r => r.json()).catch(() => ({}))
-            ]).then(([targeting, roasChart]) => {
-                targetingData = targeting;
-                roasChartData = roasChart;
-                console.log(`Loaded ${category} targeting data for`, Object.keys(targetingData).length, 'ads');
-                console.log(`Loaded ${category} ROAS chart data for`, Object.keys(roasChartData).length, 'ads');
-            });
+                const [windowsText, bathText] = await Promise.all([
+                    windowsRes.text(),
+                    bathRes.text()
+                ]);
 
-            // Load ads data
-            fetch(`${prefix}ads-data.json`)
-                .then(response => response.json())
-                .then(data => {
-                    adsData = data;
-                    filteredData = [...adsData];
-                    populateConceptFilter();
-                    updateStats();
-                    renderCards();
-                })
-                .catch(error => {
-                    console.log('Could not load ads data for', category);
-                    adsData = [];
-                    filteredData = [];
-                    renderCards();
-                });
+                allData = [
+                    ...parseCSV(windowsText),
+                    ...parseCSV(bathText)
+                ];
+
+                filteredData = allData;
+
+                // Extract unique ad names
+                allAdNames = [...new Set(allData.map(ad => ad['Ad Name']))].sort();
+                populateAdFilter();
+
+                console.log(`✅ Loaded ${allData.length} ads`);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                alert('Error loading data files');
+            }
         }
 
-        // Switch category function
-        function switchCategory(category) {
-            currentCategory = category;
+        // Populate ad filter dropdown
+        function populateAdFilter() {
+            const filterOptions = document.getElementById('adFilterOptions');
+            filterOptions.innerHTML = allAdNames.map(adName => `
+                <label class="filter-option">
+                    <input type="checkbox" value="${adName}" onchange="toggleAdFilter('${adName.replace(/'/g, "\\'")}', this.checked)">
+                    <span>${adName}</span>
+                </label>
+            `).join('');
+        }
 
-            // Update toggle buttons
-            document.querySelectorAll('.toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.category === category) {
-                    btn.classList.add('active');
+        // Toggle ad filter dropdown
+        document.addEventListener('click', (e) => {
+            const filterSearch = document.getElementById('adFilterSearch');
+            const filterOptions = document.getElementById('adFilterOptions');
+            const filterDropdown = document.querySelector('.filter-dropdown');
+
+            if (filterDropdown && filterDropdown.contains(e.target)) {
+                filterOptions.classList.add('active');
+            } else {
+                filterOptions.classList.remove('active');
+            }
+        });
+
+        // Search functionality for ad filter
+        document.getElementById('adFilterSearch').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const options = document.querySelectorAll('.filter-option');
+
+            options.forEach(option => {
+                const adName = option.querySelector('span').textContent.toLowerCase();
+                if (adName.includes(searchTerm)) {
+                    option.style.display = 'flex';
+                } else {
+                    option.style.display = 'none';
                 }
             });
+        });
 
-            // Load new data
-            loadCategoryData(category);
+        // Toggle individual ad selection
+        function toggleAdFilter(adName, checked) {
+            if (checked) {
+                selectedAdNames.add(adName);
+            } else {
+                selectedAdNames.delete(adName);
+            }
+            updateAdFilterDisplay();
+            applyAdFilter();
         }
 
-        // Initial load - Windows data
-        loadCategoryData('windows');
+        // Update filter display
+        function updateAdFilterDisplay() {
+            const count = selectedAdNames.size;
+            const countDisplay = document.getElementById('selectedAdCount');
+            const clearBtn = document.getElementById('clearAdFilter');
 
-        // Parse CSV data
-        const csvData = `﻿Concepts,ad_name,BAR,ROAS,# of Adsets,URL
-Promo & Offers,BeautyShot_V2_BNPLEvergreenOffer__IMG_LearnMore_,19%,0.89,1,https://scontent-iad3-1.xx.fbcdn.net/v/t45.1600-4/523979476_1523126929096157_2942751529007978992_n.png?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=890911&_nc_ohc=w-fBBCKiRL8Q7kNvgFLp5ym&_nc_oc=Adn_qGaqgCHNVwUdBpolpsTASVQ2MtZUfVPlqhCgYhFTyroZj5tP4nQ31t-WcLNrQNg&_nc_zt=1&_nc_ht=scontent-iad3-1.xx&edm=AAT1rw8EAAAA&_nc_gid=86yd1js_cplRssDRGK8Vqw&oh=00_AfbqkT45S-9Hj7ZrP4Cbt8FCHGuNWG-VLmEu6DaAk3bidg&oe=68D984B5
-Promo & Offers,BeautyShot_V3_BNPLEvergreenOffer__IMG_LearnMore_,17%,0.69,1,https://scontent-iad3-1.xx.fbcdn.net/v/t45.1600-4/523928364_1729616241020327_5481099485143064330_n.png?stp=dst-jpg_tt6&_nc_cat=102&ccb=1-7&_nc_sid=890911&_nc_ohc=dZUPKKIBvVUQ7kNvgGaXexa&_nc_oc=Adn61xxhchyepWy9mr14vLHD2bhQgFgaIf4BgeAIzbO7d7Z0ZE6P6dACPMiLxFYlnzM&_nc_zt=1&_nc_ht=scontent-iad3-1.xx&edm=AAT1rw8EAAAA&_nc_gid=p9aad7N-wF4R7gSflohzdA&oh=00_AfYR-FmcASQxXaj-zNUcXGo2uTcEsG-vgpXOmPi1qc0WWg&oe=68D8F423
-Promo & Offers,BeautyShot_V5_BNPLEvergreenOffer__IMG_LearnMore_,12%,0.76,1,https://scontent-iad3-2.xx.fbcdn.net/v/t45.1600-4/523904400_1290901799225290_1547919489652125430_n.png?stp=dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=890911&_nc_ohc=cDrCG9T6vXIQ7kNvwGorwbX&_nc_oc=AdkYW7OOQF-uQVm7nl612Jd0djn3dLYfw3bRnw3G18wgtSS3W-0lglx1VnQtvA7wgK4&_nc_zt=1&_nc_ht=scontent-iad3-2.xx&edm=AAT1rw8EAAAA&_nc_gid=noF-w9YNWFGWnotm3q7Y9Q&oh=00_AfZtMu_mRbbuMZyB16DsBuswPIs45cBBpnBrXcD2G93h-g&oe=68C4AA76
-BEAF Image,BeforeAfter_ClickyNumberWindowsBrand_V2_IMG_LearnMore_,11%,1.35,1,https://scontent-iad3-2.xx.fbcdn.net/v/t45.1600-4/524732483_1264960821939673_7939941906664181904_n.png?stp=dst-jpg_tt6&_nc_cat=105&ccb=1-7&_nc_sid=890911&_nc_ohc=5TjcDJFCxEIQ7kNvgH1qgcm&_nc_oc=Adn6XlOXYVVMx9VNV8YC3R4qClrPuXlMqrQ94heARqsL8LRmZsOlOvIQwDzfOEmmLj0&_nc_zt=1&_nc_ht=scontent-iad3-2.xx&edm=AAT1rw8EAAAA&_nc_gid=WHqbmefS91w5AL8_6LXmhA&oh=00_AfYdkaRJW2zBxa58-SM6SM4pwKOld6M1v2OD1Yv6oro_jQ&oe=68D8EE35`;
+            if (count > 0) {
+                countDisplay.textContent = `${count} ad${count > 1 ? 's' : ''} selected`;
+                clearBtn.style.display = 'inline';
+            } else {
+                countDisplay.textContent = '';
+                clearBtn.style.display = 'none';
+            }
+        }
 
-        // Data is now loaded by loadCategoryData function above
+        // Apply ad filter
+        function applyAdFilter() {
+            if (selectedAdNames.size === 0) {
+                // No filter, show all data
+                filterData(currentFilter);
+            } else {
+                // Filter by selected ad names
+                filteredData = allData.filter(ad => {
+                    const matchesCategory = currentFilter === 'both' || ad.Category === (currentFilter === 'windows' ? 'Windows' : 'Bath');
+                    const matchesAdName = selectedAdNames.has(ad['Ad Name']);
+                    return matchesCategory && matchesAdName;
+                });
 
-        function parseCSV(csvText) {
-            const lines = csvText.split(/\r?\n/).filter(line => line.trim());
+                console.log(`Filtered to ${filteredData.length} ads by selection`);
 
-            adsData = [];
-            for (let i = 1; i < lines.length; i++) {
-                // Parse CSV with new column order
-                // Format: concept, ad_name, spend, leads, appts, revenue, BAR, ROAS, adsets, URL
-                const parts = lines[i].split(',');
-
-                if (parts.length >= 10) {
-                    // New column order
-                    const concept = parts[0].replace(/^"|"$/g, '').trim();
-                    const adName = parts[1].replace(/^"|"$/g, '').trim();
-                    const spend = parseFloat(parts[2]) || 0;
-                    const leads = parseInt(parts[3]) || 0;
-                    const appointments = parseInt(parts[4]) || 0;
-                    const revenue = parseFloat(parts[5]) || 0;
-                    const bar = parts[6].replace(/^"|"$/g, '').trim();
-                    const roas = parseFloat(parts[7]) || 0;
-                    const adsets = parseInt(parts[8]) || 0;
-
-                    // URL is everything after field 9
-                    const urlPart = parts.slice(9).join(',').replace(/^"|"$/g, '').trim();
-
-                    adsData.push({
-                        concept: concept,
-                        adName: adName,
-                        bar: bar,
-                        roas: roas,
-                        adsets: adsets,
-                        url: urlPart,
-                        originalUrl: urlPart,
-                        spend: spend,
-                        leads: leads,
-                        appointments: appointments,
-                        revenue: revenue
-                    });
+                // Auto-regenerate if a pivot table was already created
+                if (pivotData.length > 0) {
+                    generatePivot();
                 }
             }
-            filteredData = [...adsData];
         }
 
-        function getRoasClass(roas) {
-            if (roas >= 1) return 'roas-high';
-            if (roas >= 0.5) return 'roas-medium';
-            return 'roas-low';
+        // Clear ad filter
+        document.getElementById('clearAdFilter').addEventListener('click', () => {
+            selectedAdNames.clear();
+            document.querySelectorAll('#adFilterOptions input[type="checkbox"]').forEach(cb => cb.checked = false);
+            updateAdFilterDisplay();
+            applyAdFilter();
+        });
+
+        // Filter data by category
+        function filterData(filter) {
+            currentFilter = filter;
+
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Apply category filter first
+            let categoryFiltered;
+            if (filter === 'both') {
+                document.getElementById('bothBtn').classList.add('active');
+                categoryFiltered = allData;
+            } else if (filter === 'windows') {
+                document.getElementById('windowsBtn').classList.add('active');
+                categoryFiltered = allData.filter(ad => ad.Category === 'Windows');
+            } else if (filter === 'bath') {
+                document.getElementById('bathBtn').classList.add('active');
+                categoryFiltered = allData.filter(ad => ad.Category === 'Bath');
+            }
+
+            // Apply ad name filter if any are selected
+            if (selectedAdNames.size > 0) {
+                filteredData = categoryFiltered.filter(ad => selectedAdNames.has(ad['Ad Name']));
+            } else {
+                filteredData = categoryFiltered;
+            }
+
+            console.log(`Filtered to ${filteredData.length} ${filter} ads`);
+
+            // Auto-regenerate if a pivot table was already created
+            if (pivotData.length > 0) {
+                generatePivot();
+            }
         }
 
-        function renderCards() {
-            const grid = document.getElementById('adsGrid');
-            grid.innerHTML = '';
+        // Parse CSV with proper handling of quoted values
+        function parseCSV(text) {
+            const lines = text.trim().split('\n').filter(line => line.trim()); // Remove empty lines
 
-            filteredData.forEach(ad => {
-                const card = document.createElement('div');
-                card.className = 'ad-card';
-                card.onclick = () => showModal(ad);
-
-                // Use original URL directly, or fall back to originalUrl from JSON
-                const mediaUrl = ad.url || ad.originalUrl || ad.localImage;
-                const isVideo = ad.adName && ad.adName.toLowerCase().includes('video');
-
-                // Create media element based on type
-                let mediaElement = '';
-                if (isVideo || (mediaUrl && mediaUrl.includes('.mp4'))) {
-                    // For videos, try URL first with fallback to local if available
-                    if (ad.localImage) {
-                        mediaElement = `<video src="${mediaUrl}" class="ad-image" controls muted autoplay loop playsinline onerror="this.src='${ad.localImage}'"></video>`;
-                    } else {
-                        mediaElement = `<video src="${mediaUrl}" class="ad-image" controls muted autoplay loop playsinline></video>`;
-                    }
-                } else if (mediaUrl && mediaUrl.startsWith('http')) {
-                    // For images, try URL first with fallback to local if available
-                    if (ad.localImage) {
-                        mediaElement = `<img src="${mediaUrl}" alt="${ad.adName}" class="ad-image" loading="lazy" crossorigin="anonymous" onerror="this.onerror=null; this.src='${ad.localImage}'">`;
-                    } else {
-                        mediaElement = `<img src="${mediaUrl}" alt="${ad.adName}" class="ad-image" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color: #999; font-size: 12px; text-align: center; padding: 20px;\\'>Media not available<br><small style=\\'font-size: 10px; margin-top: 5px; display: block;\\'>${ad.adName}</small></div>'">`;
-                    }
-                } else if (ad.localImage) {
-                    // If no URL but have local image, use it directly
-                    mediaElement = `<img src="${ad.localImage}" alt="${ad.adName}" class="ad-image" loading="lazy">`;
-                } else {
-                    mediaElement = `<div style="color: #999; font-size: 12px; text-align: center; padding: 20px;">No preview available<br><small style="font-size: 10px; margin-top: 5px; display: block;">${ad.adName}</small></div>`;
+            // Find the header row (first row with "Category" column)
+            let headerIndex = 0;
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].includes('Category')) {
+                    headerIndex = i;
+                    break;
                 }
+            }
 
-                card.innerHTML = `
-                    <div class="ad-image-container">
-                        ${mediaElement}
-                    </div>
-                    <div class="ad-content">
-                        <div class="ad-header">
-                            <div class="concept-badge">${ad.concept}</div>
-                            <h3 class="ad-name">${ad.adName}</h3>
+            const headers = parseCSVLine(lines[headerIndex]);
+            const data = [];
+
+            for (let i = headerIndex + 1; i < lines.length; i++) {
+                const values = parseCSVLine(lines[i]);
+                if (values.length === headers.length) {
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index];
+                    });
+                    data.push(row);
+                }
+            }
+
+            return data;
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        // Calculate metrics
+        function calculateMetrics(group) {
+            const impressions = group.reduce((sum, row) => sum + parseFloat(row.impressions || 0), 0);
+            const clicks = group.reduce((sum, row) => sum + parseFloat(row.clicks || 0), 0);
+            const spend = group.reduce((sum, row) => sum + parseFloat(row.spend || 0), 0);
+            const matched_leads = group.reduce((sum, row) => sum + parseFloat(row.matched_leads || 0), 0);
+            const booked_appts = group.reduce((sum, row) => sum + parseFloat(row.booked_appts || 0), 0);
+            const hs_revenue = group.reduce((sum, row) => sum + parseFloat(row.hs_rev || row.hs_revenue || 0), 0);
+
+            // Bath-specific metrics
+            const partner_matched_leads = group.reduce((sum, row) => sum + parseFloat(row.partner_matched_leads || 0), 0);
+            const partner_booked_appts = group.reduce((sum, row) => sum + parseFloat(row.partner_booked_appts || 0), 0);
+
+            const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
+            const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
+            const roas = spend > 0 ? (hs_revenue / spend) : 0;
+
+            // Check if this is a Bath group (any row has Category = 'Bath')
+            const isBath = group.some(row => row.Category === 'Bath');
+            const bar = isBath
+                ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
+                : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+
+            return {
+                ads_count: group.length,
+                impressions,
+                clicks,
+                spend,
+                matched_leads,
+                booked_appts,
+                hs_revenue,
+                ctr,
+                cvr,
+                roas,
+                bar
+            };
+        }
+
+        // Generate pivot table
+        function generatePivot() {
+            const groupBySelect = document.getElementById('groupBySelect');
+            const selectedValue = groupBySelect.value;
+
+            if (!selectedValue) {
+                alert('Please select a field to group by');
+                return;
+            }
+
+            // Parse the selected value to get the fields
+            let selectedFields = [];
+
+            // Handle special pre-built groupings
+            if (selectedValue === 'Concepts+Problem+Color') {
+                selectedFields = ['Concept', 'Problem', 'Color'];
+            } else if (selectedValue === 'Concepts+Headline+CTAText') {
+                selectedFields = ['Concept', 'Headline', 'CTA Text'];
+            } else if (selectedValue === 'Concepts+Headline') {
+                selectedFields = ['Concept', 'Headline'];
+            } else if (selectedValue === 'Problem+Headline+CTA') {
+                selectedFields = ['Problem', 'Headline', 'CTA Text'];
+            } else if (selectedValue === 'Concepts+Brand') {
+                selectedFields = ['Concept', 'Brand'];
+            } else {
+                // Single field (including Quadrants, Champion Ads, etc.)
+                selectedFields = [selectedValue];
+            }
+
+            // Reset selections
+            selectedRows.clear();
+            firstSelectedKey = null;
+            secondSelectedKey = null;
+            updateCompareButton();
+
+            // Group data
+            const groups = {};
+            pivotGroups = {}; // Reset
+            filteredData.forEach(row => {
+                const key = selectedFields.map(field => row[field] || 'N/A').join(' | ');
+                if (!groups[key]) {
+                    groups[key] = [];
+                }
+                groups[key].push(row);
+            });
+
+            // Calculate metrics for each group
+            pivotData = Object.entries(groups).map(([key, rows]) => {
+                const metrics = calculateMetrics(rows);
+                const keyParts = key.split(' | ');
+                const result = {};
+
+                selectedFields.forEach((field, fieldIndex) => {
+                    result[field] = keyParts[fieldIndex];
+                });
+
+                // Store the rows for this group using the key
+                result.groupKey = key;
+                pivotGroups[key] = rows;
+
+                return { ...result, ...metrics };
+            });
+
+            // Sort by spend descending
+            pivotData.sort((a, b) => b.spend - a.spend);
+
+            renderTable(selectedFields);
+        }
+
+        // Get heatmap color based on value and metric type
+        function getHeatmapColor(value, metricType, allValues) {
+            // Special handling for BAR
+            if (metricType === 'bar') {
+                if (value >= 20) return 'rgba(34, 197, 94, 0.3)';    // Extra green
+                if (value >= 15) return 'rgba(74, 222, 128, 0.2)';   // Green
+                if (value >= 10) return 'rgba(250, 204, 21, 0.2)';   // Yellow
+                return 'rgba(248, 113, 113, 0.2)';                    // Red
+            }
+
+            // Special handling for CTR
+            if (metricType === 'ctr') {
+                if (value >= 2) return 'rgba(34, 197, 94, 0.3)';     // Extra green
+                if (value >= 1) return 'rgba(74, 222, 128, 0.2)';    // Green
+                return 'rgba(248, 113, 113, 0.2)';                    // Red
+            }
+
+            // Special handling for ROAS
+            if (metricType === 'roas') {
+                if (value > 1.1) return 'rgba(34, 197, 94, 0.3)';    // Extra green
+                if (value >= 1) return 'rgba(74, 222, 128, 0.2)';    // Green
+                if (value >= 0.8) return 'rgba(250, 204, 21, 0.2)';  // Yellow
+                return 'rgba(248, 113, 113, 0.2)';                    // Red
+            }
+
+            // For other metrics, use normalized scale
+            const min = Math.min(...allValues);
+            const max = Math.max(...allValues);
+
+            if (max === min) return 'transparent';
+
+            const normalized = (value - min) / (max - min);
+
+            // For all metrics, higher is better
+            if (normalized >= 0.75) return 'rgba(74, 222, 128, 0.2)'; // Green
+            if (normalized >= 0.5) return 'rgba(250, 204, 21, 0.2)';  // Yellow
+            if (normalized >= 0.25) return 'rgba(251, 146, 60, 0.2)'; // Orange
+            return 'rgba(248, 113, 113, 0.2)'; // Red
+        }
+
+        // Render table
+        function renderTable(groupFields) {
+            const thead = document.getElementById('tableHead');
+            const tbody = document.getElementById('tableBody');
+
+            // Build headers
+            const metricHeaders = [
+                'Spend', 'CTR %', 'CVR %', 'ROAS', 'BAR %'
+            ];
+
+            // Calculate min/max for heatmap
+            const ctrValues = pivotData.map(r => r.ctr);
+            const cvrValues = pivotData.map(r => r.cvr);
+            const roasValues = pivotData.map(r => r.roas);
+            const barValues = pivotData.map(r => r.bar);
+
+            thead.innerHTML = `
+                <tr>
+                    <th style="width: 30px;"></th>
+                    <th style="width: 40px;">
+                        <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this.checked)">
+                    </th>
+                    ${groupFields.map(field => `<th>${field}</th>`).join('')}
+                    ${metricHeaders.map(h => `<th class="number">${h}</th>`).join('')}
+                </tr>
+            `;
+
+            // Build rows
+            tbody.innerHTML = '';
+            pivotData.forEach((row, index) => {
+                const groupKey = row.groupKey;
+                const safeKey = groupKey.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+
+                // Main row
+                const mainRow = document.createElement('tr');
+                mainRow.dataset.groupKey = groupKey;
+                mainRow.innerHTML = `
+                    <td><span class="expand-btn" data-key="${safeKey}">▶</span></td>
+                    <td><input type="checkbox" class="row-checkbox" data-key="${safeKey}"></td>
+                    ${groupFields.map(field => `<td>${row[field]} <span class="compare-label" data-key="${safeKey}" style="display: none; font-size: 10px; color: #8b5cf6; font-weight: 600; margin-left: 8px;"></span></td>`).join('')}
+                    <td class="number">$${formatNumber(row.spend, 2)} <span class="variance-label spend-var" data-key="${safeKey}" style="display: none; font-size: 10px; margin-left: 4px;"></span></td>
+                    <td class="number" style="background: ${getHeatmapColor(row.ctr, 'ctr', ctrValues)}">${formatNumber(row.ctr, 2)}% <span class="variance-label ctr-var" data-key="${safeKey}" style="display: none; font-size: 10px; margin-left: 4px;"></span></td>
+                    <td class="number" style="background: ${getHeatmapColor(row.cvr, 'cvr', cvrValues)}">${formatNumber(row.cvr, 2)}% <span class="variance-label cvr-var" data-key="${safeKey}" style="display: none; font-size: 10px; margin-left: 4px;"></span></td>
+                    <td class="number" style="background: ${getHeatmapColor(row.roas, 'roas', roasValues)}">${formatNumber(row.roas, 2)} <span class="variance-label roas-var" data-key="${safeKey}" style="display: none; font-size: 10px; margin-left: 4px;"></span></td>
+                    <td class="number" style="background: ${getHeatmapColor(row.bar, 'bar', barValues)}">${formatNumber(row.bar, 2)}% <span class="variance-label bar-var" data-key="${safeKey}" style="display: none; font-size: 10px; margin-left: 4px;"></span></td>
+                `;
+
+                // Expanded row (hidden by default)
+                const expandedRow = document.createElement('tr');
+                expandedRow.className = 'expanded-row';
+                expandedRow.style.display = 'none';
+                expandedRow.id = `expanded-${index}`;
+                expandedRow.dataset.key = groupKey;
+                expandedRow.innerHTML = `
+                    <td colspan="${groupFields.length + metricHeaders.length + 2}">
+                        <div class="ad-gallery" id="gallery-${index}"></div>
+                    </td>
+                `;
+
+                tbody.appendChild(mainRow);
+                tbody.appendChild(expandedRow);
+            });
+
+            // Add click handlers for expand buttons and checkboxes using event delegation
+            document.querySelectorAll('.expand-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const row = e.target.closest('tr');
+                    const groupKey = row.dataset.groupKey;
+                    const expandedRow = row.nextElementSibling;
+                    toggleRow(expandedRow, groupKey, e.target);
+                });
+            });
+
+            document.querySelectorAll('.row-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const row = e.target.closest('tr');
+                    const groupKey = row.dataset.groupKey;
+                    toggleRowSelection(groupKey, e.target.checked);
+                });
+            });
+        }
+
+        function toggleRow(expandedRow, groupKey, expandBtn) {
+            if (expandedRow.style.display === 'none') {
+                // Expand
+                expandedRow.style.display = 'table-row';
+                expandBtn.textContent = '▼';
+                const galleryId = expandedRow.querySelector('.ad-gallery').id;
+                loadGallery(galleryId, groupKey);
+            } else {
+                // Collapse
+                expandedRow.style.display = 'none';
+                expandBtn.textContent = '▶';
+            }
+        }
+
+        function loadGallery(galleryId, groupKey) {
+            const gallery = document.getElementById(galleryId);
+            let ads = pivotGroups[groupKey];
+
+            if (!ads) return;
+
+            // Sort ads by spend descending
+            ads = [...ads].sort((a, b) => {
+                const spendA = parseFloat(a.spend || 0);
+                const spendB = parseFloat(b.spend || 0);
+                return spendB - spendA;
+            });
+
+            // Store ads for navigation
+            window[`galleryAds_${galleryId}`] = ads;
+
+            // Apply compact mode if KPIs are hidden
+            const showKpis = document.getElementById('showKpisToggle').checked;
+            if (!showKpis) {
+                gallery.classList.add('compact');
+            }
+
+            gallery.innerHTML = ads.map((ad, idx) => {
+                // Use local image by ad_id, try both .png and .jpg
+                const adId = ad.ad_id || '';
+                const imageUrl = adId ? `images/${adId}.png` : (ad.creative_url || '');
+                const adName = ad['Ad Name'] || 'Unknown';
+                const uniqueId = `${galleryId}-${idx}`;
+
+                // Store ad data for modal
+                window[`adData_${uniqueId}`] = ad;
+
+                // Calculate metrics for this ad
+                const impressions = parseFloat(ad.impressions || 0);
+                const clicks = parseFloat(ad.clicks || 0);
+                const spend = parseFloat(ad.spend || 0);
+                const matched_leads = parseFloat(ad.matched_leads || 0);
+                const booked_appts = parseFloat(ad.booked_appts || 0);
+                const hs_revenue = parseFloat(ad.hs_rev || ad.hs_revenue || 0);
+                const partner_matched_leads = parseFloat(ad.partner_matched_leads || 0);
+                const partner_booked_appts = parseFloat(ad.partner_booked_appts || 0);
+
+                const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
+                const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
+                const roas = spend > 0 ? (hs_revenue / spend) : 0;
+
+                // Use partner metrics for Bath, regular metrics for Windows
+                const isBath = ad.Category === 'Bath';
+                const bar = isBath
+                    ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
+                    : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+
+                const miniStatsClass = showKpis ? '' : 'hidden';
+
+                return `
+                    <div class="ad-card">
+                        <div class="ad-thumbnail ${!imageUrl ? 'has-error' : ''}" id="thumb-${uniqueId}"
+                             data-gallery-id="${galleryId}"
+                             data-ad-index="${idx}"
+                             onclick="showModalFromThumb('${uniqueId}')">
+                            ${imageUrl ? `<img src="${imageUrl}" alt="${adName}" onerror="handleImageError(this, '${adId}')">` : ''}
                         </div>
-                        <div class="metrics">
-                            <div class="metric">
-                                <span class="metric-label">ROAS</span>
-                                <span class="metric-value roas-value ${getRoasClass(ad.roas)}">${ad.roas.toFixed(2)}</span>
+                        <div class="ad-mini-stats ${miniStatsClass}">
+                            <div class="ad-mini-stat">
+                                <span class="ad-mini-stat-label">Spend</span>
+                                <span class="ad-mini-stat-value">$${formatNumber(spend, 2)}</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">BAR</span>
-                                <span class="metric-value">${ad.bar}</span>
+                            <div class="ad-mini-stat">
+                                <span class="ad-mini-stat-label">CTR</span>
+                                <span class="ad-mini-stat-value">${formatNumber(ctr, 2)}%</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Spend</span>
-                                <span class="metric-value">$${(ad.spend || 0).toLocaleString()}</span>
+                            <div class="ad-mini-stat">
+                                <span class="ad-mini-stat-label">CVR</span>
+                                <span class="ad-mini-stat-value">${formatNumber(cvr, 2)}%</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Adsets</span>
-                                <span class="metric-value">${ad.adsets}</span>
+                            <div class="ad-mini-stat">
+                                <span class="ad-mini-stat-label">ROAS</span>
+                                <span class="ad-mini-stat-value">${formatNumber(roas, 2)}</span>
+                            </div>
+                            <div class="ad-mini-stat">
+                                <span class="ad-mini-stat-label">BAR</span>
+                                <span class="ad-mini-stat-value">${formatNumber(bar, 2)}%</span>
                             </div>
                         </div>
                     </div>
                 `;
-
-                grid.appendChild(card);
-            });
+            }).join('');
         }
 
-        function updateStats() {
-            // Stats removed per user request
-        }
-
-        function sortData(type) {
-            // Update active button
-            document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            currentSort = type;
-
-            if (type === 'default') {
-                filteredData = [...adsData];
-            } else if (type === 'roas') {
-                filteredData.sort((a, b) => b.roas - a.roas);
-            } else if (type === 'bar') {
-                filteredData.sort((a, b) => parseInt(b.bar) - parseInt(a.bar));
-            } else if (type === 'adsets') {
-                filteredData.sort((a, b) => b.adsets - a.adsets);
-            } else if (type === 'spend') {
-                filteredData.sort((a, b) => (b.spend || 0) - (a.spend || 0));
+        // Handle image loading errors - try .jpg if .png fails
+        function handleImageError(img, adId) {
+            if (!adId) {
+                img.parentElement.classList.add('has-error');
+                img.style.display = 'none';
+                return;
             }
 
-            renderCards();
-        }
-
-        // Populate concept filter dropdown
-        function populateConceptFilter() {
-            const concepts = [...new Set(adsData.map(ad => ad.concept))].sort();
-            const dropdown = document.getElementById('conceptFilter');
-
-            // Clear existing options except "All Concepts"
-            dropdown.innerHTML = '<option value="">All Concepts</option>';
-
-            // Add concept options
-            concepts.forEach(concept => {
-                const option = document.createElement('option');
-                option.value = concept;
-                option.textContent = concept;
-                dropdown.appendChild(option);
-            });
-        }
-
-        // Filter functionality
-        function applyFilters() {
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const selectedConcept = document.getElementById('conceptFilter').value;
-
-            filteredData = adsData.filter(ad => {
-                const matchesSearch = searchTerm === '' ||
-                    ad.adName.toLowerCase().includes(searchTerm) ||
-                    ad.concept.toLowerCase().includes(searchTerm);
-
-                const matchesConcept = selectedConcept === '' || ad.concept === selectedConcept;
-
-                return matchesSearch && matchesConcept;
-            });
-
-            // Update stats for filtered data
-            updateFilteredStats();
-
-            // Reapply current sort
-            if (currentSort !== 'default') {
-                sortData(currentSort);
+            // If current src is .png, try .jpg
+            if (img.src.includes('.png')) {
+                img.src = `images/${adId}.jpg`;
             } else {
-                renderCards();
+                // If .jpg also failed, show error state
+                img.parentElement.classList.add('has-error');
+                img.style.display = 'none';
             }
         }
 
-        // Update stats for filtered data (removed - no longer showing stats)
-        function updateFilteredStats() {
-            // Stats removed per user request
+        function showModalFromThumb(uniqueId) {
+            const thumbnail = document.getElementById(`thumb-${uniqueId}`);
+            if (!thumbnail) return;
+
+            const adData = window[`adData_${uniqueId}`];
+            const adId = adData?.ad_id || '';
+            const imageUrl = adId ? `images/${adId}.png` : (adData?.creative_url || '');
+
+            // Store current gallery info for navigation
+            const galleryId = thumbnail.dataset.galleryId;
+            currentAdIndex = parseInt(thumbnail.dataset.adIndex);
+            currentGalleryAds = window[`galleryAds_${galleryId}`] || [];
+
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = imageUrl;
+            modalImg.onerror = () => handleImageError(modalImg, adId);
+
+            // Set ad name in title
+            const modalAdName = document.getElementById('modalAdName');
+            if (adData && adData['Ad Name']) {
+                modalAdName.textContent = adData['Ad Name'];
+            } else {
+                modalAdName.textContent = 'Ad Performance';
+            }
+
+            // Populate stats table
+            const statsBody = document.getElementById('modalStatsBody');
+            if (adData) {
+                const impressions = parseFloat(adData.impressions || 0);
+                const clicks = parseFloat(adData.clicks || 0);
+                const spend = parseFloat(adData.spend || 0);
+                const matched_leads = parseFloat(adData.matched_leads || 0);
+                const booked_appts = parseFloat(adData.booked_appts || 0);
+                const hs_revenue = parseFloat(adData.hs_rev || adData.hs_revenue || 0);
+                const partner_matched_leads = parseFloat(adData.partner_matched_leads || 0);
+                const partner_booked_appts = parseFloat(adData.partner_booked_appts || 0);
+
+                const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
+                const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
+                const roas = spend > 0 ? (hs_revenue / spend) : 0;
+
+                // Use partner metrics for Bath, regular metrics for Windows
+                const isBath = adData.Category === 'Bath';
+                const bar = isBath
+                    ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
+                    : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+
+                statsBody.innerHTML = `
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">Spend</div><div style="font-size: 18px; font-weight: 600;">$${formatNumber(spend, 2)}</div></div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CTR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(ctr, 2)}%</div></div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CVR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(cvr, 2)}%</div></div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">ROAS</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(roas, 2)}</div></div>
+                    <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">BAR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(bar, 2)}%</div></div>
+                `;
+            }
         }
 
-        // Search functionality
-        document.getElementById('searchBar').addEventListener('input', applyFilters);
+        function navigateAd(direction) {
+            if (currentGalleryAds.length === 0) return;
 
-        // Concept filter functionality
-        document.getElementById('conceptFilter').addEventListener('change', applyFilters);
+            currentAdIndex += direction;
 
-        // Modal functions
-        function showModal(ad) {
-            const modal = document.getElementById('adModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalMedia = document.getElementById('modalMedia');
-            const modalTable = document.getElementById('modalTableContent');
-            const chartContainer = document.getElementById('modalChartContainer');
+            // Wrap around
+            if (currentAdIndex < 0) {
+                currentAdIndex = currentGalleryAds.length - 1;
+            } else if (currentAdIndex >= currentGalleryAds.length) {
+                currentAdIndex = 0;
+            }
 
-            // Set title
-            modalTitle.textContent = ad.adName;
+            const ad = currentGalleryAds[currentAdIndex];
+            const adId = ad.ad_id || '';
+            const imageUrl = adId ? `images/${adId}.png` : (ad.creative_url || '');
+            const adName = ad['Ad Name'] || '';
 
-            // Set media (image or video) with fallback support
-            const mediaUrl = ad.url || ad.originalUrl || ad.localImage;
-            const isVideo = ad.adName && ad.adName.toLowerCase().includes('video');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = imageUrl;
+            modalImg.onerror = () => handleImageError(modalImg, adId);
 
-            if (isVideo || (mediaUrl && mediaUrl.includes('.mp4'))) {
-                // For videos, try URL first with fallback to local if available
-                if (ad.localImage) {
-                    modalMedia.innerHTML = `<video src="${mediaUrl}" class="modal-image" controls autoplay muted onerror="this.src='${ad.localImage}'"></video>`;
+            // Set ad name in title
+            const modalAdName = document.getElementById('modalAdName');
+            modalAdName.textContent = adName || 'Ad Performance';
+
+            // Populate stats table
+            const statsBody = document.getElementById('modalStatsBody');
+            const impressions = parseFloat(ad.impressions || 0);
+            const clicks = parseFloat(ad.clicks || 0);
+            const spend = parseFloat(ad.spend || 0);
+            const matched_leads = parseFloat(ad.matched_leads || 0);
+            const booked_appts = parseFloat(ad.booked_appts || 0);
+            const hs_revenue = parseFloat(ad.hs_rev || ad.hs_revenue || 0);
+            const partner_matched_leads = parseFloat(ad.partner_matched_leads || 0);
+            const partner_booked_appts = parseFloat(ad.partner_booked_appts || 0);
+
+            const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
+            const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
+            const roas = spend > 0 ? (hs_revenue / spend) : 0;
+
+            // Use partner metrics for Bath, regular metrics for Windows
+            const isBath = ad.Category === 'Bath';
+            const bar = isBath
+                ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
+                : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+
+            statsBody.innerHTML = `
+                <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">Spend</div><div style="font-size: 18px; font-weight: 600;">$${formatNumber(spend, 2)}</div></div>
+                <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CTR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(ctr, 2)}%</div></div>
+                <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CVR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(cvr, 2)}%</div></div>
+                <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">ROAS</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(roas, 2)}</div></div>
+                <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">BAR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(bar, 2)}%</div></div>
+            `;
+        }
+
+        function showModal(imageUrl) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = imageUrl;
+        }
+
+        // Close modal handlers
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            document.getElementById('imageModal').classList.remove('active');
+        });
+
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target.id === 'imageModal') {
+                e.target.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('imageModal').classList.remove('active');
+            }
+        });
+
+        function formatNumber(num, decimals) {
+            return num.toLocaleString('en-US', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        // Download CSV
+        function downloadCSV() {
+            if (pivotData.length === 0) {
+                alert('Please generate a pivot table first');
+                return;
+            }
+
+            const groupBySelect = document.getElementById('groupBySelect');
+            const selectedValue = groupBySelect.value;
+            let selectedFields = [];
+
+            // Handle special pre-built groupings (same logic as generatePivot)
+            if (selectedValue === 'Concepts+Problem+Color') {
+                selectedFields = ['Concept', 'Problem', 'Color'];
+            } else if (selectedValue === 'Concepts+Headline+CTAText') {
+                selectedFields = ['Concept', 'Headline', 'CTA Text'];
+            } else if (selectedValue === 'Concepts+Headline') {
+                selectedFields = ['Concept', 'Headline'];
+            } else if (selectedValue === 'Problem+Headline+CTA') {
+                selectedFields = ['Problem', 'Headline', 'CTA Text'];
+            } else if (selectedValue === 'Concepts+Brand') {
+                selectedFields = ['Concept', 'Brand'];
+            } else {
+                selectedFields = [selectedValue];
+            }
+
+            const headers = [
+                ...selectedFields,
+                'Spend', 'CTR %', 'CVR %', 'ROAS', 'BAR %'
+            ];
+
+            const rows = pivotData.map(row => [
+                ...selectedFields.map(field => row[field]),
+                row.spend,
+                row.ctr,
+                row.cvr,
+                row.roas,
+                row.bar
+            ]);
+
+            const csv = [
+                headers.join(','),
+                ...rows.map(row => row.map(cell =>
+                    typeof cell === 'string' && cell.includes(',') ? `"${cell}"` : cell
+                ).join(','))
+            ].join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pivot-table.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Row selection functions
+        let firstSelectedKey = null;
+        let secondSelectedKey = null;
+
+        function toggleRowSelection(groupKey, checked) {
+            if (checked) {
+                if (selectedRows.size >= 2) {
+                    // Uncheck this checkbox since we're at max
+                    const checkbox = document.querySelector(`.row-checkbox[data-key="${groupKey}"]`);
+                    if (checkbox) checkbox.checked = false;
+                    return;
+                }
+                selectedRows.add(groupKey);
+
+                // Track order of selection
+                if (!firstSelectedKey) {
+                    firstSelectedKey = groupKey;
+                } else if (!secondSelectedKey) {
+                    secondSelectedKey = groupKey;
+                }
+            } else {
+                selectedRows.delete(groupKey);
+
+                // Reset order tracking
+                if (groupKey === firstSelectedKey) {
+                    firstSelectedKey = secondSelectedKey;
+                    secondSelectedKey = null;
+                } else if (groupKey === secondSelectedKey) {
+                    secondSelectedKey = null;
+                }
+            }
+            updateCompareButton();
+        }
+
+        function toggleSelectAll(checked) {
+            selectedRows.clear();
+            document.querySelectorAll('.row-checkbox').forEach((cb, index) => {
+                if (checked && index < 2) {
+                    cb.checked = true;
+                    selectedRows.add(cb.dataset.key);
                 } else {
-                    modalMedia.innerHTML = `<video src="${mediaUrl}" class="modal-image" controls autoplay muted></video>`;
+                    cb.checked = false;
                 }
-            } else if (mediaUrl && mediaUrl.startsWith('http')) {
-                // For images from URLs, try URL first with fallback to local if available
-                if (ad.localImage) {
-                    modalMedia.innerHTML = `<img src="${mediaUrl}" class="modal-image" alt="${ad.adName}" onerror="this.onerror=null; this.src='${ad.localImage}'">`;
-                } else {
-                    modalMedia.innerHTML = `<img src="${mediaUrl}" class="modal-image" alt="${ad.adName}" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'no-targeting-data\\'>No media available</div>'">`;
-                }
-            } else if (ad.localImage) {
-                // If no URL but have local image, use it directly
-                modalMedia.innerHTML = `<img src="${ad.localImage}" class="modal-image" alt="${ad.adName}">`;
+            });
+            updateCompareButton();
+        }
+
+        function updateCompareButton() {
+            const compareBtn = document.getElementById('compareBtn');
+            const count = selectedRows.size;
+            document.getElementById('compareCount').textContent = count;
+
+            // Hide all variance labels first
+            document.querySelectorAll('.compare-label, .variance-label').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+
+            if (count === 2) {
+                compareBtn.style.display = 'inline-block';
+                showInlineVariance();
             } else {
-                modalMedia.innerHTML = `<div class="no-targeting-data">No media available</div>`;
+                compareBtn.style.display = 'none';
+            }
+        }
+
+        function showInlineVariance() {
+            if (!firstSelectedKey || !secondSelectedKey) return;
+
+            // Get the two selected rows' data
+            const baselineData = pivotData.find(row => row.groupKey === firstSelectedKey);
+            const comparisonData = pivotData.find(row => row.groupKey === secondSelectedKey);
+
+            if (!baselineData || !comparisonData) return;
+
+            // Find the actual rows in the DOM using dataset.groupKey
+            const baselineRow = document.querySelector(`tr[data-group-key="${firstSelectedKey}"]`);
+            const comparisonRow = document.querySelector(`tr[data-group-key="${secondSelectedKey}"]`);
+
+            if (!baselineRow || !comparisonRow) return;
+
+            // Show "Baseline" label on first selected row
+            const baselineLabel = baselineRow.querySelector('.compare-label');
+            if (baselineLabel) {
+                baselineLabel.textContent = 'Baseline';
+                baselineLabel.style.display = 'inline';
             }
 
-            // Display ROAS chart if data exists
-            const chartData = roasChartData[ad.adName];
-            if (chartData && chartData.weeks && chartData.values && chartData.values.length > 0) {
-                chartContainer.style.display = 'block';
-
-                // Destroy previous chart if it exists
-                if (currentChart) {
-                    currentChart.destroy();
-                }
-
-                // Create new chart
-                const ctx = document.getElementById('roasChart').getContext('2d');
-                currentChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: chartData.weeks,
-                        datasets: [{
-                            label: 'ROAS',
-                            data: chartData.values,
-                            borderColor: '#4285f4',
-                            backgroundColor: 'rgba(66, 133, 244, 0.1)',
-                            borderWidth: 2,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#4285f4',
-                            tension: 0.2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'ROAS: ' + context.parsed.y.toFixed(2);
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return value.toFixed(1);
-                                    }
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    display: false
-                                }
-                            }
-                        }
-                    }
-                });
-            } else {
-                chartContainer.style.display = 'none';
+            // Show "vs Baseline" label on second selected row
+            const comparisonLabel = comparisonRow.querySelector('.compare-label');
+            if (comparisonLabel) {
+                comparisonLabel.textContent = 'vs Baseline';
+                comparisonLabel.style.display = 'inline';
             }
 
-            // Set targeting table
-            const targeting = targetingData[ad.adName];
-            if (targeting && targeting.length > 0) {
-                // Separate total row from regular rows
-                const totalRow = targeting.find(row => row.isTotal);
-                const regularRows = targeting.filter(row => !row.isTotal);
+            // Calculate and display variance for each metric on the comparison row
+            const metrics = [
+                { key: 'spend', className: 'spend-var' },
+                { key: 'ctr', className: 'ctr-var' },
+                { key: 'cvr', className: 'cvr-var' },
+                { key: 'roas', className: 'roas-var' },
+                { key: 'bar', className: 'bar-var' }
+            ];
 
-                // Sort regular rows by spend descending
-                const sortedTargeting = [...regularRows].sort((a, b) => b.spend - a.spend);
+            metrics.forEach(metric => {
+                const baseValue = baselineData[metric.key];
+                const compValue = comparisonData[metric.key];
+                const diff = compValue - baseValue;
+                const pct = baseValue !== 0 ? (diff / baseValue * 100) : 0;
 
-                let tableHTML = `
-                    <table class="targeting-table">
+                const arrowColor = diff > 0 ? '#4ade80' : diff < 0 ? '#f87171' : '#666';
+                const arrow = diff > 0 ? '↑' : diff < 0 ? '↓' : '';
+
+                const varianceLabel = comparisonRow.querySelector(`.${metric.className}`);
+                if (varianceLabel) {
+                    varianceLabel.innerHTML = `<span style="color: ${arrowColor}; font-weight: 600;">${arrow}</span><span style="color: #444; font-weight: 600;">${formatNumber(Math.abs(pct), 1)}%</span>`;
+                    varianceLabel.style.display = 'inline';
+                }
+            });
+        }
+
+        function showComparison() {
+            if (selectedRows.size < 2) return;
+
+            const selectedData = Array.from(selectedRows).map(key => {
+                return pivotData.find(row => row.groupKey === key);
+            });
+
+            // Build comparison modal content
+            const comparisonHTML = `
+                <div style="background: white; border-radius: 12px; max-width: 1000px; max-height: 90vh; overflow: auto; padding: 30px;">
+                    <h2 style="margin: 0 0 20px 0; color: #1a1a1a;">Compare Groups</h2>
+                    <table style="width: 100%; border-collapse: collapse;">
                         <thead>
                             <tr>
-                                <th>Targeting</th>
-                                <th>Spend</th>
-                                <th>CTR</th>
-                                <th>CVR</th>
-                                <th>ROAS</th>
-                                <th>BAR</th>
+                                <th style="text-align: left; padding: 12px; background: #f5f5f5; font-weight: 600; position: sticky; top: 0; border-bottom: 1px solid #e8e8e8;">Group</th>
+                                <th class="number" style="padding: 12px; background: #f5f5f5; font-weight: 600; position: sticky; top: 0; border-bottom: 1px solid #e8e8e8;">Spend</th>
+                                <th class="number" style="padding: 12px; background: #f5f5f5; font-weight: 600; position: sticky; top: 0; border-bottom: 1px solid #e8e8e8;">CTR %</th>
+                                <th class="number" style="padding: 12px; background: #f5f5f5; font-weight: 600; position: sticky; top: 0; border-bottom: 1px solid #e8e8e8;">CVR %</th>
+                                <th class="number" style="padding: 12px; background: #f5f5f5; font-weight: 600; position: sticky; top: 0; border-bottom: 1px solid #e8e8e8;">ROAS</th>
+                                <th class="number" style="padding: 12px; background: #f5f5f5; font-weight: 600; position: sticky; top: 0; border-bottom: 1px solid #e8e8e8;">BAR %</th>
                             </tr>
                         </thead>
                         <tbody>
-                `;
-
-                // Add regular rows
-                sortedTargeting.forEach(row => {
-                    const roasClass = getRoasClass(row.roas);
-                    const formattedSpend = row.spend.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-                    tableHTML += `
-                        <tr>
-                            <td>${row.targeting}</td>
-                            <td>$${formattedSpend}</td>
-                            <td>${row.ctr || '-'}</td>
-                            <td>${row.cvr || '-'}</td>
-                            <td class="roas-cell ${roasClass}">${row.roas.toFixed(2)}</td>
-                            <td>${row.bar}</td>
-                        </tr>
-                    `;
-                });
-
-                // Add total row from CSV if it exists
-                if (totalRow) {
-                    const roasClass = getRoasClass(totalRow.roas);
-                    const formattedSpend = totalRow.spend.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-                    tableHTML += `
-                        <tr style="font-weight: 600; background-color: #f8f9fa; border-top: 2px solid #e1e8ed;">
-                            <td>Total</td>
-                            <td>$${formattedSpend}</td>
-                            <td>${totalRow.ctr || '-'}</td>
-                            <td>${totalRow.cvr || '-'}</td>
-                            <td class="roas-cell ${roasClass}">${totalRow.roas.toFixed(2)}</td>
-                            <td>${totalRow.bar}</td>
-                        </tr>
-                    `;
-                }
-
-                tableHTML += `
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${selectedData[0].groupKey}</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">$${formatNumber(selectedData[0].spend, 2)}</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[0].ctr, 2)}%</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[0].cvr, 2)}%</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[0].roas, 2)}</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[0].bar, 2)}%</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${selectedData[1].groupKey}</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">$${formatNumber(selectedData[1].spend, 2)}</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[1].ctr, 2)}%</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[1].cvr, 2)}%</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[1].roas, 2)}</td>
+                                <td class="number" style="padding: 12px; border-bottom: 1px solid #e8e8e8;">${formatNumber(selectedData[1].bar, 2)}%</td>
+                            </tr>
+                            <tr style="background: #f9f9f9;">
+                                <td style="padding: 12px; font-weight: 600; color: #666;">Δ Change</td>
+                                <td class="number" style="padding: 12px;">${getDelta(selectedData[0].spend, selectedData[1].spend)}</td>
+                                <td class="number" style="padding: 12px;">${getDelta(selectedData[0].ctr, selectedData[1].ctr)}</td>
+                                <td class="number" style="padding: 12px;">${getDelta(selectedData[0].cvr, selectedData[1].cvr)}</td>
+                                <td class="number" style="padding: 12px;">${getDelta(selectedData[0].roas, selectedData[1].roas)}</td>
+                                <td class="number" style="padding: 12px;">${getDelta(selectedData[0].bar, selectedData[1].bar)}</td>
+                            </tr>
                         </tbody>
                     </table>
-                `;
+                    <button onclick="closeComparisonModal()" style="margin-top: 20px; padding: 10px 20px; background: #0066cc; color: white; border: none; border-radius: 6px; cursor: pointer;">Close</button>
+                </div>
+            `;
 
-                modalTable.innerHTML = tableHTML;
-            } else {
-                modalTable.innerHTML = `<div class="no-targeting-data">No targeting breakdown available for this ad</div>`;
-            }
-
-            // Show modal
-            modal.style.display = 'block';
+            const modal = document.getElementById('compareModal');
+            document.getElementById('compareContent').innerHTML = comparisonHTML;
+            modal.classList.add('active');
         }
 
-        function closeModal() {
-            const modal = document.getElementById('adModal');
-            modal.style.display = 'none';
+        function getDelta(val1, val2) {
+            const diff = val2 - val1;
+            const pct = val1 !== 0 ? (diff / val1 * 100) : 0;
+            const color = diff > 0 ? '#4ade80' : diff < 0 ? '#f87171' : '#666';
+            const arrow = diff > 0 ? '↑' : diff < 0 ? '↓' : '';
+            return `<span style="color: ${color}">${arrow} ${formatNumber(Math.abs(pct), 1)}%</span>`;
         }
 
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            const modal = document.getElementById('adModal');
-            if (event.target == modal) {
-                closeModal();
-            }
+        function closeComparisonModal() {
+            document.getElementById('compareModal').classList.remove('active');
         }
+
+        // Event listeners
+        document.getElementById('generateBtn').addEventListener('click', generatePivot);
+        document.getElementById('downloadBtn').addEventListener('click', downloadCSV);
+        document.getElementById('compareBtn').addEventListener('click', showComparison);
+
+        // Toggle buttons
+        document.getElementById('bothBtn').addEventListener('click', () => filterData('both'));
+        document.getElementById('windowsBtn').addEventListener('click', () => filterData('windows'));
+        document.getElementById('bathBtn').addEventListener('click', () => filterData('bath'));
+
+        // KPI toggle
+        document.getElementById('showKpisToggle').addEventListener('change', (e) => {
+            const showKpis = e.target.checked;
+            document.querySelectorAll('.ad-mini-stats').forEach(stats => {
+                if (showKpis) {
+                    stats.classList.remove('hidden');
+                } else {
+                    stats.classList.add('hidden');
+                }
+            });
+            document.querySelectorAll('.ad-gallery').forEach(gallery => {
+                if (showKpis) {
+                    gallery.classList.remove('compact');
+                } else {
+                    gallery.classList.add('compact');
+                }
+            });
+        });
+
+        // Load data on page load
+        loadData();
     </script>
 </body>
 </html>
