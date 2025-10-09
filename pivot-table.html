@@ -1097,38 +1097,30 @@
             const category = thumbnail.dataset.category;
             const safeName = thumbnail.dataset.safename;
 
-            console.log('Fallback for:', safeName);
-
-            // Try multiple patterns with different extensions
+            // Try only the most common patterns with limited index range
             const patterns = [
                 `images/${category}_${safeName}`,  // windows_adname
                 `images/${safeName}`,               // adname
             ];
 
-            // Add indexed patterns - try both _i and __i for each number
-            for (let i = 0; i <= 60; i++) {
-                patterns.push(`images/${category}_${safeName}__${i}`);  // Try __ first (more specific)
+            // Only try indexes 0-20 instead of 0-60 to reduce failed requests
+            for (let i = 0; i <= 20; i++) {
+                patterns.push(`images/${category}_${safeName}__${i}`);
                 patterns.push(`images/${category}_${safeName}_${i}`);
-                patterns.push(`images/${safeName}__${i}`);
-                patterns.push(`images/${safeName}_${i}`);
             }
 
             const extensions = ['.png', '.jpg', '.jpeg'];
 
             let patternIndex = 0;
             let extIndex = 0;
-            let attemptedUrls = [];
 
             function tryNext() {
                 if (patternIndex < patterns.length) {
                     if (extIndex < extensions.length) {
                         const url = patterns[patternIndex] + extensions[extIndex];
-                        attemptedUrls.push(url);
                         extIndex++;
                         img.onerror = tryNext;
-                        img.onload = function() {
-                            console.log('✅ Loaded:', url);
-                        };
+                        img.onload = null; // Remove success logging to reduce console spam
                         img.src = url;
                     } else {
                         // Try next pattern
@@ -1137,8 +1129,7 @@
                         tryNext();
                     }
                 } else {
-                    // All attempts failed, show placeholder
-                    console.log('❌ All failed for:', safeName, 'Tried:', attemptedUrls.slice(0, 10));
+                    // All attempts failed, show placeholder (silently)
                     if (thumbnail) {
                         thumbnail.classList.add('has-error');
                         img.classList.add('error');
@@ -1207,12 +1198,10 @@
                     `images/${safeName}`,
                 ];
 
-                // Add indexed patterns - try both _i and __i for each number
-                for (let i = 0; i <= 60; i++) {
-                    patterns.push(`images/${category}_${safeName}__${i}`);  // Try __ first (more specific)
+                // Only try indexes 0-20 to reduce failed requests
+                for (let i = 0; i <= 20; i++) {
+                    patterns.push(`images/${category}_${safeName}__${i}`);
                     patterns.push(`images/${category}_${safeName}_${i}`);
-                    patterns.push(`images/${safeName}__${i}`);
-                    patterns.push(`images/${safeName}_${i}`);
                 }
 
                 const extensions = ['.png', '.jpg', '.jpeg'];
@@ -1295,11 +1284,10 @@
                     `images/${fallbackInfo.safeName}`,
                 ];
 
-                for (let i = 0; i <= 60; i++) {
-                    patterns.push(`images/${fallbackInfo.category}_${fallbackInfo.safeName}__${i}`);  // Try __ first
+                // Only try indexes 0-20 to reduce failed requests
+                for (let i = 0; i <= 20; i++) {
+                    patterns.push(`images/${fallbackInfo.category}_${fallbackInfo.safeName}__${i}`);
                     patterns.push(`images/${fallbackInfo.category}_${fallbackInfo.safeName}_${i}`);
-                    patterns.push(`images/${fallbackInfo.safeName}__${i}`);
-                    patterns.push(`images/${fallbackInfo.safeName}_${i}`);
                 }
 
                 const extensions = ['.png', '.jpg', '.jpeg'];
