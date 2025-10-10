@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Analytics Platform</title>
+    <title>Ad Traits Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #007979 0%, #0F1A42 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -68,8 +69,9 @@
         }
 
         .platform-icon {
-            font-size: 64px;
+            font-size: 48px;
             margin-bottom: 20px;
+            color: #007979;
         }
 
         .platform-card h2 {
@@ -113,23 +115,23 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Ad Analytics Platform</h1>
+            <h1>Ad Traits Platform</h1>
             <p>Performance insights across advertising platforms</p>
         </div>
 
         <div class="platforms">
             <a href="/meta/" class="platform-card meta-card">
-                <div class="platform-icon">📱</div>
+                <div class="platform-icon"><i class="fab fa-meta"></i></div>
                 <h2>Meta Ads</h2>
                 <p>Analyze Facebook & Instagram ad performance with creative trait breakdowns</p>
                 <span class="badge">Active</span>
             </a>
 
             <a href="/display/" class="platform-card display-card">
-                <div class="platform-icon">🖼️</div>
+                <div class="platform-icon"><i class="fas fa-rectangle-ad"></i></div>
                 <h2>Display Ads</h2>
                 <p>Track display advertising campaigns and creative performance</p>
-                <span class="badge coming-soon">Coming Soon</span>
+                <span class="badge">Active</span>
             </a>
         </div>
     </div>
