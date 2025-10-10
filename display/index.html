@@ -448,7 +448,6 @@
                     <option value="">Select grouping...</option>
                     <option value="Ad Name">Ad Name</option>
                     <option value="Category">Category</option>
-                    <option value="Concept">Concept</option>
                     <option value="Headline">Headline</option>
                     <option value="Problem">Problem</option>
                     <option value="Solution">Solution</option>
@@ -461,21 +460,9 @@
                     <option value="Urgency">Urgency</option>
                     <option value="Contrast">Contrast</option>
                     <option value="Color">Color</option>
+                    <option value="Human Presence">Human Presence</option>
                     <option disabled>--- Pre-built Groupings ---</option>
-                    <option value="Concepts+Problem+Color">Concepts+Problem+Color</option>
-                    <option value="Concepts+Headline+CTAText">Concepts+Headline+CTAText</option>
-                    <option value="Concepts+Headline">Concepts+Headline</option>
                     <option value="Problem+Headline+CTA">Problem+Headline+CTA</option>
-                    <option value="Concepts+Brand">Concepts+Brand</option>
-                    <option value="Quadrants">Quadrants</option>
-                    <option value="High ROAS & High BAR">High ROAS & High BAR</option>
-                    <option value="High ROAS & Low BAR">High ROAS & Low BAR</option>
-                    <option value="Low ROAS & High BAR">Low ROAS & High BAR</option>
-                    <option value="Low ROAS & Low BAR">Low ROAS & Low BAR</option>
-                    <option value="Champion Ads">Champion Ads</option>
-                    <option value="CM Only Ads">CM Only Ads</option>
-                    <option value="Quality Ads Only">Quality Ads Only</option>
-                    <option value="Loser Ads">Loser Ads</option>
                 </select>
                 <label>Filter Ads:</label>
                 <div class="filter-dropdown">
@@ -490,12 +477,19 @@
                 <button id="downloadBtn">Download CSV</button>
                 <button id="compareBtn" style="background: #8b5cf6; border-color: #8b5cf6; display: none;">Compare (<span id="compareCount">0</span>)</button>
                 <div class="toggle-container" style="margin-left: auto;">
+                    <span style="font-weight: 600; margin-right: 8px;">Platform:</span>
+                    <button class="toggle-btn active" id="platformAllBtn">All</button>
+                    <button class="toggle-btn" id="platformMediagoBtn">MediaGO</button>
+                    <button class="toggle-btn" id="platformTaboolaBtn">Taboola</button>
+                </div>
+                <div class="toggle-container">
+                    <span style="font-weight: 600; margin-right: 8px;">Category:</span>
                     <button class="toggle-btn active" id="bothBtn">Both</button>
                     <button class="toggle-btn" id="windowsBtn">Windows</button>
-                    <button class="toggle-btn" id="bathBtn">Bath</button>
+                    <button class="toggle-btn" id="guttersBtn">Gutters</button>
                 </div>
                 <label style="min-width: auto; margin: 0; display: flex; align-items: center; gap: 4px; cursor: pointer;">
-                    <input type="checkbox" id="showKpisToggle" checked style="cursor: pointer;">
+                    <input type="checkbox" id="showKpisToggle" style="cursor: pointer;">
                     <span>Show KPIs</span>
                 </label>
             </div>
@@ -534,38 +528,125 @@
         let filteredData = [];
         let pivotData = [];
         let pivotGroups = {}; // Store original ad rows for each group
-        let currentFilter = 'both'; // 'both', 'windows', 'bath'
+        let currentFilter = 'both'; // 'both', 'windows', 'gutters'
+        let currentPlatformFilter = 'all'; // 'all', 'mediago', 'taboola'
         let currentAdIndex = 0;
         let currentGalleryAds = [];
         let selectedRows = new Set(); // Track selected rows for comparison
         let selectedAdNames = new Set(); // Track selected ad names for filtering
         let allAdNames = []; // Store all unique ad names
 
+        // Normalize Display ad data to match expected structure
+        function normalizeDisplayAd(ad, platform) {
+            // Determine category based on assetname
+            let category = 'Windows'; // Default for MediaGO
+            if (platform === 'Taboola') {
+                const assetname = ad.assetname || '';
+                category = assetname.toLowerCase().includes('gutters') ? 'Gutters' : 'Windows';
+            }
+
+            // Remove commas and $ from numbers
+            const cleanNumber = (val) => parseFloat((val || '0').replace(/[$,]/g, '')) || 0;
+
+            return {
+                'Platform': platform,
+                'Category': category,
+                'Ad Name': ad.assetname || '',
+                'ad_id': ad.assetid || '',
+                'Headline': ad.Headline || ad.headline || '',
+                'Impressions': cleanNumber(ad.Impressions),
+                'Clicks': cleanNumber(ad.Clicks),
+                'Leads': cleanNumber(ad.Leads),
+                'hs_revenue': cleanNumber(ad.Revenue),
+                'Spend': cleanNumber(ad.Spend),
+                'Booked Appts': cleanNumber(ad['Booked Appts']),
+                // Creative traits (empty for now, to be filled by OpenAI)
+                'category_group': '',
+                'headline': ad.Headline || ad.headline || '',
+                'problem': '',
+                'solution': '',
+                'offer': '',
+                'cta': ad.CTA || '',
+                'ctaPosition': '',
+                'socialProof': '',
+                'emotion': '',
+                'brand': '',
+                'urgency': '',
+                'contrast': '',
+                'color': '',
+                'humanPresence': '',
+                'headlineNumber': ''
+            };
+        }
+
         // Load and parse CSV files
         async function loadData() {
             try {
-                const [windowsRes, bathRes] = await Promise.all([
-                    fetch('traits-windows-ads.csv'),
-                    fetch('traits-bath-ads.csv')
+                const [mediagoRes, taboolaRes, traitsRes] = await Promise.all([
+                    fetch('traits-mediago-ads.csv'),
+                    fetch('traits-taboola-ads.csv'),
+                    fetch('display-creative-traits.csv')
                 ]);
 
-                const [windowsText, bathText] = await Promise.all([
-                    windowsRes.text(),
-                    bathRes.text()
+                const [mediagoText, taboolaText, traitsText] = await Promise.all([
+                    mediagoRes.text(),
+                    taboolaRes.text(),
+                    traitsRes.text()
                 ]);
 
-                allData = [
-                    ...parseCSV(windowsText),
-                    ...parseCSV(bathText)
-                ];
+                // Parse creative traits and build lookup by Asset ID
+                const traitsData = parseCSV(traitsText);
+                const traitsLookup = {};
+                traitsData.forEach(trait => {
+                    const assetId = trait['Asset ID'];
+                    if (assetId) {
+                        traitsLookup[assetId] = {
+                            'Problem': trait['Problem'] || '',
+                            'Solution': trait['Solution'] || '',
+                            'Offer': trait['Offer Style'] || '',
+                            'CTA Text': trait['CTA Text'] || '',
+                            'CTA Position': trait['CTA Position'] || '',
+                            'Social Proof': trait['Social Proof'] || '',
+                            'Emotion': trait['Emotion'] || '',
+                            'Brand': trait['Brand'] || '',
+                            'Urgency': trait['Urgency'] || '',
+                            'Contrast': trait['Contrast'] || '',
+                            'Color': trait['Color'] || '',
+                            'Human Presence': trait['Human Presence'] || '',
+                            'Headline Number': trait['Headline Number'] || ''
+                        };
+                    }
+                });
 
+                console.log(`✅ Loaded ${Object.keys(traitsLookup).length} creative traits`);
+
+                // Parse and normalize data, then merge with traits
+                const mediagoAds = parseCSV(mediagoText).map(ad => {
+                    const normalized = normalizeDisplayAd(ad, 'MediaGO');
+                    const traits = traitsLookup[normalized.ad_id];
+                    if (traits) {
+                        Object.assign(normalized, traits);
+                    }
+                    return normalized;
+                });
+
+                const taboolaAds = parseCSV(taboolaText).map(ad => {
+                    const normalized = normalizeDisplayAd(ad, 'Taboola');
+                    const traits = traitsLookup[normalized.ad_id];
+                    if (traits) {
+                        Object.assign(normalized, traits);
+                    }
+                    return normalized;
+                });
+
+                allData = [...mediagoAds, ...taboolaAds];
                 filteredData = allData;
 
                 // Extract unique ad names
                 allAdNames = [...new Set(allData.map(ad => ad['Ad Name']))].sort();
                 populateAdFilter();
 
-                console.log(`✅ Loaded ${allData.length} ads`);
+                console.log(`✅ Loaded ${allData.length} ads (${mediagoAds.length} MediaGO, ${taboolaAds.length} Taboola)`);
             } catch (error) {
                 console.error('Error loading data:', error);
                 alert('Error loading data files');
@@ -667,34 +748,72 @@
             applyAdFilter();
         });
 
+        // Filter data by platform
+        function filterPlatform(platform) {
+            currentPlatformFilter = platform;
+
+            // Update platform button states
+            document.getElementById('platformAllBtn').classList.remove('active');
+            document.getElementById('platformMediagoBtn').classList.remove('active');
+            document.getElementById('platformTaboolaBtn').classList.remove('active');
+
+            if (platform === 'all') {
+                document.getElementById('platformAllBtn').classList.add('active');
+            } else if (platform === 'mediago') {
+                document.getElementById('platformMediagoBtn').classList.add('active');
+            } else if (platform === 'taboola') {
+                document.getElementById('platformTaboolaBtn').classList.add('active');
+            }
+
+            // Re-apply all filters
+            applyFilters();
+        }
+
         // Filter data by category
         function filterData(filter) {
             currentFilter = filter;
 
-            // Update button states
-            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            // Update category button states
+            document.getElementById('bothBtn').classList.remove('active');
+            document.getElementById('windowsBtn').classList.remove('active');
+            document.getElementById('guttersBtn').classList.remove('active');
 
-            // Apply category filter first
-            let categoryFiltered;
             if (filter === 'both') {
                 document.getElementById('bothBtn').classList.add('active');
-                categoryFiltered = allData;
             } else if (filter === 'windows') {
                 document.getElementById('windowsBtn').classList.add('active');
-                categoryFiltered = allData.filter(ad => ad.Category === 'Windows');
-            } else if (filter === 'bath') {
-                document.getElementById('bathBtn').classList.add('active');
-                categoryFiltered = allData.filter(ad => ad.Category === 'Bath');
+            } else if (filter === 'gutters') {
+                document.getElementById('guttersBtn').classList.add('active');
+            }
+
+            // Re-apply all filters
+            applyFilters();
+        }
+
+        // Apply all filters (platform + category + ad names)
+        function applyFilters() {
+            let filtered = allData;
+
+            // Apply platform filter
+            if (currentPlatformFilter !== 'all') {
+                const platformName = currentPlatformFilter === 'mediago' ? 'MediaGO' : 'Taboola';
+                filtered = filtered.filter(ad => ad.Platform === platformName);
+            }
+
+            // Apply category filter
+            if (currentFilter !== 'both') {
+                const categoryName = currentFilter === 'windows' ? 'Windows' : 'Gutters';
+                filtered = filtered.filter(ad => ad.Category === categoryName);
             }
 
             // Apply ad name filter if any are selected
             if (selectedAdNames.size > 0) {
-                filteredData = categoryFiltered.filter(ad => selectedAdNames.has(ad['Ad Name']));
-            } else {
-                filteredData = categoryFiltered;
+                filtered = filtered.filter(ad => selectedAdNames.has(ad['Ad Name']));
             }
 
-            console.log(`Filtered to ${filteredData.length} ${filter} ads`);
+            filteredData = filtered;
+
+            console.log(`Filtered to ${filteredData.length} ads (Platform: ${currentPlatformFilter}, Category: ${currentFilter})`);
 
             // Auto-regenerate if a pivot table was already created
             if (pivotData.length > 0) {
@@ -752,28 +871,19 @@
             return result;
         }
 
-        // Calculate metrics
+        // Calculate metrics (Display uses same logic as Windows)
         function calculateMetrics(group) {
-            const impressions = group.reduce((sum, row) => sum + parseFloat(row.impressions || 0), 0);
-            const clicks = group.reduce((sum, row) => sum + parseFloat(row.clicks || 0), 0);
-            const spend = group.reduce((sum, row) => sum + parseFloat(row.spend || 0), 0);
-            const matched_leads = group.reduce((sum, row) => sum + parseFloat(row.matched_leads || 0), 0);
-            const booked_appts = group.reduce((sum, row) => sum + parseFloat(row.booked_appts || 0), 0);
-            const hs_revenue = group.reduce((sum, row) => sum + parseFloat(row.hs_rev || row.hs_revenue || 0), 0);
-
-            // Bath-specific metrics
-            const partner_matched_leads = group.reduce((sum, row) => sum + parseFloat(row.partner_matched_leads || 0), 0);
-            const partner_booked_appts = group.reduce((sum, row) => sum + parseFloat(row.partner_booked_appts || 0), 0);
+            const impressions = group.reduce((sum, row) => sum + parseFloat(row.Impressions || 0), 0);
+            const clicks = group.reduce((sum, row) => sum + parseFloat(row.Clicks || 0), 0);
+            const spend = group.reduce((sum, row) => sum + parseFloat(row.Spend || 0), 0);
+            const matched_leads = group.reduce((sum, row) => sum + parseFloat(row.Leads || 0), 0);
+            const booked_appts = group.reduce((sum, row) => sum + parseFloat(row['Booked Appts'] || 0), 0);
+            const hs_revenue = group.reduce((sum, row) => sum + parseFloat(row.hs_revenue || 0), 0);
 
             const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
             const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
             const roas = spend > 0 ? (hs_revenue / spend) : 0;
-
-            // Check if this is a Bath group (any row has Category = 'Bath')
-            const isBath = group.some(row => row.Category === 'Bath');
-            const bar = isBath
-                ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
-                : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+            const bar = matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0;
 
             return {
                 ads_count: group.length,
@@ -1027,25 +1137,18 @@
                 // Store ad data for modal
                 window[`adData_${uniqueId}`] = ad;
 
-                // Calculate metrics for this ad
-                const impressions = parseFloat(ad.impressions || 0);
-                const clicks = parseFloat(ad.clicks || 0);
-                const spend = parseFloat(ad.spend || 0);
-                const matched_leads = parseFloat(ad.matched_leads || 0);
-                const booked_appts = parseFloat(ad.booked_appts || 0);
-                const hs_revenue = parseFloat(ad.hs_rev || ad.hs_revenue || 0);
-                const partner_matched_leads = parseFloat(ad.partner_matched_leads || 0);
-                const partner_booked_appts = parseFloat(ad.partner_booked_appts || 0);
+                // Calculate metrics for this ad (Display uses Windows logic)
+                const impressions = parseFloat(ad.Impressions || 0);
+                const clicks = parseFloat(ad.Clicks || 0);
+                const spend = parseFloat(ad.Spend || 0);
+                const matched_leads = parseFloat(ad.Leads || 0);
+                const booked_appts = parseFloat(ad['Booked Appts'] || 0);
+                const hs_revenue = parseFloat(ad.hs_revenue || 0);
 
                 const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
                 const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
                 const roas = spend > 0 ? (hs_revenue / spend) : 0;
-
-                // Use partner metrics for Bath, regular metrics for Windows
-                const isBath = ad.Category === 'Bath';
-                const bar = isBath
-                    ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
-                    : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+                const bar = matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0;
 
                 const miniStatsClass = showKpis ? '' : 'hidden';
 
@@ -1121,10 +1224,15 @@
             modalImg.src = imageUrl;
             modalImg.onerror = () => handleImageError(modalImg, adId);
 
-            // Set ad name in title
+            // Set ad name and headline in title
             const modalAdName = document.getElementById('modalAdName');
             if (adData && adData['Ad Name']) {
-                modalAdName.textContent = adData['Ad Name'];
+                const headline = adData.headline || '';
+                if (headline) {
+                    modalAdName.textContent = `${adData['Ad Name']} - ${headline}`;
+                } else {
+                    modalAdName.textContent = adData['Ad Name'];
+                }
             } else {
                 modalAdName.textContent = 'Ad Performance';
             }
@@ -1132,27 +1240,19 @@
             // Populate stats table
             const statsBody = document.getElementById('modalStatsBody');
             if (adData) {
-                const impressions = parseFloat(adData.impressions || 0);
-                const clicks = parseFloat(adData.clicks || 0);
-                const spend = parseFloat(adData.spend || 0);
-                const matched_leads = parseFloat(adData.matched_leads || 0);
-                const booked_appts = parseFloat(adData.booked_appts || 0);
-                const hs_revenue = parseFloat(adData.hs_rev || adData.hs_revenue || 0);
-                const partner_matched_leads = parseFloat(adData.partner_matched_leads || 0);
-                const partner_booked_appts = parseFloat(adData.partner_booked_appts || 0);
+                const impressions = parseFloat(adData.Impressions || 0);
+                const clicks = parseFloat(adData.Clicks || 0);
+                const spend = parseFloat(adData.Spend || 0);
+                const matched_leads = parseFloat(adData.Leads || 0);
+                const booked_appts = parseFloat(adData['Booked Appts'] || 0);
+                const hs_revenue = parseFloat(adData.hs_revenue || 0);
 
                 const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
                 const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
                 const roas = spend > 0 ? (hs_revenue / spend) : 0;
-
-                // Use partner metrics for Bath, regular metrics for Windows
-                const isBath = adData.Category === 'Bath';
-                const bar = isBath
-                    ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
-                    : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+                const bar = matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0;
 
                 statsBody.innerHTML = `
-                    <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">Spend</div><div style="font-size: 18px; font-weight: 600;">$${formatNumber(spend, 2)}</div></div>
                     <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CTR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(ctr, 2)}%</div></div>
                     <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CVR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(cvr, 2)}%</div></div>
                     <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">ROAS</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(roas, 2)}</div></div>
@@ -1183,33 +1283,30 @@
             modalImg.src = imageUrl;
             modalImg.onerror = () => handleImageError(modalImg, adId);
 
-            // Set ad name in title
+            // Set ad name and headline in title
             const modalAdName = document.getElementById('modalAdName');
-            modalAdName.textContent = adName || 'Ad Performance';
+            const headline = ad.headline || '';
+            if (headline) {
+                modalAdName.textContent = `${adName} - ${headline}`;
+            } else {
+                modalAdName.textContent = adName || 'Ad Performance';
+            }
 
-            // Populate stats table
+            // Populate stats table (Display uses Windows logic)
             const statsBody = document.getElementById('modalStatsBody');
-            const impressions = parseFloat(ad.impressions || 0);
-            const clicks = parseFloat(ad.clicks || 0);
-            const spend = parseFloat(ad.spend || 0);
-            const matched_leads = parseFloat(ad.matched_leads || 0);
-            const booked_appts = parseFloat(ad.booked_appts || 0);
-            const hs_revenue = parseFloat(ad.hs_rev || ad.hs_revenue || 0);
-            const partner_matched_leads = parseFloat(ad.partner_matched_leads || 0);
-            const partner_booked_appts = parseFloat(ad.partner_booked_appts || 0);
+            const impressions = parseFloat(ad.Impressions || 0);
+            const clicks = parseFloat(ad.Clicks || 0);
+            const spend = parseFloat(ad.Spend || 0);
+            const matched_leads = parseFloat(ad.Leads || 0);
+            const booked_appts = parseFloat(ad['Booked Appts'] || 0);
+            const hs_revenue = parseFloat(ad.hs_revenue || 0);
 
             const ctr = impressions > 0 ? (clicks / impressions * 100) : 0;
             const cvr = clicks > 0 ? (matched_leads / clicks * 100) : 0;
             const roas = spend > 0 ? (hs_revenue / spend) : 0;
-
-            // Use partner metrics for Bath, regular metrics for Windows
-            const isBath = ad.Category === 'Bath';
-            const bar = isBath
-                ? (partner_matched_leads > 0 ? (partner_booked_appts / partner_matched_leads * 100) : 0)
-                : (matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0);
+            const bar = matched_leads > 0 ? (booked_appts / matched_leads * 100) : 0;
 
             statsBody.innerHTML = `
-                <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">Spend</div><div style="font-size: 18px; font-weight: 600;">$${formatNumber(spend, 2)}</div></div>
                 <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CTR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(ctr, 2)}%</div></div>
                 <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">CVR</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(cvr, 2)}%</div></div>
                 <div style="background: #f9f9f9; padding: 12px; border-radius: 6px;"><div style="color: #666; font-size: 12px; margin-bottom: 4px;">ROAS</div><div style="font-size: 18px; font-weight: 600;">${formatNumber(roas, 2)}</div></div>
@@ -1500,10 +1597,15 @@
         document.getElementById('downloadBtn').addEventListener('click', downloadCSV);
         document.getElementById('compareBtn').addEventListener('click', showComparison);
 
-        // Toggle buttons
+        // Platform toggle buttons
+        document.getElementById('platformAllBtn').addEventListener('click', () => filterPlatform('all'));
+        document.getElementById('platformMediagoBtn').addEventListener('click', () => filterPlatform('mediago'));
+        document.getElementById('platformTaboolaBtn').addEventListener('click', () => filterPlatform('taboola'));
+
+        // Category toggle buttons
         document.getElementById('bothBtn').addEventListener('click', () => filterData('both'));
         document.getElementById('windowsBtn').addEventListener('click', () => filterData('windows'));
-        document.getElementById('bathBtn').addEventListener('click', () => filterData('bath'));
+        document.getElementById('guttersBtn').addEventListener('click', () => filterData('gutters'));
 
         // KPI toggle
         document.getElementById('showKpisToggle').addEventListener('change', (e) => {

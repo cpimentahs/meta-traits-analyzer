@@ -293,7 +293,8 @@
         const baseColumns = [
             { key: 'thumbnail', label: 'Image', editable: false, type: 'image' },
             { key: 'category', label: 'Category', editable: false, type: 'text' },
-            { key: 'adName', label: 'Ad Name', editable: false, type: 'text' }
+            { key: 'adName', label: 'Ad Name', editable: false, type: 'text' },
+            { key: 'adId', label: 'Asset ID', editable: false, type: 'text' }
         ];
 
         // Creative trait columns (editable)
@@ -321,73 +322,67 @@
         // Combine all columns
         const allBaseColumns = [...baseColumns, ...traitColumns];
 
-        // Parse CSV helper
+        // Parse CSV helper (handles quoted fields)
         function parseCSV(text) {
             const lines = text.trim().split('\n');
-            const headers = lines[0].split(',');
+            const headers = parseCSVLine(lines[0]);
             const data = [];
 
             for (let i = 1; i < lines.length; i++) {
                 const line = lines[i].trim();
-                if (!line || line.split(',').every(cell => !cell.trim())) continue;
+                if (!line) continue;
 
-                const values = line.split(',');
+                const values = parseCSVLine(line);
                 const row = {};
                 headers.forEach((header, index) => {
                     row[header.trim()] = values[index]?.trim() || '';
                 });
 
-                // Skip rows with empty ad_name
-                if (!row.ad_name || row.ad_name.trim() === '') continue;
+                // Skip empty rows
+                if (Object.values(row).every(val => !val)) continue;
 
                 data.push(row);
             }
             return data;
         }
 
+        // Parse a single CSV line handling quoted fields
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current);
+            return result;
+        }
+
         // Load data from CSV files
         async function loadData() {
             try {
-                // Load Windows missing traits CSV
-                const windowsResponse = await fetch('Windows-missing-traits.csv');
-                const windowsText = await windowsResponse.text();
-                const windowsAds = parseCSV(windowsText);
+                // Load MediaGO and Taboola CSVs
+                const mediagoResponse = await fetch('traits-mediago-ads.csv');
+                const mediagoText = await mediagoResponse.text();
+                const mediagoAds = parseCSV(mediagoText);
 
-                // Load Bath missing traits CSV
-                const bathResponse = await fetch('Bath-missing-traits.csv');
-                const bathText = await bathResponse.text();
-                const bathAds = parseCSV(bathText);
+                const taboolaResponse = await fetch('traits-taboola-ads.csv');
+                const taboolaText = await taboolaResponse.text();
+                const taboolaAds = parseCSV(taboolaText);
 
-                // Filter only ads WITHOUT traits (where "Has Traits?" is "N")
-                const windowsWithTraits = windowsAds.filter(ad => {
-                    const hasTraits = ad['Has Traits?'];
-                    return hasTraits === 'N';
-                });
+                console.log(`✅ Loaded ${mediagoAds.length} MediaGO ads`);
+                console.log(`✅ Loaded ${taboolaAds.length} Taboola ads`);
 
-                const bathWithTraits = bathAds.filter(ad => {
-                    const hasTraits = ad['Has Traits?'];
-                    return hasTraits === 'N';
-                });
-
-                // Load targeting data (if exists)
-                let windowsTargeting = {};
-                let bathTargeting = {};
-                try {
-                    const windowsTargetingResponse = await fetch('targeting-data.json');
-                    windowsTargeting = await windowsTargetingResponse.json();
-                    console.log(`✅ Loaded Windows targeting data`);
-                } catch (e) {
-                    console.log('ℹ️ No Windows targeting data found');
-                }
-                try {
-                    const bathTargetingResponse = await fetch('bath-targeting-data.json');
-                    bathTargeting = await bathTargetingResponse.json();
-                    console.log(`✅ Loaded Bath targeting data`);
-                } catch (e) {
-                    console.log('ℹ️ No Bath targeting data found');
-                }
-
-                // Load creative traits analyses
+                // Load creative traits analyses (if exists)
                 try {
                     const traitsResponse = await fetch('creative-traits-analyses.json');
                     traitsData = await traitsResponse.json();
@@ -400,42 +395,31 @@
                 // Map CSV data to our format
                 adsData = [];
 
-                windowsWithTraits.forEach(ad => {
-                    const adName = ad.ad_name;
-                    const targetingData = windowsTargeting[adName];
+                // Helper function to clean numeric values
+                const cleanNumber = (val) => parseFloat((val || '0').replace(/[$,]/g, '')) || 0;
+
+                // Process MediaGO ads (all Windows)
+                mediagoAds.forEach(ad => {
+                    const adName = ad.assetname || '';
+                    const adId = ad.assetid || '';
+                    const existingHeadline = ad.Headline || '';
                     const traits = traitsData[adName];
 
-                    let kpis = {
-                        spend: parseFloat(ad.spend) || 0,
+                    adsData.push({
+                        category: 'MediaGO',
+                        adName: adName,
+                        adId: adId,
+                        concept: '',
+                        url: ad['Image URL'] || '',
+                        localImage: `images/${adId}.png`,
+                        originalUrl: ad['Image URL'] || '',
+                        spend: cleanNumber(ad.Spend),
                         bar: '',
                         roas: 0,
                         ctr: '',
-                        cvr: ''
-                    };
-
-                    if (targetingData && Array.isArray(targetingData)) {
-                        const totalRow = targetingData.find(row => row.isTotal || row.targeting === 'Total');
-                        if (totalRow) {
-                            kpis = {
-                                spend: totalRow.spend,
-                                bar: totalRow.bar,
-                                roas: totalRow.roas,
-                                ctr: totalRow.ctr || '',
-                                cvr: totalRow.cvr || ''
-                            };
-                        }
-                    }
-
-                    adsData.push({
-                        category: 'Windows',
-                        adName: adName,
-                        adId: ad.ad_id || '',
-                        concept: ad.category_group || '',
-                        url: ad.creative_url || '',
-                        localImage: ad.creative_url || '',
-                        originalUrl: ad.creative_url || '',
-                        ...kpis,
-                        headline: traits?.['Headline (Hook Text)'] || '',
+                        cvr: '',
+                        headline: traits?.['Headline (Hook Text)'] || existingHeadline,
+                        existingHeadline: existingHeadline,
                         problem: traits?.['Problem Shown'] || '',
                         solution: traits?.['Solution / Transformation Shown'] || '',
                         offer: traits?.['Offer Style'] || '',
@@ -456,42 +440,31 @@
                     });
                 });
 
-                bathWithTraits.forEach(ad => {
-                    const adName = ad.ad_name;
-                    const targetingData = bathTargeting[adName];
+                // Process Taboola ads (Windows/Gutters based on assetname)
+                taboolaAds.forEach(ad => {
+                    const adName = ad.assetname || '';
+                    const adId = ad.assetid || '';
+                    const existingHeadline = ad.headline || '';
                     const traits = traitsData[adName];
 
-                    let kpis = {
-                        spend: parseFloat(ad.spend) || 0,
+                    // Determine category: gutters_* = Gutters, windows* = Windows
+                    const category = adName.toLowerCase().includes('gutters') ? 'Taboola-Gutters' : 'Taboola-Windows';
+
+                    adsData.push({
+                        category: category,
+                        adName: adName,
+                        adId: adId,
+                        concept: '',
+                        url: ad['Image URL'] || '',
+                        localImage: `images/${adId}.jpg`,
+                        originalUrl: ad['Image URL'] || '',
+                        spend: cleanNumber(ad.Spend),
                         bar: '',
                         roas: 0,
                         ctr: '',
-                        cvr: ''
-                    };
-
-                    if (targetingData && Array.isArray(targetingData)) {
-                        const totalRow = targetingData.find(row => row.isTotal || row.targeting === 'Total');
-                        if (totalRow) {
-                            kpis = {
-                                spend: totalRow.spend,
-                                bar: totalRow.bar,
-                                roas: totalRow.roas,
-                                ctr: totalRow.ctr || '',
-                                cvr: totalRow.cvr || ''
-                            };
-                        }
-                    }
-
-                    adsData.push({
-                        category: 'Bath',
-                        adName: adName,
-                        adId: ad.ad_id || '',
-                        concept: ad.category_group || '',
-                        url: ad.creative_url || '',
-                        localImage: ad.creative_url || '',
-                        originalUrl: ad.creative_url || '',
-                        ...kpis,
-                        headline: traits?.['Headline (Hook Text)'] || '',
+                        cvr: '',
+                        headline: traits?.['Headline (Hook Text)'] || existingHeadline,
+                        existingHeadline: existingHeadline,
                         problem: traits?.['Problem Shown'] || '',
                         solution: traits?.['Solution / Transformation Shown'] || '',
                         offer: traits?.['Offer Style'] || '',
@@ -512,7 +485,7 @@
                     });
                 });
 
-                console.log(`✅ Loaded ${adsData.length} ads with traits (${windowsWithTraits.length} Windows, ${bathWithTraits.length} Bath)`);
+                console.log(`✅ Loaded ${adsData.length} total ads (${mediagoAds.length} MediaGO, ${taboolaAds.length} Taboola)`);
                 renderTable();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -789,7 +762,7 @@
                         continue;
                     }
 
-                    // Try both .jpg and .png extensions
+                    // Try .png, .jpg, and .jpeg extensions
                     let localPath = null;
                     let imageResponse = null;
 
@@ -800,6 +773,12 @@
                     // If .png fails, try .jpg
                     if (!imageResponse.ok) {
                         localPath = `images/${adId}.jpg`;
+                        imageResponse = await fetch(localPath);
+                    }
+
+                    // If .jpg fails, try .jpeg
+                    if (!imageResponse.ok) {
+                        localPath = `images/${adId}.jpeg`;
                         imageResponse = await fetch(localPath);
                     }
 
@@ -822,6 +801,7 @@
                     console.log(`📸 Converted to base64 (${base64.length} chars)`);
 
                     // Call OpenAI Vision API via server proxy
+                    const existingHeadline = ad.existingHeadline || '';
                     const response = await fetch('/api/openai', {
                         method: 'POST',
                         headers: {
@@ -834,10 +814,14 @@
                                 content: [
                                     {
                                         type: 'text',
-                                        text: `Analyze this Facebook ad image and extract creative traits. Return ONLY a valid JSON object with these exact keys. You MUST choose from the specified options - do not create new values:
+                                        text: `Analyze this Display ad image and extract creative traits.
+
+EXISTING HEADLINE (from CSV): "${existingHeadline}"
+
+Use the existing headline provided above along with the image to analyze the ad. Return ONLY a valid JSON object with these exact keys. You MUST choose from the specified options - do not create new values:
 
 {
-  "headline": "Extract the exact main headline/hook text shown in the ad",
+  "headline": "Use the existing headline provided above: ${existingHeadline}",
   "problem": "Choose ONE: High Bills | Thermostat | Outdated | Mold/Mildew | Hard to Clean | Accessibility Issues | Cost | InstalI Time | Other",
   "solution": "Choose ONE: Energy Efficiency | Beauty/Modernization | Noise Reduction | Easy Operation | Modern Look | Safety/Accessibility | Easy Cleaning | Luxury/Comfort | Affordability | Quick Installation | Home Value Improvement | Temperature Control | Other",
   "offer": "Choose ONE: % Discount / $ Off | BNPL / $0 Down / Financing | BOGO | None",
