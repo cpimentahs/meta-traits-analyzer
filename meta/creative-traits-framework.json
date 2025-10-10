@@ -1,0 +1,164 @@
+{
+  "Headline (Hook Text)": {
+    "type": "text",
+    "options": null
+  },
+  "Problem Shown": {
+    "type": "select",
+    "options": [
+      "Drafty/Old/Leaky/Broken",
+      "High Bills",
+      "Thermostat",
+      "Hard to Open",
+      "Outdated Look/Style",
+      "Mold/Mildew",
+      "Hard to Clean",
+      "Accessibility Issues",
+      "Cost",
+      "InstalI Time",
+      "Other"
+    ]
+  },
+  "Solution / Transformation Shown": {
+    "type": "select",
+    "options": [
+      "Energy Efficiency",
+      "Beauty/Modernization",
+      "Noise Reduction",
+      "Easy Operation",
+      "Modern Look",
+      "Safety/Accessibility",
+      "Easy Cleaning",
+      "Luxury/Comfort",
+      "Other",
+      "Affordability",
+      "Quick Installation",
+      "Home Value Improvement",
+      "Temperature Control"
+    ]
+  },
+  "Offer Style": {
+    "type": "select",
+    "options": [
+      "% Discount / $ Off",
+      "BNPL / $0 Down / Financing",
+      "BOGO",
+      "None"
+    ]
+  },
+  "CTA (Text Itself)": {
+    "type": "text",
+    "options": null
+  },
+  "CTA Position": {
+    "type": "select",
+    "options": [
+      "Top Left",
+      "Top Right",
+      "Bottom Left",
+      "Bottom Right",
+      "Center Overlay",
+      "None"
+    ]
+  },
+  "Social Proof / Credibility": {
+    "type": "select",
+    "options": [
+      "Review Stats",
+      "Customer Testimonials",
+      "Trust Badges",
+      "Warranty Guarantee",
+      "None"
+    ]
+  },
+  "Emotion / Vibe": {
+    "type": "select",
+    "options": [
+      "Relief/Comfort",
+      "Pride/Home Upgrade",
+      "Urgency/FOMO",
+      "Happiness/Family Safety",
+      "Luxury/Self-Care",
+      "Neutral/None",
+      "Curiosity/Exploratory"
+    ]
+  },
+  "Brand Presence": {
+    "type": "select",
+    "options": [
+      "Prominent Logo",
+      "Subtle Logo",
+      "No Logo"
+    ]
+  },
+  "Urgency Signals": {
+    "type": "select",
+    "options": [
+      "Limited Time Offer",
+      "Seasonal (Winter/Summer Cue)",
+      "Countdown/Graphic Urgency",
+      "None"
+    ]
+  },
+  "Contrast": {
+    "type": "select",
+    "options": [
+      "High",
+      "Mid",
+      "Low"
+    ]
+  },
+  "Color": {
+    "type": "select",
+    "options": [
+      "Warm",
+      "Neutral",
+      "Cool"
+    ]
+  },
+  "Human presence": {
+    "type": "select",
+    "options": [
+      "None",
+      "Face Prominent",
+      "Face Subtle",
+      "Body No Face",
+      "Hands Only"
+    ]
+  },
+  "Headline contains number": {
+    "type": "select",
+    "options": [
+      "Y",
+      "N"
+    ]
+  },
+  "% sign present": {
+    "type": "select",
+    "options": [
+      "Y",
+      "N"
+    ]
+  },
+  "$ sign present": {
+    "type": "select",
+    "options": [
+      "Y",
+      "N"
+    ]
+  },
+  "FREE present": {
+    "type": "select",
+    "options": [
+      "Y",
+      "N"
+    ]
+  },
+  "ALL CAPS headline": {
+    "type": "select",
+    "options": [
+      "Y",
+      "N"
+    ]
+  }
+}

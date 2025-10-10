@@ -1,0 +1,838 @@
+{
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:ShowerCost": [
+    {
+      "targeting": "Book Appt",
+      "spend": 4041.1,
+      "bar": "2%",
+      "roas": 0.94,
+      "ctr": "3.63%",
+      "cvr": "2.90%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 38694.07,
+      "bar": "9%",
+      "roas": 1.52,
+      "ctr": "3.07%",
+      "cvr": "4.59%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 23623.6,
+      "bar": "16%",
+      "roas": 1.42,
+      "ctr": "2.71%",
+      "cvr": "4.62%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 66358.77,
+      "bar": "11%",
+      "roas": 1.45,
+      "ctr": "2.97%",
+      "cvr": "4.49%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:ShowerCost": [
+    {
+      "targeting": "Book Appt",
+      "spend": 8591.97,
+      "bar": "21%",
+      "roas": 0.93,
+      "ctr": "2.69%",
+      "cvr": "3.21%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 23401.29,
+      "bar": "14%",
+      "roas": 1.28,
+      "ctr": "2.89%",
+      "cvr": "5.68%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 10293.75,
+      "bar": "22%",
+      "roas": 1.18,
+      "ctr": "2.68%",
+      "cvr": "5.65%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 42287.01,
+      "bar": "17%",
+      "roas": 1.18,
+      "ctr": "2.79%",
+      "cvr": "5.09%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:RemodelCostV2": [
+    {
+      "targeting": "Book Appt",
+      "spend": 1010.28,
+      "bar": "33%",
+      "roas": 0.48,
+      "ctr": "3.25%",
+      "cvr": "1.73%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 7319.63,
+      "bar": "13%",
+      "roas": 1.18,
+      "ctr": "2.22%",
+      "cvr": "3.67%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 7264.58,
+      "bar": "16%",
+      "roas": 0.98,
+      "ctr": "2.11%",
+      "cvr": "2.56%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 15594.49,
+      "bar": "15%",
+      "roas": 1.04,
+      "ctr": "2.22%",
+      "cvr": "2.97%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:BathCost": [
+    {
+      "targeting": "Book Appt",
+      "spend": 1501.86,
+      "bar": "33%",
+      "roas": 0.73,
+      "ctr": "2.47%",
+      "cvr": "3.33%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 7205.55,
+      "bar": "13%",
+      "roas": 0.94,
+      "ctr": "2.91%",
+      "cvr": "6.88%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 1330.49,
+      "bar": "30%",
+      "roas": 0.85,
+      "ctr": "2.01%",
+      "cvr": "6.29%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 10037.9,
+      "bar": "18%",
+      "roas": 0.9,
+      "ctr": "2.67%",
+      "cvr": "6.07%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:BathroomV1": [
+    {
+      "targeting": "Book Appt",
+      "spend": 13.98,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.06%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 3935.31,
+      "bar": "4%",
+      "roas": 0.79,
+      "ctr": "2.81%",
+      "cvr": "10.80%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 11.1,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "2.17%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3960.39,
+      "bar": "4%",
+      "roas": 0.79,
+      "ctr": "2.78%",
+      "cvr": "10.72%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Affordability": [
+    {
+      "targeting": "Book Appt",
+      "spend": 68.72,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "93.00%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 3043.63,
+      "bar": "50%",
+      "roas": 0.29,
+      "ctr": "2.23%",
+      "cvr": "5.07%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 32.87,
+      "bar": "100%",
+      "roas": 3.92,
+      "ctr": "2.83%",
+      "cvr": "28.57%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3145.22,
+      "bar": "56%",
+      "roas": 0.32,
+      "ctr": "2.10%",
+      "cvr": "5.15%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerLargeV2": [
+    {
+      "targeting": "Book Appt",
+      "spend": 77.29,
+      "bar": "0%",
+      "roas": 1.06,
+      "ctr": "2.60%",
+      "cvr": "4.17%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 2990.26,
+      "bar": "0%",
+      "roas": 0.72,
+      "ctr": "3.44%",
+      "cvr": "7.28%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 10.92,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.61%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 3078.47,
+      "bar": "0%",
+      "roas": 0.72,
+      "ctr": "3.36%",
+      "cvr": "7.06%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:Affordability": [
+    {
+      "targeting": "Book Appt",
+      "spend": 152.59,
+      "bar": "100%",
+      "roas": 0.5,
+      "ctr": "1.21%",
+      "cvr": "2.27%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 2288.76,
+      "bar": "31%",
+      "roas": 0.61,
+      "ctr": "1.59%",
+      "cvr": "7.97%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 59.33,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "97.00%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2500.68,
+      "bar": "35%",
+      "roas": 0.59,
+      "ctr": "1.52%",
+      "cvr": "7.19%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:Upgrade": [
+    {
+      "targeting": "Book Appt",
+      "spend": 139.9,
+      "bar": "0%",
+      "roas": 1.75,
+      "ctr": "3.54%",
+      "cvr": "4.00%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 1871.53,
+      "bar": "20%",
+      "roas": 0.42,
+      "ctr": "2.90%",
+      "cvr": "5.81%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 11.84,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "2.78%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 2023.27,
+      "bar": "13%",
+      "roas": 0.51,
+      "ctr": "2.99%",
+      "cvr": "5.46%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:PersonShower": [
+    {
+      "targeting": "Book Appt",
+      "spend": 106.1,
+      "bar": "0%",
+      "roas": 1.31,
+      "ctr": "88.00%",
+      "cvr": "11.76%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 1709.09,
+      "bar": "10%",
+      "roas": 0.61,
+      "ctr": "2.92%",
+      "cvr": "7.19%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 84.1,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "4.52%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1899.29,
+      "bar": "8%",
+      "roas": 0.62,
+      "ctr": "2.67%",
+      "cvr": "7.10%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:Cleobathra": [
+    {
+      "targeting": "Book Appt",
+      "spend": 1499.24,
+      "bar": "40%",
+      "roas": 0.42,
+      "ctr": "1.90%",
+      "cvr": "1.78%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 96.4,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.86%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 45.93,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "2.41%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1641.57,
+      "bar": "40%",
+      "roas": 0.38,
+      "ctr": "1.90%",
+      "cvr": "1.74%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V2": [
+    {
+      "targeting": "Lead",
+      "spend": 1481.34,
+      "bar": "0%",
+      "roas": 0.37,
+      "ctr": "1.72%",
+      "cvr": "5.97%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1481.34,
+      "bar": "0%",
+      "roas": 0.37,
+      "ctr": "1.72%",
+      "cvr": "5.97%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Vanity1": [
+    {
+      "targeting": "Lead",
+      "spend": 1402.56,
+      "bar": "0%",
+      "roas": 0.48,
+      "ctr": "2.29%",
+      "cvr": "4.29%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1402.56,
+      "bar": "0%",
+      "roas": 0.48,
+      "ctr": "2.29%",
+      "cvr": "4.29%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:OneDay": [
+    {
+      "targeting": "Book Appt",
+      "spend": 148.08,
+      "bar": "0%",
+      "roas": 0.64,
+      "ctr": "1.84%",
+      "cvr": "3.39%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 1121.61,
+      "bar": "25%",
+      "roas": 0.42,
+      "ctr": "2.73%",
+      "cvr": "4.10%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 35.66,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.50%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1305.35,
+      "bar": "20%",
+      "roas": 0.43,
+      "ctr": "2.43%",
+      "cvr": "3.88%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V3": [
+    {
+      "targeting": "Lead",
+      "spend": 1275.51,
+      "bar": "0%",
+      "roas": 0.55,
+      "ctr": "2.80%",
+      "cvr": "8.56%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1275.51,
+      "bar": "0%",
+      "roas": 0.55,
+      "ctr": "2.80%",
+      "cvr": "8.56%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:NetworxLux|f:Journey7": [
+    {
+      "targeting": "Lead",
+      "spend": 1180.1,
+      "bar": "33%",
+      "roas": 0.69,
+      "ctr": "1.57%",
+      "cvr": "7.25%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1180.1,
+      "bar": "33%",
+      "roas": 0.69,
+      "ctr": "1.57%",
+      "cvr": "7.25%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:BeforeAfter|f:90s - Copy": [
+    {
+      "targeting": "Lead",
+      "spend": 1084.32,
+      "bar": "25%",
+      "roas": 0.44,
+      "ctr": "2.81%",
+      "cvr": "5.81%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1084.32,
+      "bar": "25%",
+      "roas": 0.44,
+      "ctr": "2.81%",
+      "cvr": "5.81%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Shower1": [
+    {
+      "targeting": "Lead",
+      "spend": 1008.34,
+      "bar": "0%",
+      "roas": 0.35,
+      "ctr": "3.30%",
+      "cvr": "1.74%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 1008.34,
+      "bar": "0%",
+      "roas": 0.35,
+      "ctr": "3.30%",
+      "cvr": "1.74%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:TextImage|f:Testimonial2": [
+    {
+      "targeting": "Lead",
+      "spend": 990.49,
+      "bar": "0%",
+      "roas": 0.34,
+      "ctr": "5.02%",
+      "cvr": "4.26%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 990.49,
+      "bar": "0%",
+      "roas": 0.34,
+      "ctr": "5.02%",
+      "cvr": "4.26%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Upgrade": [
+    {
+      "targeting": "Book Appt",
+      "spend": 242,
+      "bar": "0%",
+      "roas": 0.51,
+      "ctr": "2.51%",
+      "cvr": "2.80%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 734.75,
+      "bar": "100%",
+      "roas": 0.33,
+      "ctr": "2.86%",
+      "cvr": "5.26%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 12.26,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 989.01,
+      "bar": "33%",
+      "roas": 0.37,
+      "ctr": "2.61%",
+      "cvr": "3.96%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyState|f:Shower": [
+    {
+      "targeting": "Book Appt",
+      "spend": 169.87,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "2.16%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 635.17,
+      "bar": "0%",
+      "roas": 0.78,
+      "ctr": "3.14%",
+      "cvr": "13.04%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 137.57,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.78%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 942.61,
+      "bar": "0%",
+      "roas": 0.52,
+      "ctr": "2.55%",
+      "cvr": "7.58%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:#Showers": [
+    {
+      "targeting": "Book Appt",
+      "spend": 201.94,
+      "bar": "0%",
+      "roas": 1.32,
+      "ctr": "1.75%",
+      "cvr": "8.33%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 716.62,
+      "bar": "0%",
+      "roas": 0.31,
+      "ctr": "2.47%",
+      "cvr": "8.74%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 2.92,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "5.56%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 921.48,
+      "bar": "0%",
+      "roas": 0.53,
+      "ctr": "2.16%",
+      "cvr": "8.48%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:FloorplanShowerLargeV2": [
+    {
+      "targeting": "Book Appt",
+      "spend": 116.72,
+      "bar": "0%",
+      "roas": 0.55,
+      "ctr": "2.54%",
+      "cvr": "2.56%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 667.08,
+      "bar": "17%",
+      "roas": 0.97,
+      "ctr": "1.98%",
+      "cvr": "14.29%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 30.61,
+      "bar": "0%",
+      "roas": 3.19,
+      "ctr": "2.46%",
+      "cvr": "16.67%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 814.41,
+      "bar": "14%",
+      "roas": 0.99,
+      "ctr": "2.09%",
+      "cvr": "11.80%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:AngiBathCost|f:V1": [
+    {
+      "targeting": "Lead",
+      "spend": 782.43,
+      "bar": "0%",
+      "roas": 0.16,
+      "ctr": "1.89%",
+      "cvr": "8.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 782.43,
+      "bar": "0%",
+      "roas": 0.16,
+      "ctr": "1.89%",
+      "cvr": "8.00%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickyQuestion|f:SqftShowerSmallV2": [
+    {
+      "targeting": "Book Appt",
+      "spend": 123.75,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "3.21%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 512.99,
+      "bar": "0%",
+      "roas": 0.17,
+      "ctr": "1.50%",
+      "cvr": "3.37%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 67.17,
+      "bar": "0%",
+      "roas": 0.8,
+      "ctr": "1.53%",
+      "cvr": "11.11%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 703.91,
+      "bar": "0%",
+      "roas": 0.2,
+      "ctr": "1.76%",
+      "cvr": "2.94%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:SneakySven|f:OneDay": [
+    {
+      "targeting": "Book Appt",
+      "spend": 122.32,
+      "bar": "0%",
+      "roas": 2.09,
+      "ctr": "1.93%",
+      "cvr": "14.81%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 570.08,
+      "bar": "0%",
+      "roas": 0.12,
+      "ctr": "1.66%",
+      "cvr": "8.96%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 10.73,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.27%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 703.13,
+      "bar": "0%",
+      "roas": 0.46,
+      "ctr": "1.72%",
+      "cvr": "10.42%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:ClickySchedule|f:OneDay": [
+    {
+      "targeting": "Book Appt",
+      "spend": 59.23,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "1.83%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Lead",
+      "spend": 620.85,
+      "bar": "67%",
+      "roas": 0.57,
+      "ctr": "1.74%",
+      "cvr": "10.31%"
+    },
+    {
+      "targeting": "Lead+Book Appt",
+      "spend": 0.95,
+      "bar": "0%",
+      "roas": 0,
+      "ctr": "0.00%",
+      "cvr": "0.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 681.03,
+      "bar": "67%",
+      "roas": 0.52,
+      "ctr": "1.76%",
+      "cvr": "7.75%",
+      "isTotal": true
+    }
+  ],
+  "d:Ad|c:Bath|b:Nonbrand|s:Internal|ty:Image|st:GridSelector|f:Bathroom1": [
+    {
+      "targeting": "Lead",
+      "spend": 586.64,
+      "bar": "0%",
+      "roas": 0.01,
+      "ctr": "4.14%",
+      "cvr": "32.00%"
+    },
+    {
+      "targeting": "Total",
+      "spend": 586.64,
+      "bar": "0%",
+      "roas": 0.01,
+      "ctr": "4.14%",
+      "cvr": "32.00%",
+      "isTotal": true
+    }
+  ]
+}

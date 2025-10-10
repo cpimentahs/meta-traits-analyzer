@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Table Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #1e293b;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .toggle-container {
+            display: flex;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .toggle-button {
+            padding: 8px 20px;
+            border: none;
+            background: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toggle-button.active {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            color: #3b82f6;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #059669;
+        }
+
+        .table-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #f8fafc;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0;
+            border-bottom: 1px solid #e2e8f0;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .thumbnail {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+            margin: 1px;
+        }
+
+        .thumbnail-cell {
+            width: 35px;
+            padding: 1px 4px !important;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            height: 20px;
+            border: none;
+            padding: 2px 6px;
+            font-size: 12px;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: 2px solid #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .add-column-section {
+            padding: 15px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .add-column-section input {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .ad-name-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 2px 8px !important;
+            font-size: 11px;
+        }
+
+        .static-cell {
+            padding: 2px 8px !important;
+            font-size: 11px;
+        }
+
+        .col-header-actions {
+            display: inline-flex;
+            gap: 5px;
+            margin-left: 8px;
+        }
+
+        .btn-remove-col {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            padding: 0;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .btn-remove-col:hover {
+            color: #dc2626;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .image-modal-close:hover {
+            color: #bbb;
+        }
+
+        .thumbnail {
+            cursor: pointer;
+        }
+
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Ad Table Editor - Ads Missing Traits</h1>
+        <div class="header-controls">
+            <button class="btn btn-secondary" onclick="downloadImages()" style="background-color: #10b981;">⬇️ Download Images</button>
+            <button class="btn btn-secondary" onclick="runOpenAIAnalysis()" style="background-color: #8b5cf6;">🤖 Run OpenAI Analysis</button>
+            <button class="btn btn-primary" onclick="downloadCSV()">Download CSV</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="adsTable">
+            <thead id="tableHeader">
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" class="image-modal-content">
+    </div>
+
+    <script>
+        let adsData = [];
+        let customColumns = {};
+        let traitsData = {};
+
+        // Base columns
+        const baseColumns = [
+            { key: 'thumbnail', label: 'Image', editable: false, type: 'image' },
+            { key: 'category', label: 'Category', editable: false, type: 'text' },
+            { key: 'adName', label: 'Ad Name', editable: false, type: 'text' }
+        ];
+
+        // Creative trait columns (editable)
+        const traitColumns = [
+            { key: 'headline', label: 'Headline', editable: true, type: 'text' },
+            { key: 'problem', label: 'Problem', editable: true, type: 'text' },
+            { key: 'solution', label: 'Solution', editable: true, type: 'text' },
+            { key: 'offer', label: 'Offer Style', editable: true, type: 'text' },
+            { key: 'cta', label: 'CTA Text', editable: true, type: 'text' },
+            { key: 'ctaPosition', label: 'CTA Position', editable: true, type: 'text' },
+            { key: 'socialProof', label: 'Social Proof', editable: true, type: 'text' },
+            { key: 'emotion', label: 'Emotion', editable: true, type: 'text' },
+            { key: 'brand', label: 'Brand', editable: true, type: 'text' },
+            { key: 'urgency', label: 'Urgency', editable: true, type: 'text' },
+            { key: 'contrast', label: 'Contrast', editable: true, type: 'text' },
+            { key: 'color', label: 'Color', editable: true, type: 'text' },
+            { key: 'humanPresence', label: 'Human Presence', editable: true, type: 'text' },
+            { key: 'headlineNumber', label: 'Headline Number', editable: true, type: 'text' },
+            { key: 'percentSign', label: '% Sign', editable: true, type: 'text' },
+            { key: 'dollarSign', label: '$ Sign', editable: true, type: 'text' },
+            { key: 'freePresent', label: 'FREE', editable: true, type: 'text' },
+            { key: 'allCaps', label: 'ALL CAPS', editable: true, type: 'text' }
+        ];
+
+        // Combine all columns
+        const allBaseColumns = [...baseColumns, ...traitColumns];
+
+        // Parse CSV helper
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            const headers = lines[0].split(',');
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line || line.split(',').every(cell => !cell.trim())) continue;
+
+                const values = line.split(',');
+                const row = {};
+                headers.forEach((header, index) => {
+                    row[header.trim()] = values[index]?.trim() || '';
+                });
+
+                // Skip rows with empty ad_name
+                if (!row.ad_name || row.ad_name.trim() === '') continue;
+
+                data.push(row);
+            }
+            return data;
+        }
+
+        // Load data from CSV files
+        async function loadData() {
+            try {
+                // Load Windows missing traits CSV
+                const windowsResponse = await fetch('Windows-missing-traits.csv');
+                const windowsText = await windowsResponse.text();
+                const windowsAds = parseCSV(windowsText);
+
+                // Load Bath missing traits CSV
+                const bathResponse = await fetch('Bath-missing-traits.csv');
+                const bathText = await bathResponse.text();
+                const bathAds = parseCSV(bathText);
+
+                // Filter only ads WITHOUT traits (where "Has Traits?" is "N")
+                const windowsWithTraits = windowsAds.filter(ad => {
+                    const hasTraits = ad['Has Traits?'];
+                    return hasTraits === 'N';
+                });
+
+                const bathWithTraits = bathAds.filter(ad => {
+                    const hasTraits = ad['Has Traits?'];
+                    return hasTraits === 'N';
+                });
+
+                // Load targeting data (if exists)
+                let windowsTargeting = {};
+                let bathTargeting = {};
+                try {
+                    const windowsTargetingResponse = await fetch('targeting-data.json');
+                    windowsTargeting = await windowsTargetingResponse.json();
+                    console.log(`✅ Loaded Windows targeting data`);
+                } catch (e) {
+                    console.log('ℹ️ No Windows targeting data found');
+                }
+                try {
+                    const bathTargetingResponse = await fetch('bath-targeting-data.json');
+                    bathTargeting = await bathTargetingResponse.json();
+                    console.log(`✅ Loaded Bath targeting data`);
+                } catch (e) {
+                    console.log('ℹ️ No Bath targeting data found');
+                }
+
+                // Load creative traits analyses
+                try {
+                    const traitsResponse = await fetch('creative-traits-analyses.json');
+                    traitsData = await traitsResponse.json();
+                    console.log(`✅ Loaded ${Object.keys(traitsData).length} analyzed ads`);
+                } catch (e) {
+                    console.log('ℹ️ No creative traits data found yet');
+                    traitsData = {};
+                }
+
+                // Map CSV data to our format
+                adsData = [];
+
+                windowsWithTraits.forEach(ad => {
+                    const adName = ad.ad_name;
+                    const targetingData = windowsTargeting[adName];
+                    const traits = traitsData[adName];
+
+                    let kpis = {
+                        spend: parseFloat(ad.spend) || 0,
+                        bar: '',
+                        roas: 0,
+                        ctr: '',
+                        cvr: ''
+                    };
+
+                    if (targetingData && Array.isArray(targetingData)) {
+                        const totalRow = targetingData.find(row => row.isTotal || row.targeting === 'Total');
+                        if (totalRow) {
+                            kpis = {
+                                spend: totalRow.spend,
+                                bar: totalRow.bar,
+                                roas: totalRow.roas,
+                                ctr: totalRow.ctr || '',
+                                cvr: totalRow.cvr || ''
+                            };
+                        }
+                    }
+
+                    adsData.push({
+                        category: 'Windows',
+                        adName: adName,
+                        adId: ad.ad_id || '',
+                        concept: ad.category_group || '',
+                        url: ad.creative_url || '',
+                        localImage: ad.creative_url || '',
+                        originalUrl: ad.creative_url || '',
+                        ...kpis,
+                        headline: traits?.['Headline (Hook Text)'] || '',
+                        problem: traits?.['Problem Shown'] || '',
+                        solution: traits?.['Solution / Transformation Shown'] || '',
+                        offer: traits?.['Offer Style'] || '',
+                        cta: traits?.['CTA (Text Itself)'] || '',
+                        ctaPosition: traits?.['CTA Position'] || '',
+                        socialProof: traits?.['Social Proof / Credibility'] || '',
+                        emotion: traits?.['Emotion / Vibe'] || '',
+                        brand: traits?.['Brand Presence'] || '',
+                        urgency: traits?.['Urgency Signals'] || '',
+                        contrast: traits?.['Contrast'] || '',
+                        color: traits?.['Color'] || '',
+                        humanPresence: traits?.['Human presence'] || '',
+                        headlineNumber: traits?.['Headline contains number'] || '',
+                        percentSign: traits?.['% sign present'] || '',
+                        dollarSign: traits?.['$ sign present'] || '',
+                        freePresent: traits?.['FREE present'] || '',
+                        allCaps: traits?.['ALL CAPS headline'] || ''
+                    });
+                });
+
+                bathWithTraits.forEach(ad => {
+                    const adName = ad.ad_name;
+                    const targetingData = bathTargeting[adName];
+                    const traits = traitsData[adName];
+
+                    let kpis = {
+                        spend: parseFloat(ad.spend) || 0,
+                        bar: '',
+                        roas: 0,
+                        ctr: '',
+                        cvr: ''
+                    };
+
+                    if (targetingData && Array.isArray(targetingData)) {
+                        const totalRow = targetingData.find(row => row.isTotal || row.targeting === 'Total');
+                        if (totalRow) {
+                            kpis = {
+                                spend: totalRow.spend,
+                                bar: totalRow.bar,
+                                roas: totalRow.roas,
+                                ctr: totalRow.ctr || '',
+                                cvr: totalRow.cvr || ''
+                            };
+                        }
+                    }
+
+                    adsData.push({
+                        category: 'Bath',
+                        adName: adName,
+                        adId: ad.ad_id || '',
+                        concept: ad.category_group || '',
+                        url: ad.creative_url || '',
+                        localImage: ad.creative_url || '',
+                        originalUrl: ad.creative_url || '',
+                        ...kpis,
+                        headline: traits?.['Headline (Hook Text)'] || '',
+                        problem: traits?.['Problem Shown'] || '',
+                        solution: traits?.['Solution / Transformation Shown'] || '',
+                        offer: traits?.['Offer Style'] || '',
+                        cta: traits?.['CTA (Text Itself)'] || '',
+                        ctaPosition: traits?.['CTA Position'] || '',
+                        socialProof: traits?.['Social Proof / Credibility'] || '',
+                        emotion: traits?.['Emotion / Vibe'] || '',
+                        brand: traits?.['Brand Presence'] || '',
+                        urgency: traits?.['Urgency Signals'] || '',
+                        contrast: traits?.['Contrast'] || '',
+                        color: traits?.['Color'] || '',
+                        humanPresence: traits?.['Human presence'] || '',
+                        headlineNumber: traits?.['Headline contains number'] || '',
+                        percentSign: traits?.['% sign present'] || '',
+                        dollarSign: traits?.['$ sign present'] || '',
+                        freePresent: traits?.['FREE present'] || '',
+                        allCaps: traits?.['ALL CAPS headline'] || ''
+                    });
+                });
+
+                console.log(`✅ Loaded ${adsData.length} ads with traits (${windowsWithTraits.length} Windows, ${bathWithTraits.length} Bath)`);
+                renderTable();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                alert('Error loading data. Make sure the CSV files are available.');
+            }
+        }
+
+        // Initialize custom columns for each ad
+        function initializeCustomColumns() {
+            adsData.forEach((ad, index) => {
+                if (!customColumns[ad.adName]) {
+                    customColumns[ad.adName] = {};
+                }
+            });
+        }
+
+        // Render table
+        function renderTable() {
+            initializeCustomColumns();
+
+            const tableHeader = document.getElementById('tableHeader');
+            const tableBody = document.getElementById('tableBody');
+
+            // Get all custom column names
+            const customColumnNames = new Set();
+            Object.values(customColumns).forEach(cols => {
+                Object.keys(cols).forEach(name => customColumnNames.add(name));
+            });
+
+            // Build header
+            let headerHTML = '<tr>';
+            allBaseColumns.forEach(col => {
+                headerHTML += `<th>${col.label}</th>`;
+            });
+            customColumnNames.forEach(colName => {
+                headerHTML += `<th>${colName}<span class="col-header-actions"><button class="btn-remove-col" onclick="removeColumn('${colName}')" title="Remove column">×</button></span></th>`;
+            });
+            headerHTML += '</tr>';
+            tableHeader.innerHTML = headerHTML;
+
+            // Build body
+            let bodyHTML = '';
+            adsData.forEach((ad, index) => {
+                bodyHTML += '<tr>';
+
+                allBaseColumns.forEach(col => {
+                    if (col.type === 'image') {
+                        const imgSrc = ad.localImage || ad.url || ad.originalUrl || '';
+                        if (imgSrc) {
+                            bodyHTML += `<td class="thumbnail-cell"><img src="${imgSrc}" class="thumbnail" onclick="event.stopPropagation(); showImageModal('${imgSrc}')" onerror="this.style.display='none'"></td>`;
+                        } else {
+                            bodyHTML += `<td class="thumbnail-cell"></td>`;
+                        }
+                    } else if (col.editable) {
+                        const rawValue = ad[col.key] || '';
+                        const value = String(rawValue).replace(/"/g, '&quot;');
+                        bodyHTML += `<td><input type="${col.type}" value="${value}" onchange="updateValue(${index}, '${col.key}', this.value)"></td>`;
+                    } else {
+                        const cellClass = col.key === 'adName' ? 'ad-name-cell' : 'static-cell';
+                        bodyHTML += `<td class="${cellClass}">${ad[col.key] || ''}</td>`;
+                    }
+                });
+
+                // Add custom columns
+                customColumnNames.forEach(colName => {
+                    const value = customColumns[ad.adName]?.[colName] || '';
+                    bodyHTML += `<td><input type="text" value="${value}" onchange="updateCustomValue('${ad.adName}', '${colName}', this.value)"></td>`;
+                });
+
+                bodyHTML += '</tr>';
+            });
+            tableBody.innerHTML = bodyHTML;
+        }
+
+        // Update value
+        function updateValue(index, key, value) {
+            adsData[index][key] = value;
+        }
+
+        // Update custom column value
+        function updateCustomValue(adName, colName, value) {
+            if (!customColumns[adName]) {
+                customColumns[adName] = {};
+            }
+            customColumns[adName][colName] = value;
+        }
+
+        // Download images function
+        async function downloadImages() {
+            const confirmed = confirm('This will download all missing ad images from the CSV files. Continue?');
+            if (!confirmed) return;
+
+            console.log('📥 Starting image download...');
+            alert('Image download started. Check the browser console for progress. This may take a few minutes.');
+
+            try {
+                // Parse both CSV files
+                const windowsResponse = await fetch('Windows-missing-traits.csv');
+                const windowsText = await windowsResponse.text();
+                const windowsAds = parseCSV(windowsText);
+
+                const bathResponse = await fetch('Bath-missing-traits.csv');
+                const bathText = await bathResponse.text();
+                const bathAds = parseCSV(bathText);
+
+                // Filter ads with "N" and has URL
+                const adsToDownload = [...windowsAds, ...bathAds].filter(ad => {
+                    const hasTraits = ad['Has Traits?'];
+                    return (hasTraits === 'N' || hasTraits !== ad.ad_name) && ad.creative_url && ad.ad_name;
+                });
+
+                console.log(`📊 Found ${adsToDownload.length} images to check`);
+
+                let downloaded = 0;
+                let skipped = 0;
+                let failed = 0;
+
+                for (let i = 0; i < adsToDownload.length; i++) {
+                    const ad = adsToDownload[i];
+                    const adId = ad.ad_id;
+                    const ext = ad.creative_url.includes('.jpg') ? '.jpg' : '.png';
+                    const localPath = `images/${adId}${ext}`;
+
+                    if (!adId) {
+                        console.error(`❌ No ad_id for: ${ad.ad_name}`);
+                        failed++;
+                        continue;
+                    }
+
+                    // Check if already exists
+                    try {
+                        const checkResponse = await fetch(localPath, { method: 'HEAD' });
+                        if (checkResponse.ok) {
+                            console.log(`✓ ${i + 1}/${adsToDownload.length} - Already exists: ${adId}${ext}`);
+                            skipped++;
+                            continue;
+                        }
+                    } catch (e) {
+                        // File doesn't exist, will download
+                    }
+
+                    try {
+                        console.log(`⬇️  ${i + 1}/${adsToDownload.length} - Downloading: ${adId}${ext}`);
+
+                        // Download image
+                        const imageResponse = await fetch(ad.creative_url);
+                        if (!imageResponse.ok) {
+                            console.error(`❌ Failed to download: ${adId}${ext}`);
+                            failed++;
+                            continue;
+                        }
+
+                        const blob = await imageResponse.blob();
+
+                        // Note: Browser can't save files directly to disk
+                        // Images are downloaded to browser cache and will be used from there
+                        console.log(`✅ Cached: ${adId}${ext}`);
+                        downloaded++;
+
+                    } catch (error) {
+                        console.error(`❌ Error downloading ${adId}${ext}:`, error);
+                        failed++;
+                    }
+
+                    // Small delay
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
+
+                console.log('\n📊 Summary:');
+                console.log(`✅ Cached: ${downloaded}`);
+                console.log(`⏭️  Skipped: ${skipped}`);
+                console.log(`❌ Failed: ${failed}`);
+
+                alert(`Image download complete!\n✅ Cached: ${downloaded}\n⏭️ Skipped: ${skipped}\n❌ Failed: ${failed}\n\nNote: Images are cached in browser. For permanent storage, run the Node.js script on the server.`);
+
+            } catch (error) {
+                console.error('Error downloading images:', error);
+                alert('Error downloading images. Check console for details.');
+            }
+        }
+
+        // Download CSV
+        function downloadCSV() {
+            // Get all custom column names
+            const customColumnNames = new Set();
+            Object.values(customColumns).forEach(cols => {
+                Object.keys(cols).forEach(name => customColumnNames.add(name));
+            });
+
+            // Build CSV header
+            let csv = allBaseColumns.filter(col => col.type !== 'image').map(col => col.label).join(',');
+            if (customColumnNames.size > 0) {
+                csv += ',' + Array.from(customColumnNames).join(',');
+            }
+            csv += '\n';
+
+            // Build CSV rows
+            adsData.forEach(ad => {
+                const row = [];
+                allBaseColumns.forEach(col => {
+                    if (col.type !== 'image') {
+                        let value = ad[col.key] || '';
+                        // Escape quotes and wrap in quotes if contains comma
+                        if (typeof value === 'string' && (value.includes(',') || value.includes('"') || value.includes('\n'))) {
+                            value = '"' + value.replace(/"/g, '""') + '"';
+                        }
+                        row.push(value);
+                    }
+                });
+
+                customColumnNames.forEach(colName => {
+                    let value = customColumns[ad.adName]?.[colName] || '';
+                    if (typeof value === 'string' && (value.includes(',') || value.includes('"') || value.includes('\n'))) {
+                        value = '"' + value.replace(/"/g, '""') + '"';
+                    }
+                    row.push(value);
+                });
+
+                csv += row.join(',') + '\n';
+            });
+
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `all_ads_table_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Image modal functions
+        function showImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
+        // OpenAI Analysis function
+        async function runOpenAIAnalysis() {
+            const confirmed = confirm(`This will analyze ${adsData.length} ads using OpenAI Vision. This may take several minutes and will use API credits. Continue?`);
+            if (!confirmed) return;
+
+            console.log('🤖 Starting OpenAI analysis...');
+            console.log(`📊 Total ads to analyze: ${adsData.length}`);
+
+            let completed = 0;
+            let failed = 0;
+
+            for (let i = 0; i < adsData.length; i++) {
+                const ad = adsData[i];
+                console.log(`Analyzing ${i+1}/${adsData.length}: ${ad.adName}`);
+
+                try {
+                    // For OpenAI, use local images as base64
+                    const adId = ad.adId;
+
+                    if (!adId) {
+                        console.warn(`⚠️ No ad_id for ${ad.adName}`);
+                        alert(`Failed: ${ad.adName} - No ad_id in CSV.`);
+                        failed++;
+                        continue;
+                    }
+
+                    // Try both .jpg and .png extensions
+                    let localPath = null;
+                    let imageResponse = null;
+
+                    // Try .png first
+                    localPath = `images/${adId}.png`;
+                    imageResponse = await fetch(localPath);
+
+                    // If .png fails, try .jpg
+                    if (!imageResponse.ok) {
+                        localPath = `images/${adId}.jpg`;
+                        imageResponse = await fetch(localPath);
+                    }
+
+                    if (!imageResponse.ok) {
+                        console.warn(`⚠️ Could not load local image for ${ad.adName} (ID: ${adId})`);
+                        alert(`Failed: ${ad.adName} - Image not found locally. Run "Download Images" first.`);
+                        failed++;
+                        continue;
+                    }
+
+                    console.log(`📸 Loading local image: ${localPath}`);
+
+                    const blob = await imageResponse.blob();
+                    const base64 = await new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.readAsDataURL(blob);
+                    });
+
+                    console.log(`📸 Converted to base64 (${base64.length} chars)`);
+
+                    // Call OpenAI Vision API via server proxy
+                    const response = await fetch('/api/openai', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model: 'gpt-4o',
+                            messages: [{
+                                role: 'user',
+                                content: [
+                                    {
+                                        type: 'text',
+                                        text: `Analyze this Facebook ad image and extract creative traits. Return ONLY a valid JSON object with these exact keys. You MUST choose from the specified options - do not create new values:
+
+{
+  "headline": "Extract the exact main headline/hook text shown in the ad",
+  "problem": "Choose ONE: High Bills | Thermostat | Outdated | Mold/Mildew | Hard to Clean | Accessibility Issues | Cost | InstalI Time | Other",
+  "solution": "Choose ONE: Energy Efficiency | Beauty/Modernization | Noise Reduction | Easy Operation | Modern Look | Safety/Accessibility | Easy Cleaning | Luxury/Comfort | Affordability | Quick Installation | Home Value Improvement | Temperature Control | Other",
+  "offer": "Choose ONE: % Discount / $ Off | BNPL / $0 Down / Financing | BOGO | None",
+  "cta": "Extract the exact CTA button text shown in the ad",
+  "ctaPosition": "Choose ONE: Top Left | Top Right | Bottom Left | Bottom Right | Center Overlay | None",
+  "socialProof": "Choose ONE: Review Stats | Customer Testimonials | Trust Badges | Warranty Guarantee | None",
+  "emotion": "Choose ONE: Relief/Comfort | Pride/Home Upgrade | Urgency/FOMO | Happiness/Family Safety | Luxury/Self-Care | Neutral/None | Curiosity/Exploratory",
+  "brand": "Choose ONE: Prominent Logo | Subtle Logo | No Logo",
+  "urgency": "Choose ONE: Limited Time Offer | Seasonal (Winter/Summer Cue) | Countdown/Graphic Urgency | None",
+  "contrast": "Choose ONE: High | Mid | Low",
+  "color": "Choose ONE: Warm | Cool",
+  "humanPresence": "Choose ONE: None | Face Prominent | Face Subtle | Body No Face | Hands Only",
+  "headlineNumber": "Choose ONE: Y | N",
+  "percentSign": "Choose ONE: Y | N",
+  "dollarSign": "Choose ONE: Y | N",
+  "freePresent": "Choose ONE: Y | N",
+  "allCaps": "Choose ONE: Y | N"
+}
+
+CRITICAL: You MUST select from the exact options provided. Do not invent new categories or values. If unsure, choose the closest match or "None"/"Other" if available.`
+                                    },
+                                    {
+                                        type: 'image_url',
+                                        image_url: {
+                                            url: base64
+                                        }
+                                    }
+                                ]
+                            }],
+                            max_tokens: 1000
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.text();
+                        console.error(`❌ API Error for ${ad.adName}:`, error);
+                        alert(`API Error for ${ad.adName}: ${error.substring(0, 200)}`);
+                        failed++;
+                        continue;
+                    }
+
+                    const result = await response.json();
+                    const content = result.choices[0].message.content;
+
+                    // Parse JSON from response
+                    const jsonMatch = content.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        const traits = JSON.parse(jsonMatch[0]);
+
+                        // Update the ad data
+                        adsData[i] = {
+                            ...ad,
+                            headline: traits.headline || '',
+                            problem: traits.problem || '',
+                            solution: traits.solution || '',
+                            offer: traits.offer || '',
+                            cta: traits.cta || '',
+                            ctaPosition: traits.ctaPosition || '',
+                            socialProof: traits.socialProof || '',
+                            emotion: traits.emotion || '',
+                            brand: traits.brand || '',
+                            urgency: traits.urgency || '',
+                            contrast: traits.contrast || '',
+                            color: traits.color || '',
+                            humanPresence: traits.humanPresence || '',
+                            headlineNumber: traits.headlineNumber || '',
+                            percentSign: traits.percentSign || '',
+                            dollarSign: traits.dollarSign || '',
+                            freePresent: traits.freePresent || '',
+                            allCaps: traits.allCaps || ''
+                        };
+
+                        completed++;
+                        console.log(`✅ ${i+1}/${adsData.length} complete`);
+
+                        // Update table every 5 ads
+                        if ((i + 1) % 5 === 0) {
+                            renderTable();
+                        }
+                    } else {
+                        console.warn(`⚠️ Could not parse JSON for ${ad.adName}`);
+                        console.log('Response content:', content);
+                        alert(`Failed to parse JSON for ${ad.adName}. Check console for details.`);
+                        failed++;
+                    }
+
+                    // Small delay to avoid rate limits
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                } catch (error) {
+                    console.error(`❌ Error analyzing ${ad.adName}:`, error);
+                    alert(`Exception for ${ad.adName}: ${error.message}`);
+                    failed++;
+                }
+            }
+
+            // Final render
+            renderTable();
+            console.log(`✅ Analysis complete! Completed: ${completed}, Failed: ${failed}`);
+            alert(`Analysis complete!\n✅ Completed: ${completed}\n❌ Failed: ${failed}`);
+        }
+
+        // Load initial data
+        loadData();
+    </script>
+</body>
+</html>

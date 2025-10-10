@@ -9,10 +9,10 @@ const PORT = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static('.'));
 
-// Serve the images directory
-app.use('/images', express.static(path.join(__dirname, 'images')));
+// Serve static files for each platform
+app.use('/meta', express.static(path.join(__dirname, 'meta')));
+app.use('/display', express.static(path.join(__dirname, 'display')));
 
 // API endpoint to proxy OpenAI requests
 app.post('/api/openai', async (req, res) => {
@@ -64,17 +64,20 @@ app.post('/api/openai', async (req, res) => {
 
 // API endpoint to download image
 app.post('/api/download-image', async (req, res) => {
-    const { ad_id, url } = req.body;
+    const { ad_id, url, platform } = req.body;
 
     if (!ad_id || !url) {
         return res.status(400).json({ error: 'Missing ad_id or url' });
     }
 
+    // Default to 'meta' if platform not specified
+    const platformDir = platform || 'meta';
+
     try {
         // Determine file extension from URL
         const ext = url.includes('.jpg') || url.includes('.jpeg') ? '.jpg' : '.png';
         const filename = `${ad_id}${ext}`;
-        const filepath = path.join(__dirname, 'images', filename);
+        const filepath = path.join(__dirname, platformDir, 'images', filename);
 
         // Download the image
         const protocol = url.startsWith('https') ? https : http;
@@ -110,9 +113,18 @@ app.post('/api/download-image', async (req, res) => {
     }
 });
 
-// Serve the pivot table at root
+// Serve landing page at root
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Redirect /meta to /meta/ (with trailing slash for proper routing)
+app.get('/meta', (req, res) => {
+    res.redirect('/meta/');
+});
+
+app.get('/display', (req, res) => {
+    res.redirect('/display/');
 });
 
 // Start server
