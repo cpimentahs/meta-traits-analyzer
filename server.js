@@ -110,9 +110,9 @@ app.post('/api/download-image', async (req, res) => {
     }
 });
 
-// Serve the dashboard at root
+// Serve the pivot table at root
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'ad-dashboard.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Start server
